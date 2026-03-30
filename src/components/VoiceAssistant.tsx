@@ -2,14 +2,14 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Phone, X, Send, Loader2, Mic, MicOff, Volume2, Sparkles } from "lucide-react";
+import { X, Mic, MicOff, Volume2, Sparkles, Phone } from "lucide-react";
 
 interface Message {
   role: "user" | "assistant";
   content: string;
 }
 
-type VoiceState = "idle" | "listening" | "speaking";
+type VoiceState = "idle" | "listening" | "speaking" | "connecting";
 
 export default function VoiceAssistant() {
   const [isOpen, setIsOpen] = useState(false);
@@ -20,13 +20,12 @@ export default function VoiceAssistant() {
         "Hey there! I'm Alyson's AI assistant. Ask me anything about lessons, pricing, or book your first session!",
     },
   ]);
-  const [input, setInput] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [voiceState, setVoiceState] = useState<VoiceState>("idle");
   const [isListening, setIsListening] = useState(false);
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const recognitionRef = useRef<any>(null);
+  const hasStartedRef = useRef(false);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -47,11 +46,22 @@ export default function VoiceAssistant() {
     };
   }, []);
 
+  // Auto-start listening when opened
+  useEffect(() => {
+    if (isOpen && !hasStartedRef.current) {
+      hasStartedRef.current = true;
+      // Small delay then start listening
+      setTimeout(() => {
+        startListening();
+      }, 500);
+    }
+  }, [isOpen]);
+
   const startListening = () => {
     if (!("webkitSpeechRecognition" in window) && !("SpeechRecognition" in window)) {
       setMessages(prev => [...prev, { 
         role: "assistant", 
-        content: "Voice input not supported in this browser. Please type instead." 
+        content: "Voice input not supported in this browser." 
       }]);
       return;
     }
@@ -88,7 +98,7 @@ export default function VoiceAssistant() {
       if (event.error !== "no-speech") {
         setMessages(prev => [...prev, { 
           role: "assistant", 
-          content: "Sorry, I didn't catch that. Please try again or type." 
+          content: "Sorry, I didn't catch that. Try again!" 
         }]);
       }
     };
@@ -111,8 +121,8 @@ export default function VoiceAssistant() {
   };
 
   const handleVoiceInput = async (text: string) => {
+    setVoiceState("connecting");
     setMessages((prev) => [...prev, { role: "user", content: text }]);
-    setIsLoading(true);
 
     try {
       const response = await fetch("/api/voice", {
@@ -138,9 +148,10 @@ export default function VoiceAssistant() {
           ...prev,
           {
             role: "assistant",
-            content: `Oops! Something went wrong: ${data.error}`,
+            content: `Oops! Something went wrong. Try again?`,
           },
         ]);
+        setVoiceState("idle");
       } else {
         setMessages((prev) => [
           ...prev,
@@ -149,6 +160,7 @@ export default function VoiceAssistant() {
             content: "Hmm, I didn't get that. Try again?",
           },
         ]);
+        setVoiceState("idle");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -156,15 +168,14 @@ export default function VoiceAssistant() {
         ...prev,
         {
           role: "assistant",
-          content: "Connection error. Please try again!",
+          content: "Connection error. Try again!",
         },
       ]);
-    } finally {
-      setIsLoading(false);
+      setVoiceState("idle");
     }
   };
 
-  const speakText = (text: string, onEnd?: () => void) => {
+  const speakText = (text: string) => {
     if ("speechSynthesis" in window) {
       speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
@@ -172,70 +183,33 @@ export default function VoiceAssistant() {
       utterance.pitch = 1;
       utterance.onend = () => {
         setVoiceState("idle");
-        if (onEnd) onEnd();
+        // Auto-listen again after speaking
+        setTimeout(() => {
+          if (isOpen) startListening();
+        }, 500);
       };
       utterance.onerror = () => {
         setVoiceState("idle");
-        if (onEnd) onEnd();
+        setTimeout(() => {
+          if (isOpen) startListening();
+        }, 500);
       };
       speechSynthesis.speak(utterance);
     } else {
-      if (onEnd) onEnd();
+      setVoiceState("idle");
+      setTimeout(() => {
+        if (isOpen) startListening();
+      }, 500);
     }
   };
 
-  const speakMessage = (text: string) => {
-    setVoiceState("speaking");
-    speakText(text);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isLoading) return;
-
-    const userMessage = input.trim();
-    setInput("");
-    setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
-    setIsLoading(true);
-
-    try {
-      const response = await fetch("/api/voice", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: userMessage,
-          history: messages.slice(-6),
-        }),
-      });
-
-      const data = await response.json();
-
-      if (data.response) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.response },
-        ]);
-      } else {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
-            content: "Hmm, I didn't get that. Try again?",
-          },
-        ]);
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content: "Connection error. Please try again!",
-        },
-      ]);
-    } finally {
-      setIsLoading(false);
+  const closeAndStop = () => {
+    stopListening();
+    if ("speechSynthesis" in window) {
+      speechSynthesis.cancel();
     }
+    setIsOpen(false);
+    hasStartedRef.current = false;
   };
 
   if (!isOpen) {
@@ -282,7 +256,7 @@ export default function VoiceAssistant() {
       {/* Ambient glow */}
       <div className="absolute -inset-4 bg-gradient-to-br from-amber-500/20 via-red-500/10 to-transparent rounded-3xl blur-2xl" />
 
-      <div className="relative w-[380px] h-[580px] bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+      <div className="relative w-[360px] h-[500px] bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden flex flex-col">
         {/* Animated background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -304,6 +278,7 @@ export default function VoiceAssistant() {
                 <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-[#0a0a0a] ${
                   voiceState === "listening" ? "bg-green-500 animate-pulse" :
                   voiceState === "speaking" ? "bg-amber-500 animate-pulse" :
+                  voiceState === "connecting" ? "bg-blue-500 animate-pulse" :
                   "bg-white/30"
                 }`} />
               </div>
@@ -313,59 +288,42 @@ export default function VoiceAssistant() {
                 <p className="text-white/40 text-xs">
                   {voiceState === "listening" && <span className="text-green-400">Listening...</span>}
                   {voiceState === "speaking" && <span className="text-amber-400">Speaking...</span>}
-                  {voiceState === "idle" && "Online"}
+                  {voiceState === "connecting" && <span className="text-blue-400">Thinking...</span>}
+                  {voiceState === "idle" && <span className="text-white/50">Tap mic to talk</span>}
                 </p>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
-              {/* Voice toggle */}
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={isListening ? stopListening : startListening}
-                className={`w-9 h-9 rounded-lg flex items-center justify-center transition-all ${
-                  isListening 
-                    ? "bg-red-500/20 hover:bg-red-500/30" 
-                    : "bg-green-500/20 hover:bg-green-500/30"
-                }`}
-                aria-label={isListening ? "Stop listening" : "Start voice"}
-              >
-                {isListening ? (
-                  <MicOff className="w-4 h-4 text-red-400" />
-                ) : (
-                  <Mic className="w-4 h-4 text-green-400" />
-                )}
-              </motion.button>
-              
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={() => setIsOpen(false)}
-                className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
-                aria-label="Close"
-              >
-                <X className="w-4 h-4 text-white/70" />
-              </motion.button>
-            </div>
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={closeAndStop}
+              className="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors"
+              aria-label="Close"
+            >
+              <X className="w-4 h-4 text-white/70" />
+            </motion.button>
           </div>
 
           {/* Sound wave visualization */}
           <AnimatePresence>
-            {voiceState === "listening" && (
+            {(voiceState === "listening" || voiceState === "speaking") && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
                 animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 className="overflow-hidden"
               >
-                <div className="flex items-center justify-center gap-1 py-2">
-                  {[...Array(12)].map((_, i) => (
+                <div className="flex items-center justify-center gap-1 py-3">
+                  {[...Array(16)].map((_, i) => (
                     <motion.div
                       key={i}
                       animate={{
-                        height: ["8px", `${16 + Math.random() * 16}px`, "8px"],
+                        height: voiceState === "listening" 
+                          ? ["6px", `${12 + Math.random() * 20}px`, "6px"]
+                          : ["6px", `${8 + Math.sin(i * 0.5) * 12}px`, "6px"],
                       }}
                       transition={{
-                        duration: 0.4 + i * 0.05,
+                        duration: voiceState === "listening" ? 0.3 + i * 0.03 : 0.8,
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
@@ -379,7 +337,7 @@ export default function VoiceAssistant() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 relative z-10">
+        <div className="flex-1 overflow-y-auto p-4 space-y-3 relative z-10">
           <AnimatePresence mode="popLayout">
             {messages.map((message, index) => (
               <motion.div
@@ -391,105 +349,65 @@ export default function VoiceAssistant() {
                 className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
               >
                 <div
-                  className={`max-w-[85%] px-4 py-3 rounded-2xl text-sm ${
+                  className={`max-w-[90%] px-4 py-3 rounded-2xl text-sm ${
                     message.role === "user"
                       ? "bg-gradient-to-br from-amber-500 to-red-500 text-white rounded-br-sm shadow-lg shadow-amber-500/20"
                       : "bg-white/8 border border-white/10 text-white/90 rounded-bl-sm backdrop-blur-sm"
                   }`}
                 >
                   <p>{message.content}</p>
-                  {message.role === "assistant" && (
-                    <button
-                      onClick={() => speakMessage(message.content)}
-                      className="mt-2 text-xs text-amber-400 hover:text-amber-300 flex items-center gap-1 transition-colors"
-                    >
-                      <Volume2 className="w-3 h-3" />
-                      Listen
-                    </button>
-                  )}
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
           
-          {isLoading && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="flex justify-start"
-            >
-              <div className="bg-white/8 border border-white/10 px-4 py-3 rounded-2xl rounded-bl-sm">
-                <div className="flex gap-1">
-                  {[0, 1, 2].map((i) => (
-                    <motion.div
-                      key={i}
-                      animate={{ scale: [0.8, 1.2, 0.8] }}
-                      transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
-                      className="w-2 h-2 rounded-full bg-amber-500"
-                    />
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          )}
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <form onSubmit={handleSubmit} className="relative z-10 p-4 border-t border-white/5 bg-[#0a0a0a]/50">
-          <div className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-2xl px-1 py-1">
+        {/* Voice controls */}
+        <div className="relative z-10 p-5 border-t border-white/5 bg-[#0a0a0a]/50">
+          <div className="flex flex-col items-center gap-4">
+            {/* Mic button */}
             <motion.button
               whileTap={{ scale: 0.9 }}
-              type="button"
               onClick={isListening ? stopListening : startListening}
-              className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all ${
+              className={`relative w-20 h-20 rounded-full flex items-center justify-center transition-all ${
                 isListening 
-                  ? "bg-red-500 shadow-lg shadow-red-500/30" 
-                  : "bg-white/5 hover:bg-white/10"
+                  ? "bg-red-500 shadow-2xl shadow-red-500/40" 
+                  : voiceState === "speaking"
+                  ? "bg-amber-500 shadow-2xl shadow-amber-500/40"
+                  : "bg-gradient-to-br from-amber-500 to-red-500 shadow-2xl shadow-amber-500/30"
               }`}
             >
+              {/* Pulsing ring when listening */}
+              {isListening && (
+                <motion.div
+                  animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                  className="absolute inset-0 rounded-full bg-red-500"
+                />
+              )}
+              
               {isListening ? (
-                <MicOff className="w-4 h-4 text-white" />
+                <MicOff className="w-8 h-8 text-white" />
+              ) : voiceState === "speaking" ? (
+                <Volume2 className="w-8 h-8 text-white animate-pulse" />
               ) : (
-                <Mic className="w-4 h-4 text-white/70" />
+                <Mic className="w-8 h-8 text-white" />
               )}
             </motion.button>
-            
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask me anything..."
-              className="flex-1 bg-transparent text-white placeholder:text-white/30 text-sm py-2 focus:outline-none"
-              disabled={isLoading}
-            />
-            
-            <motion.button
-              whileTap={{ scale: 0.9 }}
-              type="submit"
-              disabled={!input.trim() || isLoading}
-              className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-red-500 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-amber-500/20"
-            >
-              <Send className="w-4 h-4 text-white" />
-            </motion.button>
+
+            {/* Status text */}
+            <p className="text-white/40 text-xs text-center">
+              {isListening 
+                ? "Tap to stop" 
+                : voiceState === "speaking"
+                ? "Listening..."
+                : "Tap to talk"
+              }
+            </p>
           </div>
-          
-          {/* Quick suggestions */}
-          <div className="flex gap-2 mt-3 overflow-x-auto pb-1 scrollbar-hide">
-            {["Book a lesson", "Pricing", "Intensive course", "Pass Plus"].map((suggestion) => (
-              <button
-                key={suggestion}
-                type="button"
-                onClick={() => {
-                  setInput(suggestion);
-                }}
-                className="flex-shrink-0 px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full text-xs text-white/60 hover:text-white transition-colors"
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
-        </form>
+        </div>
       </div>
     </motion.div>
   );
