@@ -1,446 +1,438 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform, useSpring } from "motion/react";
-import { Phone, Clock, Award, Heart, Car, BookOpen, Shield, Users, ArrowRight, Star, Check, ChevronRight } from "lucide-react";
-
-const testimonials = [
-  { name: "Sarah J.", location: "Blackwood", text: "Alyson was so patient and friendly. Passed first time!", stars: 5 },
-  { name: "James T.", location: "Tredegar", text: "Excellent instructor! Helped me pass with only 3 minors.", stars: 5 },
-  { name: "Emma L.", location: "Newport", text: "After failing twice, Alyson helped me pass first time.", stars: 5 },
-  { name: "Michael R.", location: "Risca", text: "Best instructor in the area! Very calm and patient.", stars: 5 },
-];
+import { motion, useScroll, useTransform } from "motion/react";
+import { Phone, ArrowRight, Star, Award, Shield, Users, Heart, ChevronDown } from "lucide-react";
 
 const features = [
-  { icon: Heart, title: "Patient & Friendly", description: "We understand nervous beginners and teach at your pace." },
-  { icon: Shield, title: "Safety First", description: "Creating safe drivers is our top priority." },
-  { icon: Users, title: "Learner-Centred", description: "Lessons tailored to you, not a one-size-fits-all." },
-  { icon: Award, title: "High Pass Rate", description: "Expert guidance from a Grade A instructor." },
+  { title: "Patient & Friendly", description: "Understanding nervous beginners", icon: Heart, color: "from-pink-500 to-rose-500" },
+  { title: "Safety First", description: "Creating safe drivers for life", icon: Shield, color: "from-amber-500 to-orange-500" },
+  { title: "High Pass Rate", description: "98% pass rate", icon: Award, color: "from-emerald-500 to-green-500" },
+  { title: "Local Expert", description: "Blackwood & surrounding areas", icon: Users, color: "from-blue-500 to-cyan-500" },
 ];
 
-const services = [
-  { icon: Car, title: "Standard Lessons", description: "One-to-one tailored to your ability.", price: "From £30/hr" },
-  { icon: Clock, title: "Intensive Courses", description: "Pass your test in weeks, not months.", price: "From £450" },
-  { icon: BookOpen, title: "Block Bookings", description: "Save money with discounts.", price: "Up to 15% off" },
-  { icon: Award, title: "Pass Plus", description: "Post-test training for confidence.", price: "Available" },
+const courses = [
+  { name: "Standard Lessons", hours: "1-2 hours", price: "From £30", image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=600&fit=crop" },
+  { name: "Intensive Course", hours: "1-2 weeks", price: "From £450", image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=600&fit=crop" },
+  { name: "Block Booking", hours: "5+ lessons", price: "Save 15%", image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop" },
 ];
 
-function ParallaxBackground() {
+const testimonials = [
+  { name: "Sarah", text: "Alyson made me feel so comfortable. Passed first time!", location: "Blackwood", image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face" },
+  { name: "James", text: "Best instructor ever. Helped me pass with confidence!", location: "Tredegar", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face" },
+  { name: "Emma", text: "After failing twice elsewhere, I finally passed!", location: "Newport", image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face" },
+  { name: "Michael", text: "So patient and professional. Highly recommend!", location: "Risca", image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face" },
+];
+
+function Hero() {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const y3 = useTransform(scrollYProgress, [0, 1], ["0%", "70%"]);
-
-  return (
-    <div ref={ref} className="absolute inset-0 overflow-hidden">
-      <motion.div
-        style={{ y: y1 }}
-        className="absolute top-0 left-0 w-[600px] h-[600px] bg-amber-500/20 rounded-full blur-[200px]"
-      />
-      <motion.div
-        style={{ y: y2 }}
-        className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-red-500/15 rounded-full blur-[180px]"
-      />
-      <motion.div
-        style={{ y: y3 }}
-        className="absolute bottom-0 left-1/3 w-[400px] h-[400px] bg-blue-500/10 rounded-full blur-[150px]"
-      />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,transparent_0%,#0a0a0a_60%)]" />
-    </div>
-  );
-}
-
-function HeroSection() {
-  const ref = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end start"],
-  });
-
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
 
   return (
-    <section ref={ref} className="relative min-h-screen flex items-center overflow-hidden">
-      <ParallaxBackground />
-      
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:60px_60px]" />
+    <section ref={ref} className="relative h-screen overflow-hidden">
+      {/* Background */}
+      <motion.div style={{ y, scale }} className="absolute inset-0">
+        <Image
+          src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&h=1080&fit=crop"
+          alt="Driving"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
+      </motion.div>
 
-      <div className="container relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center min-h-screen py-32">
+      {/* Animated circles */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(5)].map((_, i) => (
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2, duration: 0.6 }}
-              className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-sm border border-white/10 rounded-full mb-8"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-amber-500"></span>
-              </span>
-              <span className="text-sm text-white/70 font-medium">South Wales Premier Driving School</span>
-            </motion.div>
-            
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight"
-            >
-              Learn to Drive with{" "}
-              <span className="text-gradient">Confidence</span>
-            </motion.h1>
-            
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-xl text-white/60 mb-10 max-w-lg leading-relaxed"
-            >
-              Patient, friendly instruction from an experienced Approved Driving Instructor with 20+ years of teaching experience.
-            </motion.p>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-5"
-            >
-              <Link href="/contact" className="btn btn-primary group">
-                <span>Book Your First Lesson</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <a href="tel:01234567890" className="btn btn-secondary group">
-                <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>Call Now</span>
-              </a>
-            </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex flex-wrap gap-10 mt-14 pt-10 border-t border-white/10"
-            >
-              {[
-                { value: "20+", label: "Years Experience", accent: "amber" },
-                { value: "98%", label: "Pass Rate", accent: "red" },
-                { value: "500+", label: "Pupils Passed", accent: "blue" },
-              ].map((stat, i) => (
-                <div key={i}>
-                  <div className={`text-4xl font-display font-bold text-${stat.accent}-500`}>{stat.value}</div>
-                  <div className="text-sm text-white/40">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
-          </motion.div>
-
-          {/* Hero Image with 3D Effect */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.4, duration: 1, ease: "easeOut" }}
-            style={{ y, opacity, scale }}
-            className="hidden lg:block relative"
-          >
-            <div className="relative">
-              {/* Glow behind */}
-              <div className="absolute -inset-8 bg-gradient-to-br from-amber-500/30 via-red-500/20 to-blue-500/30 rounded-[3rem] blur-3xl" />
-              
-              {/* Main image container */}
-              <div className="relative perspective-1000">
-                <div className="relative rounded-[2rem] overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm">
-                  <Image
-                    src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=1000&fit=crop"
-                    alt="Driving instructor"
-                    width={600}
-                    height={750}
-                    className="w-full h-auto object-cover"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-                </div>
-                
-                {/* Floating badge */}
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1, duration: 0.5 }}
-                  className="absolute -bottom-6 -left-6 glass-card px-6 py-4"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-red-500 rounded-xl flex items-center justify-center">
-                      <Award className="w-6 h-6 text-black" />
-                    </div>
-                    <div>
-                      <div className="text-white font-semibold">Grade A</div>
-                      <div className="text-white/50 text-sm">DVSA Instructor</div>
-                    </div>
-                  </div>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FeatureCard({ feature, index }: { feature: typeof features[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      viewport={{ once: true }}
-      className="glass-card p-8 group border-glow"
-    >
-      <div className="relative">
-        <div className="absolute -inset-4 bg-gradient-to-br from-amber-500/20 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-        <div className="relative w-16 h-16 bg-gradient-to-br from-amber-500/20 to-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-          <feature.icon className="w-8 h-8 text-amber-500" />
-        </div>
-      </div>
-      <h3 className="text-xl font-display font-semibold text-white mb-3">{feature.title}</h3>
-      <p className="text-white/50 leading-relaxed">{feature.description}</p>
-    </motion.div>
-  );
-}
-
-function FeaturesSection() {
-  return (
-    <section className="relative py-32 bg-[#0a0a0a] overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-amber-500/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-[100px]" />
-      </div>
-      
-      <div className="container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <span className="inline-block px-4 py-1.5 bg-amber-500/10 text-amber-500 text-sm font-medium rounded-full mb-6">
-            Why Choose Us
-          </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-            Learn from the{" "}
-            <span className="text-gradient">Best</span>
-          </h2>
-          <p className="text-lg text-white/50 max-w-2xl mx-auto">
-            We&apos;re committed to helping you become a safe, confident driver with personalized instruction.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, i) => (
-            <FeatureCard key={i} feature={feature} index={i} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ServiceCard({ service, index }: { service: typeof services[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      viewport={{ once: true }}
-      className="group"
-    >
-      <div className="glass-card p-8 h-full border-glow hover:border-amber-500/30 transition-colors">
-        <div className="relative mb-6">
-          <div className="absolute -inset-2 bg-gradient-to-br from-amber-500/30 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
-          <div className="relative w-14 h-14 bg-white/5 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-            <service.icon className="w-7 h-7 text-amber-500" />
-          </div>
-        </div>
-        <h3 className="text-xl font-display font-semibold text-white mb-2">{service.title}</h3>
-        <p className="text-white/50 mb-4">{service.description}</p>
-        <span className="inline-block text-amber-500 font-semibold">{service.price}</span>
-      </div>
-    </motion.div>
-  );
-}
-
-function ServicesSection() {
-  return (
-    <section className="relative py-32 bg-[#0f0f0f] overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-red-500/5 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-amber-500/5 rounded-full blur-[120px]" />
-      </div>
-      
-      <div className="container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
-        >
-          <span className="inline-block px-4 py-1.5 bg-amber-500/10 text-amber-500 text-sm font-medium rounded-full mb-6">
-            Our Services
-          </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-            Driving Lessons for{" "}
-            <span className="text-gradient">Everyone</span>
-          </h2>
-          <p className="text-lg text-white/50 max-w-2xl mx-auto">
-            Flexible driving lessons tailored to your needs and schedule.
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, i) => (
-            <ServiceCard key={i} service={service} index={i} />
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Link href="/services" className="btn btn-secondary group">
-            <span>View All Services</span>
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
-      </div>
-    </section>
-  );
-}
-
-function TestimonialCard({ testimonial, index }: { testimonial: typeof testimonials[0]; index: number }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.6 }}
-      viewport={{ once: true }}
-      className="glass-card p-8"
-    >
-      <div className="flex gap-1 mb-4">
-        {[...Array(testimonial.stars)].map((_, j) => (
-          <Star key={j} className="w-4 h-4 fill-amber-500 text-amber-500" />
+            key={i}
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: [0.1, 0.3, 0.1], scale: [1, 1.5, 1] }}
+            transition={{ duration: 8 + i * 2, repeat: Infinity, delay: i * 0.5 }}
+            className={`absolute rounded-full blur-3xl ${i % 2 === 0 ? "bg-amber-500/20" : "bg-red-500/20"}`}
+            style={{
+              width: 200 + i * 100,
+              height: 200 + i * 100,
+              left: `${10 + i * 20}%`,
+              top: `${20 + i * 15}%`,
+            }}
+          />
         ))}
       </div>
-      <p className="text-white/70 mb-6 leading-relaxed">&ldquo;{testimonial.text}&rdquo;</p>
-      <div>
-        <div className="font-semibold text-white">{testimonial.name}</div>
-        <div className="text-sm text-white/40">{testimonial.location}</div>
+
+      {/* Main content */}
+      <div className="relative z-10 h-full flex items-center">
+        <div className="container">
+          <div className="max-w-5xl">
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="mb-8"
+            >
+              <span className="inline-block px-6 py-3 bg-gradient-to-r from-amber-500 to-red-500 rounded-full font-semibold text-black">
+                Trusted by 500+ Students
+              </span>
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white leading-[0.9] mb-8"
+            >
+              Drive with <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-red-400">
+                Confidence
+              </span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.4 }}
+              className="text-xl md:text-2xl text-white/70 max-w-xl mb-12"
+            >
+              20+ years experience teaching people to drive safely. 
+              Patient, friendly instruction tailored to you.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="flex flex-wrap gap-4"
+            >
+              <Link
+                href="/contact"
+                className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden"
+              >
+                <span className="relative z-10 flex items-center gap-2">
+                  Book Lesson <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </span>
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </Link>
+              <a
+                href="tel:01234567890"
+                className="px-8 py-4 border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
+              >
+                <Phone className="w-5 h-5" /> Call Now
+              </a>
+            </motion.div>
+          </div>
+        </div>
       </div>
-    </motion.div>
+
+      {/* Scroll down indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ duration: 2, repeat: Infinity }}
+          className="w-8 h-14 border-2 border-white/30 rounded-full flex justify-center p-2"
+        >
+          <motion.div className="w-1.5 h-3 bg-white rounded-full" />
+        </motion.div>
+      </motion.div>
+    </section>
   );
 }
 
-function TestimonialsSection() {
+function FeatureStrip() {
   return (
-    <section className="relative py-32 bg-[#0a0a0a] overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-0 w-96 h-96 bg-amber-500/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-red-500/5 rounded-full blur-[100px]" />
-      </div>
+    <section className="relative py-24 bg-[#0a0a0a] overflow-hidden">
+      {/* Background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black to-[#0a0a0a]" />
       
       <div className="container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-display font-bold text-white">
+            Why Choose <span className="text-amber-500">Alyson&apos;s</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+          {features.map((feature, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 80 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ 
+                delay: i * 0.1, 
+                duration: 0.6, 
+                ease: [0.25, 0.46, 0.45, 0.94]
+              }}
+              viewport={{ once: true, margin: "-50px" }}
+              className="group bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 lg:p-8 hover:bg-white/10 hover:border-amber-500/30 transition-all duration-500"
+            >
+              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300`}>
+                <feature.icon className="w-7 h-7 text-white" />
+              </div>
+              <h3 className="text-white font-bold text-lg mb-2">{feature.title}</h3>
+              <p className="text-white/50 text-sm">{feature.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CoursesSection() {
+  return (
+    <section className="relative py-40 bg-[#0a0a0a]">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(245,158,11,0.1),transparent_50%)]" />
+      
+      <div className="container relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <span className="inline-block px-4 py-1.5 bg-amber-500/10 text-amber-500 text-sm font-medium rounded-full mb-6">
-            Testimonials
-          </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-6">
-            What Our{" "}
-            <span className="text-gradient">Pupils Say</span>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-6">
+            Our <span className="text-gradient">Courses</span>
           </h2>
-          <p className="text-lg text-white/50 max-w-2xl mx-auto">
-            Join hundreds of satisfied pupils who passed with Alyson&apos;s Driving Tuition.
+          <p className="text-white/50 text-xl max-w-2xl mx-auto">
+            Flexible options to fit your schedule and learning style
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {testimonials.map((testimonial, i) => (
-            <TestimonialCard key={i} testimonial={testimonial} index={i} />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {courses.map((course, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.15, duration: 0.8 }}
+              viewport={{ once: true }}
+              className="group relative"
+            >
+              <div className="relative h-[450px] rounded-[2.5rem] overflow-hidden">
+                <Image
+                  src={course.image}
+                  alt={course.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+                
+                {/* Floating badge */}
+                <div className="absolute top-6 right-6 px-4 py-2 bg-white/20 backdrop-blur-md rounded-full">
+                  <span className="text-white font-bold">{course.price}</span>
+                </div>
+
+                <div className="absolute bottom-0 left-0 right-0 p-8">
+                  <h3 className="text-3xl font-display font-bold text-white mb-2">{course.name}</h3>
+                  <p className="text-white/70 mb-4">{course.hours}</p>
+                  <Link
+                    href="/services"
+                    className="inline-flex items-center gap-2 text-amber-400 font-semibold hover:gap-3 transition-all"
+                  >
+                    Learn more <ChevronDown className="w-4 h-4 rotate-[-90deg]" />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.6 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Link href="/testimonials" className="btn btn-secondary group">
-            <span>Read More Reviews</span>
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </motion.div>
       </div>
+    </section>
+  );
+}
+
+function AboutPreview() {
+  return (
+    <section className="relative py-40 bg-[#111] overflow-hidden">
+      <div className="absolute inset-0">
+        <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-amber-500/10 to-transparent" />
+      </div>
+
+      <div className="container relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+            <span className="inline-block px-4 py-2 bg-amber-500/20 text-amber-500 rounded-full font-medium mb-6">
+              Meet Your Instructor
+            </span>
+            <h2 className="text-5xl md:text-6xl font-display font-bold text-white mb-8">
+              Hi, I&apos;m <span className="text-amber-500">Alyson Baldwin</span>
+            </h2>
+            <p className="text-white/60 text-lg mb-6 leading-relaxed">
+              With over 20 years of experience as a DVSA Approved Driving Instructor, 
+              I&apos;ve helped hundreds of learners become safe, confident drivers.
+            </p>
+            <p className="text-white/60 text-lg mb-8 leading-relaxed">
+              I believe everyone can learn to drive with the right patience and guidance. 
+              Whether you&apos;re a complete beginner or returning to driving, 
+              I&apos;ll tailor my teaching to your unique needs.
+            </p>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 text-amber-500 font-bold text-lg hover:gap-3 transition-all"
+            >
+              More about me <ArrowRight className="w-5 h-5" />
+            </Link>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <div className="relative w-full aspect-[4/5] rounded-[3rem] overflow-hidden">
+              <Image
+                src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop&crop=face"
+                alt="Alyson Baldwin"
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+            </div>
+            
+            {/* Floating card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.5, duration: 0.5 }}
+              viewport={{ once: true }}
+              className="absolute -bottom-8 -left-8 bg-white rounded-3xl p-6 shadow-2xl"
+            >
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-red-500 rounded-2xl flex items-center justify-center">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-black">Grade A</div>
+                  <div className="text-gray-500">Instructor Rating</div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TestimonialsMarquee() {
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
+
+  return (
+    <section className="relative py-20 bg-[#0a0a0a] overflow-hidden">
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#111] to-transparent z-10" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#111] to-transparent z-10" />
+      
+      <motion.div
+        animate={{ x: ["0%", "-33.33%"] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="flex gap-8"
+      >
+        {duplicatedTestimonials.map((t, i) => (
+          <div
+            key={i}
+            className="flex-shrink-0 w-[400px] bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-8"
+          >
+            <div className="flex items-center gap-4 mb-6">
+              <div className="relative w-16 h-16 rounded-full overflow-hidden">
+                <Image src={t.image} alt={t.name} fill className="object-cover" />
+              </div>
+              <div>
+                <div className="font-bold text-white">{t.name}</div>
+                <div className="text-white/50 text-sm">{t.location}</div>
+              </div>
+            </div>
+            <div className="flex gap-1 mb-4">
+              {[...Array(5)].map((_, j) => (
+                <Star key={j} className="w-4 h-4 fill-amber-500 text-amber-500" />
+              ))}
+            </div>
+            <p className="text-white/70">&ldquo;{t.text}&rdquo;</p>
+          </div>
+        ))}
+      </motion.div>
     </section>
   );
 }
 
 function CTASection() {
   return (
-    <section className="relative py-32 bg-[#0a0a0a] overflow-hidden">
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-red-500/10" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-amber-500/10 rounded-full blur-[150px]" />
-      </div>
+    <section className="relative py-40 overflow-hidden">
+      <Image
+        src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1920&h=800&fit=crop"
+        alt=""
+        fill
+        className="object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-black/60" />
       
+      <div className="absolute inset-0">
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            animate={{ 
+              x: [0, 100, 0],
+              y: [0, -50, 0],
+              opacity: [0.1, 0.3, 0.1]
+            }}
+            transition={{ duration: 10 + i * 2, repeat: Infinity, delay: i }}
+            className="absolute w-32 h-32 bg-amber-500/20 rounded-full blur-2xl"
+            style={{
+              left: `${10 + i * 12}%`,
+              top: `${20 + (i % 3) * 25}%`,
+            }}
+          />
+        ))}
+      </div>
+
       <div className="container relative z-10">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-center"
+          className="text-center max-w-3xl mx-auto"
         >
-          <h2 className="text-4xl md:text-6xl font-display font-bold text-white mb-6">
-            Ready to Start Your{" "}
-            <span className="text-gradient">Journey?</span>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8">
+            Start Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-400">Journey</span> Today
           </h2>
-          <p className="text-xl text-white/50 mb-10 max-w-2xl mx-auto">
-            Book your first lesson today and get on the road to passing your test.
+          <p className="text-xl text-white/60 mb-12">
+            Book your first lesson and discover why we&apos;re South Wales&apos; most trusted driving school
           </p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center">
-            <Link href="/contact" className="btn btn-primary group">
-              <span>Book Your First Lesson</span>
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          <div className="flex flex-wrap justify-center gap-6">
+            <Link
+              href="/contact"
+              className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full text-lg hover:scale-105 transition-transform"
+            >
+              Book Your First Lesson
             </Link>
-            <a href="tel:01234567890" className="btn btn-secondary group">
-              <Phone className="w-5 h-5 group-hover:scale-110 transition-transform" />
-              <span>Call Now</span>
+            <a
+              href="tel:01234567890"
+              className="px-10 py-5 border-2 border-white/30 text-white font-bold rounded-full text-lg hover:bg-white/10 transition-colors flex items-center gap-3"
+            >
+              <Phone className="w-5 h-5" /> 01234 567890
             </a>
           </div>
         </motion.div>
@@ -452,10 +444,11 @@ function CTASection() {
 export default function Home() {
   return (
     <>
-      <HeroSection />
-      <FeaturesSection />
-      <ServicesSection />
-      <TestimonialsSection />
+      <Hero />
+      <FeatureStrip />
+      <CoursesSection />
+      <AboutPreview />
+      <TestimonialsMarquee />
       <CTASection />
     </>
   );
