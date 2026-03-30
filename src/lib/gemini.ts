@@ -2,8 +2,10 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
 
+// IMPORTANT: Use gemini-2.5-flash (NOT gemini-2.0-flash-exp, gemini-1.5-flash, etc.)
+// See AI-RECEPTIONIST-SETUP.md for details
 export const model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash-exp",
+  model: "gemini-2.5-flash",
 });
 
 export const SYSTEM_PROMPT = `You are the friendly, professional receptionist for Alyson's Driving Tuition in South Wales.

@@ -139,6 +139,14 @@ export default function VoiceAssistant() {
         ]);
         setVoiceState("speaking");
         speakText(data.response);
+      } else if (data.error) {
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content: `Sorry, something went wrong: ${data.error}`,
+          },
+        ]);
       } else {
         setMessages((prev) => [
           ...prev,
