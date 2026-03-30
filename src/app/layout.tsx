@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import VoiceAssistant from "@/components/VoiceAssistant";
 
 const baseUrl = 'https://alysonsdrivingtuition.co.uk';
 
@@ -116,6 +117,7 @@ export default function RootLayout({
         <Navigation />
         <main id="main-content" className="flex-1">{children}</main>
         <Footer />
+        <VoiceAssistant />
       </body>
     </html>
   );
