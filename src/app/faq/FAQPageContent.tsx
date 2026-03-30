@@ -61,7 +61,7 @@ function FAQHero() {
   const y = useTransform(scrollY, [0, 500], [0, 150]);
 
   return (
-    <section className="relative min-h-[50vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&h=1080&fit=crop')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/70" />
@@ -119,7 +119,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
       >
-        <span className="font-display font-semibold text-white group-hover:text-amber-500 transition-colors pr-4">{question}</span>
+        <span className={`font-display font-semibold transition-colors pr-4 ${isOpen ? "text-amber-500" : "text-white group-hover:text-amber-500"}`}>{question}</span>
         <ChevronDown
           className={`w-5 h-5 text-white/40 group-hover:text-amber-500 transition-all duration-300 ${
             isOpen ? "rotate-180" : ""

@@ -55,6 +55,14 @@ const testimonials = [
   },
 ];
 
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase();
+}
+
 function TestimonialsHero() {
   const { scrollY } = useScroll();
   const y = useTransform(scrollY, [0, 500], [0, 150]);
@@ -118,7 +126,7 @@ function TestimonialsGrid() {
       </div>
 
       <div className="container relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((testimonial, i) => (
             <motion.div
               key={i}
@@ -134,9 +142,14 @@ function TestimonialsGrid() {
                 ))}
               </div>
               <p className="text-white/70 mb-6 leading-relaxed">&ldquo;{testimonial.text}&rdquo;</p>
-              <div>
-                <div className="font-semibold text-white">{testimonial.name}</div>
-                <div className="text-sm text-white/40">{testimonial.location}</div>
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-red-500 flex items-center justify-center flex-shrink-0">
+                  <span className="text-black font-bold text-sm">{getInitials(testimonial.name)}</span>
+                </div>
+                <div>
+                  <div className="font-semibold text-white">{testimonial.name}</div>
+                  <div className="text-sm text-white/40">{testimonial.location}</div>
+                </div>
               </div>
             </motion.div>
           ))}

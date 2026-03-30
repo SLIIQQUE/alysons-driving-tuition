@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Phone } from "lucide-react";
 
@@ -17,6 +18,7 @@ const navigation = [
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -59,16 +61,23 @@ export default function Navigation() {
 
             {/* Desktop navigation */}
             <div className="hidden lg:flex lg:gap-x-10">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className="text-sm font-medium text-white/70 hover:text-amber-500 transition-all duration-300 relative group"
-                >
-                  {item.name}
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-500 group-hover:w-full transition-all duration-300" />
-                </Link>
-              ))}
+              {navigation.map((item) => {
+                const isActive = pathname === item.href;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`text-sm font-medium transition-all duration-300 relative group ${
+                      isActive ? "text-amber-500" : "text-white/70 hover:text-amber-500"
+                    }`}
+                  >
+                    {item.name}
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-amber-500 transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`} />
+                  </Link>
+                );
+              })}
             </div>
 
             {/* CTA Button */}
@@ -142,16 +151,23 @@ export default function Navigation() {
                   <div className="mt-8 flow-root">
                     <div className="-my-6 divide-y divide-white/10">
                       <div className="space-y-2 py-6">
-                        {navigation.map((item) => (
-                          <Link
-                            key={item.name}
-                            href={item.href}
-                            onClick={() => setMobileMenuOpen(false)}
-                            className="-mx-3 block rounded-xl px-3 py-3 text-base font-semibold leading-7 text-white hover:bg-white/5"
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
+                        {navigation.map((item) => {
+                          const isActive = pathname === item.href;
+                          return (
+                            <Link
+                              key={item.name}
+                              href={item.href}
+                              onClick={() => setMobileMenuOpen(false)}
+                              className={`-mx-3 block rounded-xl px-3 py-3 text-base font-semibold leading-7 ${
+                                isActive 
+                                  ? "text-amber-500 bg-amber-500/10" 
+                                  : "text-white hover:bg-white/5"
+                              }`}
+                            >
+                              {item.name}
+                            </Link>
+                          );
+                        })}
                       </div>
                       <div className="py-6">
                         <Link
