@@ -15,11 +15,30 @@ const navigation = {
     { name: "FAQ", href: "/faq" },
     { name: "Contact", href: "/contact" },
   ],
+  legal: [
+    { name: "Terms of Service", href: "/terms" },
+    { name: "Privacy Policy", href: "/privacy" },
+  ],
 };
 
 export default function Footer() {
   return (
     <footer className="relative bg-[#0a0a0a] text-white overflow-visible pt-16 lg:pt-24 pb-8">
+      {/* Text Underlay */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span 
+            className="font-display text-[12vw] font-bold text-white opacity-[0.03] leading-none tracking-tighter whitespace-nowrap"
+            style={{ 
+              transform: 'scale(1.5)',
+              WebkitTextStroke: '1px rgba(245, 158, 11, 0.1)',
+            }}
+          >
+            Alyson's Driving
+          </span>
+        </div>
+      </div>
+
       {/* Gradient Background */}
       <div className="absolute inset-0">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-[150px]" />
@@ -80,44 +99,60 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="mt-16 xl:mt-0 grid grid-cols-2 gap-8 xl:col-span-2">
-            <div className="grid grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
-                  Services
-                </h3>
-                <ul role="list" className="space-y-3">
-                  {navigation.services.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm text-white/50 hover:text-amber-500 transition-colors flex items-center gap-2 group text-nowrap"
-                      >
-                        <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-amber-500" />
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
-                  Company
-                </h3>
-                <ul role="list" className="space-y-3">
-                  {navigation.company.map((item) => (
-                    <li key={item.name}>
-                      <Link
-                        href={item.href}
-                        className="text-sm text-white/50 hover:text-amber-500 transition-colors flex items-center gap-2 group text-nowrap"
-                      >
-                        <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-amber-500" />
-                        {item.name}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className="mt-16 xl:mt-0 xl:col-span-2 grid grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
+                Services
+              </h3>
+              <ul role="list" className="space-y-3">
+                {navigation.services.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-white/50 hover:text-amber-500 transition-colors flex items-center gap-2 group text-nowrap"
+                    >
+                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-amber-500" />
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
+                Company
+              </h3>
+              <ul role="list" className="space-y-3">
+                {navigation.company.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-white/50 hover:text-amber-500 transition-colors flex items-center gap-2 group text-nowrap"
+                    >
+                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-amber-500" />
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
+                Legal
+              </h3>
+              <ul role="list" className="space-y-3">
+                {navigation.legal.map((item) => (
+                  <li key={item.name}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-white/50 hover:text-amber-500 transition-colors flex items-center gap-2 group text-nowrap"
+                    >
+                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all text-amber-500" />
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
