@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import VoiceAssistant from "@/components/VoiceAssistant";
 
-const baseUrl = 'https://alysonsdrivingtuition.co.uk';
+const baseUrl = "https://alysonsdrivingtuition.co.uk";
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
@@ -12,8 +12,18 @@ export const metadata: Metadata = {
     default: "Alyson's Driving Tuition | Driving Lessons in South Wales",
     template: "%s | Alyson's Driving Tuition",
   },
-  description: "Learn to drive with confidence in South Wales. Patient, friendly driving lessons from Alyson Baldwin - DVSA Approved Driving Instructor with 20+ years experience. Book your first lesson today.",
-  keywords: ["driving lessons", "driving instructor", "South Wales", "Blackwood", "Tredegar", "intensive courses", "Pass Plus", "learn to drive"],
+  description:
+    "Learn to drive with confidence in South Wales. Patient, friendly driving lessons from Alyson Baldwin - DVSA Approved Driving Instructor with 20+ years experience. Book your first lesson today.",
+  keywords: [
+    "driving lessons",
+    "driving instructor",
+    "South Wales",
+    "Blackwood",
+    "Tredegar",
+    "intensive courses",
+    "Pass Plus",
+    "learn to drive",
+  ],
   authors: [{ name: "Alyson Baldwin" }],
   creator: "Alyson's Driving Tuition",
   publisher: "Alyson's Driving Tuition",
@@ -28,7 +38,8 @@ export const metadata: Metadata = {
     url: baseUrl,
     siteName: "Alyson's Driving Tuition",
     title: "Alyson's Driving Tuition | Driving Lessons in South Wales",
-    description: "Learn to drive with confidence. Patient, friendly instruction from an experienced ADI with 20+ years experience.",
+    description:
+      "Learn to drive with confidence. Patient, friendly instruction from an experienced ADI with 20+ years experience.",
     images: [
       {
         url: `${baseUrl}/og-image.jpg`,
@@ -41,7 +52,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Alyson's Driving Tuition | Driving Lessons in South Wales",
-    description: "Learn to drive with confidence. Patient, friendly instruction from an experienced ADI with 20+ years experience.",
+    description:
+      "Learn to drive with confidence. Patient, friendly instruction from an experienced ADI with 20+ years experience.",
     images: [`${baseUrl}/og-image.jpg`],
     creator: "@alysonsdriving",
   },
@@ -67,7 +79,8 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "DrivingSchool",
     name: "Alyson's Driving Tuition",
-    description: "Learn to drive with confidence in South Wales. Patient, friendly driving lessons from Alyson Baldwin - DVSA Approved Driving Instructor.",
+    description:
+      "Learn to drive with confidence in South Wales. Patient, friendly driving lessons from Alyson Baldwin - DVSA Approved Driving Instructor.",
     url: baseUrl,
     telephone: "01234567890",
     email: "hello@alysonsdrivingtuition.co.uk",
@@ -102,7 +115,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"
@@ -115,7 +128,9 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Navigation />
-        <main id="main-content" className="flex-1">{children}</main>
+        <main id="main-content" className="flex-1">
+          {children}
+        </main>
         <Footer />
         <VoiceAssistant />
       </body>
