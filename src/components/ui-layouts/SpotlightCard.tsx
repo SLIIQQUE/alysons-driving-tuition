@@ -51,13 +51,14 @@ export function SpotlightCard({ children, className }: SpotlightCardProps) {
 }
 
 interface FeatureCardProps {
-  icon: React.ElementType;
+  icon: React.ElementType<any>;
   title: string;
   description: string;
   delay?: number;
 }
 
 export function FeatureCard({ icon: Icon, title, description, delay = 0 }: FeatureCardProps) {
+  const IconComponent = Icon as React.ComponentType<{ className?: string }>;
   return (
     <SpotlightCard className="p-8 h-full">
       <motion.div
@@ -67,7 +68,7 @@ export function FeatureCard({ icon: Icon, title, description, delay = 0 }: Featu
         viewport={{ once: true }}
       >
         <div className="w-14 h-14 bg-[#f59e0b]/10 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-          <Icon className="w-7 h-7 text-[#f59e0b]" />
+          {IconComponent && <IconComponent className="w-7 h-7 text-[#f59e0b]" />}
         </div>
         <h3 className="font-heading font-bold text-xl text-white mb-3">{title}</h3>
         <p className="text-gray-400">{description}</p>
@@ -77,7 +78,7 @@ export function FeatureCard({ icon: Icon, title, description, delay = 0 }: Featu
 }
 
 interface ServiceCardProps {
-  icon: React.ElementType;
+  icon: React.ElementType<any>;
   title: string;
   description: string;
   features: string[];
@@ -88,6 +89,7 @@ interface ServiceCardProps {
 }
 
 export function ServiceCard({ icon: Icon, title, description, features, price, cta, href, delay = 0 }: ServiceCardProps) {
+  const IconComponent = Icon as React.ComponentType<{ className?: string }>;
   return (
     <SpotlightCard className="p-8 h-full">
       <motion.div
@@ -97,7 +99,7 @@ export function ServiceCard({ icon: Icon, title, description, features, price, c
         viewport={{ once: true }}
       >
         <div className="w-14 h-14 bg-[#1e40af]/10 rounded-xl flex items-center justify-center mb-6">
-          <Icon className="w-7 h-7 text-[#1e40af]" />
+          {IconComponent && <IconComponent className="w-7 h-7 text-[#1e40af]" />}
         </div>
         <h3 className="font-heading font-bold text-2xl text-gray-900 mb-4">{title}</h3>
         <p className="text-gray-600 mb-6">{description}</p>

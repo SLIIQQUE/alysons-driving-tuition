@@ -346,6 +346,16 @@ h1, h2, h3, h4, h5, h6 {
   animation: shine 0.8s;
 }
 
+/* Shimmer animation for gallery */
+@keyframes shimmer {
+  0% { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
 /* Border glow */
 .border-glow {
   position: relative;

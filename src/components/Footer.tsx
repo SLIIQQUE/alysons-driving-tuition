@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Mail, MapPin, Clock, ArrowRight, MessageCircle } from "lucide-react";
+import { Mail, MapPin, ArrowRight } from "lucide-react";
 
 const navigation = {
   services: [
@@ -29,11 +29,11 @@ export default function Footer() {
       {/* Text Underlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 flex items-center justify-center">
-          <span 
+          <span
             className="font-display text-[12vw] font-bold text-white opacity-[0.03] leading-none tracking-tighter whitespace-nowrap"
-            style={{ 
-              transform: 'scale(1.5)',
-              WebkitTextStroke: '1px rgba(245, 158, 11, 0.1)',
+            style={{
+              transform: "scale(1.5)",
+              WebkitTextStroke: "1px rgba(245, 158, 11, 0.1)",
             }}
           >
             Alyson's Driving
@@ -73,15 +73,6 @@ export default function Footer() {
               learn to drive with confidence since 2004.
             </p>
             <div className="flex flex-col gap-4">
-              {/* <button
-                onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
-                className="flex items-center gap-3 text-white/70 hover:text-amber-500 transition-colors group"
-              >
-                <div className="w-10 h-10 bg-gradient-to-r from-amber-500 to-red-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <MessageCircle className="w-5 h-5 text-black" />
-                </div>
-                <span className="font-semibold text-amber-500">Chat with AI Assistant</span>
-              </button> */}
               <a
                 href="mailto:hello@alysonsdriving.co.uk"
                 className="flex items-center gap-3 text-white/70 hover:text-amber-500 transition-colors group"

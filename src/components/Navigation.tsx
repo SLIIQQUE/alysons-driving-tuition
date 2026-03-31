@@ -9,6 +9,7 @@ import { Menu, X, MessageCircle } from "lucide-react";
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Services", href: "/services" },
+  { name: "Gallery", href: "/gallery" },
   { name: "About", href: "/about" },
   { name: "Testimonials", href: "/testimonials" },
   { name: "FAQ", href: "/faq" },
