@@ -73,7 +73,7 @@ export default function Footer() {
               learn to drive with confidence since 2004.
             </p>
             <div className="flex flex-col gap-4">
-              <button
+              {/* <button
                 onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
                 className="flex items-center gap-3 text-white/70 hover:text-amber-500 transition-colors group"
               >
@@ -81,7 +81,7 @@ export default function Footer() {
                   <MessageCircle className="w-5 h-5 text-black" />
                 </div>
                 <span className="font-semibold text-amber-500">Chat with AI Assistant</span>
-              </button>
+              </button> */}
               <a
                 href="mailto:hello@alysonsdriving.co.uk"
                 className="flex items-center gap-3 text-white/70 hover:text-amber-500 transition-colors group"
