@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Car, Clock, Bookmark, Award, BookOpen, RefreshCw, ArrowRight, Check, Phone } from "lucide-react";
+import { Car, Clock, Bookmark, Award, BookOpen, RefreshCw, ArrowRight, Check, MessageCircle } from "lucide-react";
 
 const services = [
   {
@@ -279,10 +279,13 @@ function CTASection() {
               <span>Get in Touch</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <a href="tel:01234567890" className="btn btn-secondary group">
-              <Phone className="w-5 h-5" />
-              <span>Call Now</span>
-            </a>
+            <button 
+              onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+              className="btn btn-secondary group"
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span>Chat with AI</span>
+            </button>
           </div>
         </motion.div>
       </div>

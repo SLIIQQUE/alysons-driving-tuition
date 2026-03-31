@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Clock, ArrowRight, MessageCircle } from "lucide-react";
 
 const navigation = {
   services: [
@@ -71,15 +73,15 @@ export default function Footer() {
               learn to drive with confidence since 2004.
             </p>
             <div className="flex flex-col gap-4">
-              <a
-                href="tel:01234567890"
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
                 className="flex items-center gap-3 text-white/70 hover:text-amber-500 transition-colors group"
               >
-                <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center group-hover:bg-amber-500/20 transition-colors">
-                  <Phone className="w-5 h-5" />
+                <div className="w-10 h-10 bg-gradient-to-r from-amber-500 to-red-500 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <MessageCircle className="w-5 h-5 text-black" />
                 </div>
-                01234 567890
-              </a>
+                <span className="font-semibold text-amber-500">Chat with AI Assistant</span>
+              </button>
               <a
                 href="mailto:hello@alysonsdriving.co.uk"
                 className="flex items-center gap-3 text-white/70 hover:text-amber-500 transition-colors group"

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Star, ArrowRight, Phone } from "lucide-react";
+import { Star, ArrowRight, MessageCircle } from "lucide-react";
 
 const testimonials = [
   {
@@ -186,10 +186,13 @@ function CTASection() {
               <span>Book Your First Lesson</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <a href="tel:01234567890" className="btn btn-secondary group">
-              <Phone className="w-5 h-5" />
-              <span>Call Now</span>
-            </a>
+            <button 
+              onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+              className="btn btn-secondary group"
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span>Chat with AI</span>
+            </button>
           </div>
         </motion.div>
       </div>

@@ -59,6 +59,12 @@ export default function VoiceAssistant() {
   useEffect(() => { scrollToBottom(); }, [messages]);
 
   useEffect(() => {
+    const handleOpen = () => setIsOpen(true);
+    window.addEventListener('openVoiceAssistant', handleOpen);
+    return () => window.removeEventListener('openVoiceAssistant', handleOpen);
+  }, []);
+
+  useEffect(() => {
     return () => { cleanup(); };
   }, []);
 
@@ -214,7 +220,6 @@ export default function VoiceAssistant() {
         config: {
           responseModalities: [Modality.AUDIO],
           systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
-          thinkingLevel: "minimal",
         },
         callbacks: {
           onopen: () => {

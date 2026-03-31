@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Phone, ArrowRight, ChevronDown } from "lucide-react";
+import { MessageCircle, ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 const faqs = [
@@ -186,10 +186,13 @@ function CTASection() {
             Can&apos;t find the answer you&apos;re looking for? Get in touch and we&apos;ll be happy to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
-            <a href="tel:01234567890" className="btn btn-secondary group">
-              <Phone className="w-5 h-5" />
-              <span>Call Now</span>
-            </a>
+            <button 
+              onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+              className="btn btn-secondary group"
+            >
+              <MessageCircle className="w-5 h-5" />
+              <span>Chat with AI</span>
+            </button>
             <Link href="/contact" className="btn btn-primary group">
               <span>Contact Us</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

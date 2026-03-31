@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Award, Clock, CheckCircle, Heart, Shield, Target, Users, ArrowRight, Phone } from "lucide-react";
+import { Award, Clock, CheckCircle, Heart, Shield, Target, Users, ArrowRight, MessageCircle } from "lucide-react";
 
 const qualifications = [
   {
@@ -322,10 +322,10 @@ function CTASection() {
               <span>Book a Lesson</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <a href="tel:01234567890" className="btn btn-secondary group">
-              <Phone className="w-5 h-5" />
-              <span>Call Now</span>
-            </a>
+            <Link href="/contact" className="btn btn-secondary group">
+              <MessageCircle className="w-5 h-5" />
+              <span>Chat with AI</span>
+            </Link>
           </div>
         </motion.div>
       </div>

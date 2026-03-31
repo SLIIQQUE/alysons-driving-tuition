@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "motion/react";
-import { Phone, Mail, MapPin, Clock, Send, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Clock, Send, ArrowRight, MessageCircle } from "lucide-react";
 
 function ContactHero() {
   const { scrollY } = useScroll();
@@ -169,12 +169,17 @@ function ContactContent() {
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-amber-500" />
+                  <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <MessageCircle className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Phone</h3>
-                    <a href="tel:01234567890" className="text-amber-500 hover:underline">01234 567890</a>
+                    <h3 className="font-semibold text-white mb-1">AI Assistant</h3>
+                    <button 
+                      onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+                      className="text-amber-500 hover:underline"
+                    >
+                      Chat now for instant answers
+                    </button>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -209,16 +214,21 @@ function ContactContent() {
 
             <div className="glass-card p-8 md:p-10 bg-gradient-to-br from-amber-500/20 to-red-500/10 border-amber-500/20">
               <h3 className="text-xl font-display font-bold text-white mb-4">
-                Ready to Start?
+                Try Our AI Assistant
               </h3>
               <p className="text-white/60 mb-6">
-                Book your first lesson today and start your journey to becoming a confident driver.
+                Chat with our AI assistant to book lessons, get answers to questions, or learn more about our services.
               </p>
-              <a href="tel:01234567890" className="btn btn-primary w-full group">
-                <Phone className="w-5 h-5" />
-                <span>Call Now</span>
+            <button
+              onClick={() => {
+                window.dispatchEvent(new CustomEvent('openVoiceAssistant'));
+              }}
+              className="btn btn-primary w-full group"
+              >
+                <MessageCircle className="w-5 h-5" />
+                <span>Chat with AI</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </button>
             </div>
           </motion.div>
         </div>

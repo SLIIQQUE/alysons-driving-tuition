@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { Phone, ArrowRight, Star, Award, Shield, Users, Heart, ChevronDown } from "lucide-react";
+import { ArrowRight, Star, Award, Shield, Users, Heart, ChevronDown, MessageCircle } from "lucide-react";
 
 const features = [
   { title: "Patient & Friendly", description: "Understanding nervous beginners", icon: Heart, color: "from-pink-500 to-rose-500" },
@@ -108,21 +108,21 @@ function Hero() {
               transition={{ duration: 1, delay: 0.5 }}
               className="flex flex-wrap gap-4"
             >
-              <Link
-                href="/contact"
-                className="group relative px-8 py-4 bg-white text-black font-bold rounded-full overflow-hidden"
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+                className="group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Book Lesson <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <MessageCircle className="w-5 h-5" />
+                  Chat with AI Assistant
                 </span>
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-red-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-              </Link>
-              <a
-                href="tel:01234567890"
+              </button>
+              <Link
+                href="/contact"
                 className="px-8 py-4 border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
               >
-                <Phone className="w-5 h-5" /> Call Now
-              </a>
+                Book a Lesson
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -422,18 +422,19 @@ function CTASection() {
             Book your first lesson and discover why we&apos;re South Wales&apos; most trusted driving school
           </p>
           <div className="flex flex-wrap justify-center gap-6">
+            <button
+              onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+              className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full text-lg hover:scale-105 transition-transform flex items-center gap-3"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Chat with AI Assistant
+            </button>
             <Link
               href="/contact"
-              className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full text-lg hover:scale-105 transition-transform"
+              className="px-10 py-5 border-2 border-white/30 text-white font-bold rounded-full text-lg hover:bg-white/10 transition-colors"
             >
               Book Your First Lesson
             </Link>
-            <a
-              href="tel:01234567890"
-              className="px-10 py-5 border-2 border-white/30 text-white font-bold rounded-full text-lg hover:bg-white/10 transition-colors flex items-center gap-3"
-            >
-              <Phone className="w-5 h-5" /> 01234 567890
-            </a>
           </div>
         </motion.div>
       </div>

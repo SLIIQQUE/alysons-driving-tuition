@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -81,14 +81,14 @@ export default function Navigation() {
             </div>
 
             {/* CTA Button */}
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-4">
-              <a
-                href="tel:01234567890"
-                className="flex items-center gap-2 text-sm font-medium text-white/70 hover:text-amber-500 transition-colors"
+            <div className="hidden lg:flex lg:flex-1 lg:justify-end items-center gap-3">
+              <button
+                onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+                className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-semibold rounded-full hover:shadow-lg hover:shadow-amber-500/25 transition-all group"
               >
-                <Phone className="w-4 h-4" />
-                01234 567890
-              </a>
+                <MessageCircle className="w-4 h-4" />
+                <span className="text-sm">AI Assistant</span>
+              </button>
               <Link
                 href="/contact"
                 className="btn btn-primary text-sm py-2.5 px-5"
@@ -169,11 +169,21 @@ export default function Navigation() {
                           );
                         })}
                       </div>
-                      <div className="py-6">
+                      <div className="py-6 space-y-4">
+                        <button
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            window.dispatchEvent(new CustomEvent('openVoiceAssistant'));
+                          }}
+                          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-xl"
+                        >
+                          <MessageCircle className="w-5 h-5" />
+                          AI Assistant
+                        </button>
                         <Link
                           href="/contact"
                           onClick={() => setMobileMenuOpen(false)}
-                          className="-mx-3 block rounded-xl px-3 py-3 text-base font-semibold text-center text-black bg-gradient-to-r from-amber-500 to-red-500 hover:opacity-90"
+                          className="-mx-3 block rounded-xl px-3 py-3 text-base font-semibold text-center text-black bg-white/10"
                         >
                           Book Lesson
                         </Link>

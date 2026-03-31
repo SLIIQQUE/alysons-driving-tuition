@@ -3,7 +3,7 @@
 import { useRef, useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "motion/react";
-import { Phone, Mail, MapPin, Clock, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Clock, ArrowRight, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navigation = {
@@ -191,9 +191,14 @@ export function AnimatedFooter() {
           <div>
             <h3 className="font-heading font-bold text-lg mb-6">Contact</h3>
             <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-[#a3a3a3]">
-                <Phone className="w-5 h-5 text-[#7c3aed]" />
-                <a href="tel:01234567890" className="hover:text-white transition-colors">01234 567890</a>
+              <li>
+                <button 
+                  onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+                  className="flex items-center gap-3 text-amber-500 hover:text-amber-400 transition-colors"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  <span className="font-semibold">Chat with AI Assistant</span>
+                </button>
               </li>
               <li className="flex items-center gap-3 text-[#a3a3a3]">
                 <Mail className="w-5 h-5 text-[#7c3aed]" />
