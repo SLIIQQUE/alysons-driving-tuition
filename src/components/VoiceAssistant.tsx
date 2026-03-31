@@ -50,6 +50,7 @@ export default function VoiceAssistant() {
   const audioContextRef = useRef<AudioContext | null>(null);
   const recordContextRef = useRef<AudioContext | null>(null);
   const nextPlayTimeRef = useRef<number>(0);
+  const activeSourcesRef = useRef<Set<AudioBufferSourceNode>>(new Set());
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -98,7 +99,7 @@ export default function VoiceAssistant() {
     setVoiceState("idle");
   }, []);
 
-  const playAudio = useCallback(async (base64Data: string) => {
+  const playAudio = useCallback((base64Data: string) => {
     try {
       if (!audioContextRef.current || audioContextRef.current.state === "closed") {
         const AudioCtx = window.AudioContext || (window as any).webkitAudioContext;
@@ -108,21 +109,18 @@ export default function VoiceAssistant() {
       
       const audioContext = audioContextRef.current;
       if (audioContext.state === "suspended") {
-        await audioContext.resume();
+        audioContext.resume();
       }
 
-      const binaryString = atob(base64Data);
-      const bytes = new Uint8Array(binaryString.length);
-      for (let i = 0; i < binaryString.length; i++) {
-        bytes[i] = binaryString.charCodeAt(i);
-      }
+      const binary = atob(base64Data);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
       
-      // Live API returns 16-bit PCM, little-endian, 24kHz
-      const view = new DataView(bytes.buffer);
       const float32Data = new Float32Array(bytes.length / 2);
+      const view = new DataView(bytes.buffer);
       for (let i = 0; i < float32Data.length; i++) {
-        const int16 = view.getInt16(i * 2, true);
-        float32Data[i] = int16 / (int16 < 0 ? 32768 : 32767);
+        const s = view.getInt16(i * 2, true);
+        float32Data[i] = s / 32768.0;
       }
       
       const audioBuffer = audioContext.createBuffer(1, float32Data.length, 24000);
@@ -132,10 +130,17 @@ export default function VoiceAssistant() {
       source.buffer = audioBuffer;
       source.connect(audioContext.destination);
       
-      const currentTime = audioContext.currentTime;
-      const playTime = Math.max(currentTime, nextPlayTimeRef.current);
-      source.start(playTime);
-      nextPlayTimeRef.current = playTime + audioBuffer.duration;
+      const now = audioContext.currentTime;
+      const playAt = Math.max(now, nextPlayTimeRef.current);
+      
+      // Track source for interruption
+      activeSourcesRef.current.add(source);
+      source.onended = () => {
+        activeSourcesRef.current.delete(source);
+      };
+
+      source.start(playAt);
+      nextPlayTimeRef.current = playAt + audioBuffer.duration;
       
     } catch (err) {
       console.error("Audio playback error:", err);
@@ -172,7 +177,8 @@ export default function VoiceAssistant() {
           recordContextRef.current = audioCtx;
           
           const source = audioCtx.createMediaStreamSource(stream);
-          const processor = audioCtx.createScriptProcessor(4096, 1, 1);
+          // Use smallest buffer (256) for lowest input latency (~16ms at 16kHz)
+          const processor = audioCtx.createScriptProcessor(256, 1, 1);
           
           processor.onaudioprocess = (e) => {
             if (!sessionRef.current) return;
@@ -180,21 +186,15 @@ export default function VoiceAssistant() {
             const pcm16 = new Int16Array(inputData.length);
             for (let i = 0; i < inputData.length; i++) {
               const s = Math.max(-1, Math.min(1, inputData[i]));
-              pcm16[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+              pcm16[i] = (s * 32767) | 0;
             }
-            
-            const uint8 = new Uint8Array(pcm16.buffer);
+            // Fast base64 via binary string
+            const bytes = new Uint8Array(pcm16.buffer);
             let binary = '';
-            // chunk it to avoid maximum call stack size exceeded on large buffers
-            const chunkSize = 8192;
-            for (let i = 0; i < uint8.length; i += chunkSize) {
-                binary += String.fromCharCode.apply(null, Array.from(uint8.subarray(i, i + chunkSize)));
-            }
-            const base64 = btoa(binary);
-            
+            for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
             try {
               sessionRef.current.sendRealtimeInput({
-                 audio: { data: base64, mimeType: "audio/pcm;rate=16000" }
+                audio: { data: btoa(binary), mimeType: "audio/pcm;rate=16000" }
               });
             } catch (err) {}
           };
@@ -214,6 +214,7 @@ export default function VoiceAssistant() {
         config: {
           responseModalities: [Modality.AUDIO],
           systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+          thinkingLevel: "minimal",
         },
         callbacks: {
           onopen: () => {
@@ -239,14 +240,13 @@ export default function VoiceAssistant() {
             if (content?.outputTranscription?.text) {
                setMessages(prev => [...prev, { role: "assistant", content: content.outputTranscription.text }]);
             }
-            if (content?.interrupted) {
-               if (audioContextRef.current && audioContextRef.current.state === "running") {
-                  try {
-                    await audioContextRef.current.suspend();
-                    audioContextRef.current.close();
-                  } catch (e) {}
-                  audioContextRef.current = null;
-               }
+             if (content?.interrupted) {
+               // Stop all active audio immediately
+               activeSourcesRef.current.forEach(source => {
+                 try { source.stop(); } catch (e) {}
+               });
+               activeSourcesRef.current.clear();
+               nextPlayTimeRef.current = 0;
                setVoiceState("listening");
             }
             if (content?.turnComplete) {
