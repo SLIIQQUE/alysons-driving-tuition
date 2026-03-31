@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
+  reactCompiler: false,
   images: {
     remotePatterns: [
       {
@@ -13,6 +13,19 @@ const nextConfig: NextConfig = {
         hostname: 'placehold.co',
       },
     ],
+  },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; connect-src 'self' wss://generativelanguage.googleapis.com https://generativelanguage.googleapis.com; img-src 'self' https: data:; font-src 'self' data:; style-src 'self' 'unsafe-inline';"
+          },
+        ],
+      },
+    ];
   },
 };
 
