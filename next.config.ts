@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; connect-src 'self' wss://generativelanguage.googleapis.com https://generativelanguage.googleapis.com; img-src 'self' https: data:; font-src 'self' data:; style-src 'self' 'unsafe-inline';"
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline'; connect-src 'self' wss://generativelanguage.googleapis.com https://generativelanguage.googleapis.com; img-src 'self' https: data:; font-src 'self' data:; style-src 'self' 'unsafe-inline';"
           },
         ],
       },

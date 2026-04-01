@@ -27,6 +27,14 @@ export const metadata: Metadata = {
   authors: [{ name: "Alyson Baldwin" }],
   creator: "Alyson's Driving Tuition",
   publisher: "Alyson's Driving Tuition",
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   formatDetection: {
     telephone: true,
     email: true,
@@ -82,8 +90,8 @@ export default function RootLayout({
     description:
       "Learn to drive with confidence in South Wales. Patient, friendly driving lessons from Alyson Baldwin - DVSA Approved Driving Instructor.",
     url: baseUrl,
-    telephone: "01234567890",
-    email: "hello@alysonsdrivingtuition.co.uk",
+    telephone: "01234 567890",
+    email: "hello@alysonsdriving.co.uk",
     address: {
       "@type": "PostalAddress",
       addressLocality: "Blackwood",
@@ -105,7 +113,7 @@ export default function RootLayout({
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: "4.9",
-      reviewCount: "500",
+      reviewCount: "33",
       bestRating: "5",
     },
     sameAs: [
