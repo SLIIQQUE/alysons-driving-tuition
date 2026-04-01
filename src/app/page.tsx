@@ -68,33 +68,71 @@ const courses = [
 
 const testimonials = [
   {
-    name: "Sarah",
-    text: "Alyson made me feel so comfortable. Passed first time!",
-    location: "Blackwood",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop&crop=face",
+    name: "Liza Lewis",
+    text: "Fab instructor really patient, definitely recommend.",
+    location: "South Wales",
+    stars: 4.5,
   },
   {
-    name: "James",
-    text: "Best instructor ever. Helped me pass with confidence!",
-    location: "Tredegar",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+    name: "Marllah Rose Hoskin",
+    text: "Couldn't recommend Alyson enough, thankyou for everything!",
+    location: "South Wales",
+    stars: 4.5,
   },
   {
-    name: "Emma",
-    text: "After failing twice elsewhere, I finally passed!",
-    location: "Newport",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
+    name: "Nicole Adams",
+    text: "Thank you so much for your support and helping me pass first time!",
+    location: "South Wales",
+    stars: 5,
   },
   {
-    name: "Michael",
-    text: "So patient and professional. Highly recommend!",
-    location: "Risca",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face",
+    name: "Blake Liam Carter",
+    text: "Passed first time and couldn't be happier. Can't thank Alyson enough!",
+    location: "South Wales",
+    stars: 5,
   },
+  {
+    name: "Jennie Powell",
+    text: "Alyson was absolutely amazing, great at explaining all the manoeuvres!",
+    location: "South Wales",
+    stars: 4,
+  },
+  {
+    name: "Sally-Ann Morgan",
+    text: "Very patient and provides so much knowledge and support. 100% recommended!",
+    location: "South Wales",
+    stars: 5,
+  },
+  {
+    name: "Ben Ellaway",
+    text: "Professional, patient and thorough instruction. Highly recommend!",
+    location: "South Wales",
+    stars: 4.5,
+  },
+  {
+    name: "Zac Yearsley",
+    text: "Great instructor who's very patient and brought my confidence on loads.",
+    location: "South Wales",
+    stars: 5,
+  },
+];
+
+function getInitials(name: string) {
+  return name
+    .split(" ")
+    .map((n) => n[0])
+    .join("")
+    .toUpperCase()
+    .slice(0, 2);
+}
+
+const avatarColors = [
+  "from-amber-500 to-orange-500",
+  "from-pink-500 to-rose-500",
+  "from-emerald-500 to-green-500",
+  "from-blue-500 to-cyan-500",
+  "from-purple-500 to-violet-500",
+  "from-red-500 to-orange-500",
 ];
 
 function Hero() {
@@ -452,14 +490,8 @@ function TestimonialsMarquee() {
             className="flex-shrink-0 w-[400px] bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-8"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                <Image
-                  src={t.image}
-                  alt={t.name}
-                  fill
-                  className="object-cover"
-                  sizes="64px"
-                />
+              <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarColors[i % avatarColors.length]} flex items-center justify-center flex-shrink-0`}>
+                <span className="text-black font-bold text-sm">{getInitials(t.name)}</span>
               </div>
               <div>
                 <div className="font-bold text-white">{t.name}</div>
@@ -470,7 +502,7 @@ function TestimonialsMarquee() {
               {[...Array(5)].map((_, j) => (
                 <Star
                   key={j}
-                  className="w-4 h-4 fill-amber-500 text-amber-500"
+                  className={`w-4 h-4 ${j < Math.floor(t.stars) ? 'fill-amber-500 text-amber-500' : j < t.stars ? 'fill-amber-500/50 text-amber-500' : 'text-white/20'}`}
                 />
               ))}
             </div>
