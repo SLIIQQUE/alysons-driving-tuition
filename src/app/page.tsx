@@ -189,24 +189,13 @@ function Hero() {
       <div className="relative z-10 h-full flex items-center">
         <div className="container">
           <div className="max-w-5xl">
-            <motion.div
-              initial={{ opacity: 0, y: 60 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.2 }}
-              className="mb-8"
-            >
-              <span className="inline-block px-6 py-3 bg-gradient-to-r from-amber-500 to-red-500 rounded-full font-semibold text-black">
-                Trusted by 500+ Students
-              </span>
-            </motion.div>
-
             <motion.h1
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
               className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white leading-[0.9] mb-8"
             >
-              Driving Lessons in <br />
+              Driving <br /> Lessons in <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-red-400">
                 Blackwood
               </span>
@@ -218,7 +207,8 @@ function Hero() {
               transition={{ duration: 1, delay: 0.35 }}
               className="text-lg md:text-xl text-white/50 max-w-lg mb-12"
             >
-              Professional driving lessons in Blackwood, Tredegar, Risca &amp; across South Wales
+              Professional driving lessons in Blackwood, Tredegar, Risca &amp;
+              across South Wales
             </motion.p>
 
             <motion.p
@@ -508,8 +498,12 @@ function TestimonialsMarquee() {
             className="flex-shrink-0 w-[400px] bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-8"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarColors[i % avatarColors.length]} flex items-center justify-center flex-shrink-0`}>
-                <span className="text-black font-bold text-sm">{getInitials(t.name)}</span>
+              <div
+                className={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarColors[i % avatarColors.length]} flex items-center justify-center flex-shrink-0`}
+              >
+                <span className="text-black font-bold text-sm">
+                  {getInitials(t.name)}
+                </span>
               </div>
               <div>
                 <div className="font-bold text-white">{t.name}</div>
@@ -520,7 +514,7 @@ function TestimonialsMarquee() {
               {[...Array(5)].map((_, j) => (
                 <Star
                   key={j}
-                  className={`w-4 h-4 ${j < Math.floor(t.stars) ? 'fill-amber-500 text-amber-500' : j < t.stars ? 'fill-amber-500/50 text-amber-500' : 'text-white/20'}`}
+                  className={`w-4 h-4 ${j < Math.floor(t.stars) ? "fill-amber-500 text-amber-500" : j < t.stars ? "fill-amber-500/50 text-amber-500" : "text-white/20"}`}
                 />
               ))}
             </div>
@@ -591,7 +585,7 @@ function PricingPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              className={`glass-card p-8 border-glow relative ${pkg.popular ? 'border-amber-500/30' : ''}`}
+              className={`glass-card p-8 border-glow relative ${pkg.popular ? "border-amber-500/30" : ""}`}
             >
               {pkg.popular && (
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-amber-500 to-red-500 rounded-full text-xs font-semibold text-black">
@@ -602,9 +596,13 @@ function PricingPreview() {
                 <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center mx-auto mb-4">
                   <pkg.icon className="w-6 h-6 text-amber-500" />
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2">{pkg.name}</h3>
+                <h3 className="text-lg font-bold text-white mb-2">
+                  {pkg.name}
+                </h3>
                 <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-3xl font-display font-bold text-amber-500">{pkg.price}</span>
+                  <span className="text-3xl font-display font-bold text-amber-500">
+                    {pkg.price}
+                  </span>
                   <span className="text-white/40 text-sm">{pkg.unit}</span>
                 </div>
                 <p className="text-white/40 text-sm mt-2">{pkg.description}</p>
@@ -637,26 +635,32 @@ function BlogPreview() {
     {
       slug: "how-to-prepare-for-driving-test",
       title: "How to Prepare for Your Driving Test",
-      excerpt: "Everything you need to know before test day — from what to bring to common mistakes.",
+      excerpt:
+        "Everything you need to know before test day — from what to bring to common mistakes.",
       date: "Mar 2026",
       category: "Test Prep",
-      image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=600&h=400&fit=crop",
     },
     {
       slug: "how-many-driving-lessons-do-you-need",
       title: "How Many Driving Lessons Do You Need?",
-      excerpt: "The average is 45 hours, but everyone's different. Here's how to figure out yours.",
+      excerpt:
+        "The average is 45 hours, but everyone's different. Here's how to figure out yours.",
       date: "Mar 2026",
       category: "Learning Guide",
-      image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&h=400&fit=crop",
     },
     {
       slug: "nervous-about-learning-to-drive",
       title: "Nervous About Learning to Drive?",
-      excerpt: "80% of learners feel anxious. Here are proven tips to overcome driving nerves.",
+      excerpt:
+        "80% of learners feel anxious. Here are proven tips to overcome driving nerves.",
       date: "Feb 2026",
       category: "Confidence",
-      image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&h=400&fit=crop",
+      image:
+        "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&h=400&fit=crop",
     },
   ];
 
