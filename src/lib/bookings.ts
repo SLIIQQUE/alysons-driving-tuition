@@ -22,8 +22,3 @@ export async function getBookings(): Promise<Booking[]> {
   if (!fs.existsSync(BOOKINGS_FILE)) return [];
   return JSON.parse(fs.readFileSync(BOOKINGS_FILE, "utf-8"));
 }
-
-export async function getBookingById(id: string): Promise<Booking | null> {
-  const bookings = await getBookings();
-  return bookings.find((b) => b.id === id) || null;
-}

@@ -91,12 +91,6 @@ export default function Navigation() {
                 <MessageCircle className="w-4 h-4" />
                 <span className="text-sm">AI Assistant</span>
               </button>
-              {/* <Link
-                href="/contact"
-                className="btn btn-primary text-sm py-2.5 px-5"
-              >
-                Book Lesson
-              </Link> */}
             </div>
 
             {/* Mobile menu button */}
@@ -182,13 +176,6 @@ export default function Navigation() {
                           <MessageCircle className="w-5 h-5" />
                           AI Assistant
                         </button>
-                        {/* <Link
-                          href="/contact"
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="-mx-3 block rounded-xl px-3 py-3 text-base font-semibold text-center text-black bg-white/10"
-                        >
-                          Book Lesson
-                        </Link> */}
                       </div>
                     </div>
                   </div>
