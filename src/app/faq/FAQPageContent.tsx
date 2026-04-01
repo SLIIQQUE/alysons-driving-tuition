@@ -1,72 +1,81 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { MessageCircle, ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 const faqs = [
   {
     question: "How long does it take to learn to drive?",
-    answer: "Everyone learns at different speeds. On average, it takes around 40-50 hours of professional training plus private practice to reach test standard. However, this varies depending on your individual ability and how often you have lessons. Some pupils pass in as little as 20 hours, while others may need more.",
+    answer:
+      "Everyone learns at different speeds. On average, it takes around 40-50 hours of professional training plus private practice to reach test standard. However, this varies depending on your individual ability and how often you have lessons. Some pupils pass in as little as 20 hours, while others may need more.",
   },
   {
     question: "Do you offer automatic driving lessons?",
-    answer: "Yes! I offer both manual and automatic driving lessons. Please contact me to discuss your preference and find the best option for you.",
+    answer:
+      "Yes! I offer both manual and automatic driving lessons. Please contact me to discuss your preference and find the best option for you.",
   },
   {
     question: "What cars do you use for lessons?",
-    answer: "I use a modern, dual-controlled Ford Fiesta (manual) for lessons. It's safe, reliable, air-conditioned, and regularly serviced for your comfort and safety during lessons.",
+    answer:
+      "I use a modern, dual-controlled Ford Fiesta (manual) for lessons. It's safe, reliable, air-conditioned, and regularly serviced for your comfort and safety during lessons.",
   },
   {
     question: "How much do driving lessons cost?",
-    answer: "Standard lessons start from £30 per hour. Block bookings offer discounts - 5% off for 5+ lessons, 10% off for 10+ lessons, and 15% off for 20+ lessons. Intensive course prices vary depending on your needs.",
+    answer:
+      "Standard lessons start from £30 per hour. Block bookings offer discounts - 5% off for 5+ lessons, 10% off for 10+ lessons, and 15% off for 20+ lessons. Intensive course prices vary depending on your needs.",
   },
   {
     question: "Do you offer intensive driving courses?",
-    answer: "Yes! I offer intensive courses where you can pass your test in just 1-2 weeks. These are perfect for those who need their license quickly for work or have a deadline. Contact me for a quote based on your specific needs.",
+    answer:
+      "Yes! I offer intensive courses where you can pass your test in just 1-2 weeks. These are perfect for those who need their license quickly for work or have a deadline. Contact me for a quote based on your specific needs.",
   },
   {
     question: "What is Pass Plus?",
-    answer: "Pass Plus is a post-test course that helps new drivers gain more experience after passing their test. It covers various driving conditions and can sometimes help reduce insurance premiums. It's a great way to build confidence on the road.",
+    answer:
+      "Pass Plus is a post-test course that helps new drivers gain more experience after passing their test. It covers various driving conditions and can sometimes help reduce insurance premiums. It's a great way to build confidence on the road.",
   },
   {
     question: "Do you help with the theory test?",
-    answer: "Yes! I provide support with theory test preparation. I can help you practice questions and ensure you're confident before booking your theory test. Both tests work together, so being prepared for both is important.",
+    answer:
+      "Yes! I provide support with theory test preparation. I can help you practice questions and ensure you're confident before booking your theory test. Both tests work together, so being prepared for both is important.",
   },
   {
     question: "Can I have lessons in my own car?",
-    answer: "For safety reasons, I recommend learning in my dual-controlled car initially. Once you reach a certain level and if your car is suitable and insured, we can discuss this. Safety is always my top priority.",
+    answer:
+      "For safety reasons, I recommend learning in my dual-controlled car initially. Once you reach a certain level and if your car is suitable and insured, we can discuss this. Safety is always my top priority.",
   },
   {
     question: "What happens if I need to cancel a lesson?",
-    answer: "I understand that life happens! I ask for 48 hours notice for cancellations. Cancellations with less than 48 hours notice may be charged. Please contact me as soon as possible if you need to reschedule.",
+    answer:
+      "I understand that life happens! I ask for 48 hours notice for cancellations. Cancellations with less than 48 hours notice may be charged. Please contact me as soon as possible if you need to reschedule.",
   },
   {
     question: "At what age can I start learning to drive?",
-    answer: "You can start learning to drive at 17. However, you can apply for your provisional driving licence from age 15 years and 9 months. Many pupils start taking lessons before they're 17 to be ready for their test as soon as they turn 17.",
+    answer:
+      "You can start learning to drive at 17. However, you can apply for your provisional driving licence from age 15 years and 9 months. Many pupils start taking lessons before they're 17 to be ready for their test as soon as they turn 17.",
   },
   {
     question: "Do you teach nervous beginners?",
-    answer: "Absolutely! I have extensive experience teaching nervous beginners. I pride myself on being patient and understanding. Everyone learns at their own pace, and I'll never rush you. We'll work together to build your confidence gradually.",
+    answer:
+      "Absolutely! I have extensive experience teaching nervous beginners. I pride myself on being patient and understanding. Everyone learns at their own pace, and I'll never rush you. We'll work together to build your confidence gradually.",
   },
   {
     question: "What areas do you cover?",
-    answer: "I cover Blackwood, Tredegar, Risca, Newport, and surrounding South Wales areas. If you're not sure if I cover your area, please get in touch and I'll let you know.",
+    answer:
+      "I cover Blackwood, Tredegar, Risca, Newport, and surrounding South Wales areas. If you're not sure if I cover your area, please get in touch and I'll let you know.",
   },
 ];
 
 function FAQHero() {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&h=1080&fit=crop')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/70" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
-        
+
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 4, repeat: Infinity }}
@@ -79,7 +88,7 @@ function FAQHero() {
         />
       </div>
 
-      <motion.div style={{ y }} className="container relative z-10 text-center">
+      <motion.div className="container relative z-10 text-center">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -94,8 +103,7 @@ function FAQHero() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6"
         >
-          Frequently Asked{" "}
-          <span className="text-gradient">Questions</span>
+          Frequently Asked <span className="text-gradient">Questions</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -103,7 +111,8 @@ function FAQHero() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="text-xl text-white/60 max-w-2xl mx-auto"
         >
-          Everything you need to know about learning to drive with Alyson&apos;s Driving Tuition.
+          Everything you need to know about learning to drive with Alyson&apos;s
+          Driving Tuition.
         </motion.p>
       </motion.div>
     </section>
@@ -119,7 +128,11 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
       >
-        <span className={`font-display font-semibold transition-colors pr-4 ${isOpen ? "text-amber-500" : "text-white group-hover:text-amber-500"}`}>{question}</span>
+        <span
+          className={`font-display font-semibold transition-colors pr-4 ${isOpen ? "text-amber-500" : "text-white group-hover:text-amber-500"}`}
+        >
+          {question}
+        </span>
         <ChevronDown
           className={`w-5 h-5 text-white/40 group-hover:text-amber-500 transition-all duration-300 ${
             isOpen ? "rotate-180" : ""
@@ -155,7 +168,11 @@ function FAQContent() {
         >
           <div className="glass-card p-8 md:p-10">
             {faqs.map((faq, index) => (
-              <FAQItem key={index} question={faq.question} answer={faq.answer} />
+              <FAQItem
+                key={index}
+                question={faq.question}
+                answer={faq.answer}
+              />
             ))}
           </div>
         </motion.div>
@@ -183,11 +200,14 @@ function CTASection() {
             Still Have Questions?
           </h2>
           <p className="text-white/50 mb-8 max-w-xl mx-auto">
-            Can&apos;t find the answer you&apos;re looking for? Get in touch and we&apos;ll be happy to help.
+            Can&apos;t find the answer you&apos;re looking for? Get in touch and
+            we&apos;ll be happy to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
-            <button 
-              onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+            <button
+              onClick={() =>
+                window.dispatchEvent(new CustomEvent("openVoiceAssistant"))
+              }
               className="btn btn-secondary group"
             >
               <MessageCircle className="w-5 h-5" />

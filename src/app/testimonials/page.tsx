@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
 import { Star, ArrowRight, MessageCircle } from "lucide-react";
 
 const testimonials = [
@@ -64,16 +64,13 @@ function getInitials(name: string) {
 }
 
 function TestimonialsHero() {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&h=1080&fit=crop')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/70" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
-        
+
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 4, repeat: Infinity }}
@@ -86,7 +83,7 @@ function TestimonialsHero() {
         />
       </div>
 
-      <motion.div style={{ y }} className="container relative z-10 text-center">
+      <motion.div className="container relative z-10 text-center">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -101,8 +98,7 @@ function TestimonialsHero() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6"
         >
-          What Our{" "}
-          <span className="text-gradient">Pupils Say</span>
+          What Our <span className="text-gradient">Pupils Say</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -110,7 +106,8 @@ function TestimonialsHero() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="text-xl text-white/60 max-w-2xl mx-auto"
         >
-          Join hundreds of satisfied pupils who passed with Alyson&apos;s Driving Tuition.
+          Join hundreds of satisfied pupils who passed with Alyson&apos;s
+          Driving Tuition.
         </motion.p>
       </motion.div>
     </section>
@@ -138,17 +135,28 @@ function TestimonialsGrid() {
             >
               <div className="flex gap-1 mb-4">
                 {[...Array(testimonial.stars)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-amber-500 text-amber-500" />
+                  <Star
+                    key={j}
+                    className="w-4 h-4 fill-amber-500 text-amber-500"
+                  />
                 ))}
               </div>
-              <p className="text-white/70 mb-6 leading-relaxed">&ldquo;{testimonial.text}&rdquo;</p>
+              <p className="text-white/70 mb-6 leading-relaxed">
+                &ldquo;{testimonial.text}&rdquo;
+              </p>
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-500 to-red-500 flex items-center justify-center flex-shrink-0">
-                  <span className="text-black font-bold text-sm">{getInitials(testimonial.name)}</span>
+                  <span className="text-black font-bold text-sm">
+                    {getInitials(testimonial.name)}
+                  </span>
                 </div>
                 <div>
-                  <div className="font-semibold text-white">{testimonial.name}</div>
-                  <div className="text-sm text-white/40">{testimonial.location}</div>
+                  <div className="font-semibold text-white">
+                    {testimonial.name}
+                  </div>
+                  <div className="text-sm text-white/40">
+                    {testimonial.location}
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -179,15 +187,18 @@ function CTASection() {
             <span className="text-gradient">Success Stories?</span>
           </h2>
           <p className="text-lg text-white/50 mb-10 max-w-xl mx-auto">
-            Book your first lesson today and start your journey to passing your driving test.
+            Book your first lesson today and start your journey to passing your
+            driving test.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <Link href="/contact" className="btn btn-primary group">
               <span>Book Your First Lesson</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button 
-              onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+            <button
+              onClick={() =>
+                window.dispatchEvent(new CustomEvent("openVoiceAssistant"))
+              }
               className="btn btn-secondary group"
             >
               <MessageCircle className="w-5 h-5" />

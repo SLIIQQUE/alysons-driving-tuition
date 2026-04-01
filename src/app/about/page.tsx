@@ -2,15 +2,26 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
-import { Award, Clock, CheckCircle, Heart, Shield, Target, Users, ArrowRight, MessageCircle } from "lucide-react";
+import { motion } from "motion/react";
+import {
+  Award,
+  Clock,
+  CheckCircle,
+  Heart,
+  Shield,
+  Target,
+  Users,
+  ArrowRight,
+  MessageCircle,
+} from "lucide-react";
 
 const qualifications = [
   {
     icon: Award,
     title: "DVSA Approved",
     subtitle: "Licensed ADI",
-    description: "Fully licensed and regulated by the Driving and Vehicle Standards Agency",
+    description:
+      "Fully licensed and regulated by the Driving and Vehicle Standards Agency",
   },
   {
     icon: CheckCircle,
@@ -30,36 +41,37 @@ const values = [
   {
     icon: Heart,
     title: "Patience & Understanding",
-    description: "Every learner is different. I take time to understand your needs and adapt my teaching style accordingly.",
+    description:
+      "Every learner is different. I take time to understand your needs and adapt my teaching style accordingly.",
   },
   {
     icon: Shield,
     title: "Safety First",
-    description: "Creating safe drivers is my top priority. Good driving habits last a lifetime.",
+    description:
+      "Creating safe drivers is my top priority. Good driving habits last a lifetime.",
   },
   {
     icon: Target,
     title: "Learner-Centred Approach",
-    description: "Lessons tailored to you, not a one-size-fits-all curriculum. Your goals matter.",
+    description:
+      "Lessons tailored to you, not a one-size-fits-all curriculum. Your goals matter.",
   },
   {
     icon: Users,
     title: "Professional & Reliable",
-    description: "Always on time, always prepared, always focused on your success.",
+    description:
+      "Always on time, always prepared, always focused on your success.",
   },
 ];
 
 function AboutHero() {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1920&h=1080&fit=crop&crop=face')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/70" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
-        
+
         {/* Animated glows */}
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
@@ -73,7 +85,7 @@ function AboutHero() {
         />
       </div>
 
-      <motion.div style={{ y }} className="container relative z-10 text-center">
+      <motion.div className="container relative z-10 text-center">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -88,8 +100,7 @@ function AboutHero() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6"
         >
-          Meet{" "}
-          <span className="text-gradient">Alyson Baldwin</span>
+          Meet <span className="text-gradient">Alyson Baldwin</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -132,7 +143,7 @@ function AboutContent() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
             </div>
-            
+
             {/* Floating badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.8 }}
@@ -164,20 +175,21 @@ function AboutContent() {
             </h2>
             <div className="space-y-6 text-white/60 leading-relaxed">
               <p>
-                I started teaching driving over 20 years ago because I love helping
-                people gain the confidence and skills to drive safely for life.
+                I started teaching driving over 20 years ago because I love
+                helping people gain the confidence and skills to drive safely
+                for life.
               </p>
               <p>
-                Every pupil is different, and I take pride in adapting my teaching
-                style to suit each individual&apos;s needs. Whether you&apos;re nervous
-                about getting behind the wheel or just need a bit more practice before
-                your test, I&apos;m here to help.
+                Every pupil is different, and I take pride in adapting my
+                teaching style to suit each individual&apos;s needs. Whether
+                you&apos;re nervous about getting behind the wheel or just need
+                a bit more practice before your test, I&apos;m here to help.
               </p>
               <p>
-                As a local instructor based in Blackwood, I know the area well and can
-                help you practice on the roads you&apos;ll be tested on. My goal is to
-                not just help you pass your test, but to give you the skills and
-                confidence to drive safely for life.
+                As a local instructor based in Blackwood, I know the area well
+                and can help you practice on the roads you&apos;ll be tested on.
+                My goal is to not just help you pass your test, but to give you
+                the skills and confidence to drive safely for life.
               </p>
             </div>
           </motion.div>
@@ -229,7 +241,9 @@ function Qualifications() {
                   <qual.icon className="w-8 h-8 text-amber-500" />
                 </div>
               </div>
-              <h3 className="text-xl font-display font-semibold text-white mb-1">{qual.title}</h3>
+              <h3 className="text-xl font-display font-semibold text-white mb-1">
+                {qual.title}
+              </h3>
               <p className="text-amber-500 font-medium mb-3">{qual.subtitle}</p>
               <p className="text-white/50 text-sm">{qual.description}</p>
             </motion.div>
@@ -263,7 +277,8 @@ function Values() {
             My Values
           </h2>
           <p className="text-white/50">
-            My mission is to provide friendly, patient instruction that builds confidence.
+            My mission is to provide friendly, patient instruction that builds
+            confidence.
           </p>
         </motion.div>
 
@@ -284,7 +299,9 @@ function Values() {
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-display font-semibold text-white mb-2">{value.title}</h3>
+                <h3 className="text-lg font-display font-semibold text-white mb-2">
+                  {value.title}
+                </h3>
                 <p className="text-white/50">{value.description}</p>
               </div>
             </motion.div>
@@ -311,11 +328,11 @@ function CTASection() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
-            Ready to Start Your{" "}
-            <span className="text-gradient">Journey?</span>
+            Ready to Start Your <span className="text-gradient">Journey?</span>
           </h2>
           <p className="text-lg text-white/50 mb-10 max-w-xl mx-auto">
-            Book your first lesson today and see why so many pupils recommend Alyson&apos;s Driving Tuition.
+            Book your first lesson today and see why so many pupils recommend
+            Alyson&apos;s Driving Tuition.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <Link href="/contact" className="btn btn-primary group">

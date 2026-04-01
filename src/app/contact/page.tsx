@@ -1,19 +1,23 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
-import { Mail, MapPin, Clock, Send, ArrowRight, MessageCircle } from "lucide-react";
+import { motion } from "motion/react";
+import {
+  Mail,
+  MapPin,
+  Clock,
+  Send,
+  ArrowRight,
+  MessageCircle,
+} from "lucide-react";
 
 function ContactHero() {
-  const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 150]);
-
   return (
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&h=1080&fit=crop')] bg-cover bg-center" />
         <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/70" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
-        
+
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 4, repeat: Infinity }}
@@ -26,7 +30,7 @@ function ContactHero() {
         />
       </div>
 
-      <motion.div style={{ y }} className="container relative z-10 text-center">
+      <motion.div className="container relative z-10 text-center">
         <motion.span
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -41,8 +45,7 @@ function ContactHero() {
           transition={{ delay: 0.3, duration: 0.8 }}
           className="text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6"
         >
-          Get in{" "}
-          <span className="text-gradient">Touch</span>
+          Get in <span className="text-gradient">Touch</span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -81,7 +84,10 @@ function ContactContent() {
               <form className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-white/70 mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-white/70 mb-2"
+                    >
                       Your Name *
                     </label>
                     <input
@@ -93,7 +99,10 @@ function ContactContent() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-white/70 mb-2">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-white/70 mb-2"
+                    >
                       Email Address *
                     </label>
                     <input
@@ -107,7 +116,10 @@ function ContactContent() {
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-white/70 mb-2">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-white/70 mb-2"
+                    >
                       Phone Number
                     </label>
                     <input
@@ -118,13 +130,21 @@ function ContactContent() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-white/70 mb-2">
+                    <label
+                      htmlFor="service"
+                      className="block text-sm font-medium text-white/70 mb-2"
+                    >
                       Service Interested In
                     </label>
-                    <select id="service" className="input bg-white/5 border-white/10 text-white">
+                    <select
+                      id="service"
+                      className="input bg-white/5 border-white/10 text-white"
+                    >
                       <option value="">Select a service</option>
                       <option value="standard">Standard Driving Lessons</option>
-                      <option value="intensive">Intensive Driving Course</option>
+                      <option value="intensive">
+                        Intensive Driving Course
+                      </option>
                       <option value="block">Block Booking</option>
                       <option value="pass-plus">Pass Plus</option>
                       <option value="refresher">Refresher Lessons</option>
@@ -133,7 +153,10 @@ function ContactContent() {
                   </div>
                 </div>
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-white/70 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-white/70 mb-2"
+                  >
                     Message *
                   </label>
                   <textarea
@@ -144,10 +167,7 @@ function ContactContent() {
                     required
                   />
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-primary w-full group"
-                >
+                <button type="submit" className="btn btn-primary w-full group">
                   <span>Send Message</span>
                   <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -173,9 +193,15 @@ function ContactContent() {
                     <MessageCircle className="w-6 h-6 text-black" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">AI Assistant</h3>
-                    <button 
-                      onClick={() => window.dispatchEvent(new CustomEvent('openVoiceAssistant'))}
+                    <h3 className="font-semibold text-white mb-1">
+                      AI Assistant
+                    </h3>
+                    <button
+                      onClick={() =>
+                        window.dispatchEvent(
+                          new CustomEvent("openVoiceAssistant"),
+                        )
+                      }
                       className="text-amber-500 hover:underline"
                     >
                       Chat now for instant answers
@@ -188,7 +214,12 @@ function ContactContent() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">Email</h3>
-                    <a href="mailto:hello@alysonsdriving.co.uk" className="text-amber-500 hover:underline">hello@alysonsdriving.co.uk</a>
+                    <a
+                      href="mailto:hello@alysonsdriving.co.uk"
+                      className="text-amber-500 hover:underline"
+                    >
+                      hello@alysonsdriving.co.uk
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -196,8 +227,13 @@ function ContactContent() {
                     <MapPin className="w-6 h-6 text-amber-500" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Areas Covered</h3>
-                    <p className="text-white/60">Blackwood, Tredegar, Risca, Newport and surrounding South Wales areas</p>
+                    <h3 className="font-semibold text-white mb-1">
+                      Areas Covered
+                    </h3>
+                    <p className="text-white/60">
+                      Blackwood, Tredegar, Risca, Newport and surrounding South
+                      Wales areas
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -205,8 +241,14 @@ function ContactContent() {
                     <Clock className="w-6 h-6 text-amber-500" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-white mb-1">Lesson Times</h3>
-                    <p className="text-white/60">Monday - Saturday: 8am - 8pm<br />Sunday: By arrangement</p>
+                    <h3 className="font-semibold text-white mb-1">
+                      Lesson Times
+                    </h3>
+                    <p className="text-white/60">
+                      Monday - Saturday: 8am - 8pm
+                      <br />
+                      Sunday: By arrangement
+                    </p>
                   </div>
                 </div>
               </div>
@@ -217,13 +259,14 @@ function ContactContent() {
                 Try Our AI Assistant
               </h3>
               <p className="text-white/60 mb-6">
-                Chat with our AI assistant to book lessons, get answers to questions, or learn more about our services.
+                Chat with our AI assistant to book lessons, get answers to
+                questions, or learn more about our services.
               </p>
-            <button
-              onClick={() => {
-                window.dispatchEvent(new CustomEvent('openVoiceAssistant'));
-              }}
-              className="btn btn-primary w-full group"
+              <button
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("openVoiceAssistant"));
+                }}
+                className="btn btn-primary w-full group"
               >
                 <MessageCircle className="w-5 h-5" />
                 <span>Chat with AI</span>

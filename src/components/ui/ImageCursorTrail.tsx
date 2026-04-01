@@ -1,7 +1,7 @@
 "use client";
 
 import React, { createRef, useRef, type ReactNode } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion } from "motion/react";
 
 function cn(...classes: (string | undefined | null | false)[]) {
   return classes.filter(Boolean).join(" ");
@@ -15,7 +15,6 @@ interface ImageMouseTrailProps {
   children?: ReactNode;
   fadeAnimation?: boolean;
   maxNumberOfImages?: number;
-  backgroundImage?: string;
 }
 
 export function ImageCursorTrail({
@@ -26,7 +25,6 @@ export function ImageCursorTrail({
   imgClass = "w-40 h-48",
   distance = 20,
   fadeAnimation = false,
-  backgroundImage,
 }: ImageMouseTrailProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const refs = useRef(items.map(() => createRef<HTMLImageElement>()));
@@ -93,8 +91,8 @@ export function ImageCursorTrail({
       )}
     >
       <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&h=1080&fit=crop')] bg-cover bg-center" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/100" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
 
       <div className="relative z-10">{children}</div>
       {items.map((item, index) => (

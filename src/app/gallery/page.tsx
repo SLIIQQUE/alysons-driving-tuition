@@ -25,7 +25,6 @@ export default function GalleryPage() {
         items={galleryImages}
         className="h-screen w-full"
         imgClass="w-64 h-74 rounded-2xl"
-        backgroundImage="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1920&h=1080&fit=crop"
       />
     </>
   );
