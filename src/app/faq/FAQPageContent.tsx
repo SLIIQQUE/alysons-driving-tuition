@@ -119,7 +119,7 @@ function FAQHero() {
   );
 }
 
-function FAQItem({ question, answer }: { question: string; answer: string }) {
+function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -127,21 +127,23 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
+        aria-expanded={isOpen}
       >
-        <span
-          className={`font-display font-semibold transition-colors pr-4 ${isOpen ? "text-amber-500" : "text-white group-hover:text-amber-500"}`}
+        <h3
+          className={`font-display font-semibold text-lg transition-colors pr-4 ${isOpen ? "text-amber-500" : "text-white group-hover:text-amber-500"}`}
         >
           {question}
-        </span>
+        </h3>
         <ChevronDown
           className={`w-5 h-5 text-white/40 group-hover:text-amber-500 transition-all duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
+          aria-hidden="true"
         />
       </button>
       <div
         className={`overflow-hidden transition-all duration-300 ${
-          isOpen ? "max-h-48 pb-6" : "max-h-0"
+          isOpen ? "max-h-96 pb-6" : "max-h-0"
         }`}
       >
         <p className="text-white/50 leading-relaxed">{answer}</p>
@@ -172,6 +174,7 @@ function FAQContent() {
                 key={index}
                 question={faq.question}
                 answer={faq.answer}
+                index={index}
               />
             ))}
           </div>

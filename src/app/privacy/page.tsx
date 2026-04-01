@@ -99,7 +99,7 @@ function PrivacyContent() {
     {
       title: "10. Contact Us",
       content:
-        "If you have any questions about this Privacy Policy or how we handle your data, please contact us at hello@alysonsdriving.co.uk, call 01234 567890, or write to us at Blackwood, South Wales.",
+        "If you have any questions about this Privacy Policy or how we handle your data, please contact us at hello@alysonsdriving.co.uk, call 07700 900000, or write to us at Blackwood, South Wales.",
     },
   ];
 

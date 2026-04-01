@@ -94,7 +94,7 @@ function TermsContent() {
     {
       title: "9. Contact Information",
       content:
-        "If you have any questions about these Terms of Service, please contact us at hello@alysonsdriving.co.uk or call 01234 567890.",
+        "If you have any questions about these Terms of Service, please contact us at hello@alysonsdriving.co.uk or call 07700 900000.",
     },
   ];
 

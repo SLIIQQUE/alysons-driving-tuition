@@ -1,9 +1,14 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Contact Alyson's Driving Tuition. Book your first lesson or ask a question. Call 01234 567890 or use our contact form. Serving Blackwood, Tredegar, Risca, Newport.",
-  keywords: ["contact driving school", "book driving lesson", "driving instructor contact", "South Wales driving lessons"],
+  title: "Contact Alyson's Driving Tuition | Book Driving Lessons in Blackwood",
+  description: "Contact Alyson's Driving Tuition to book your first driving lesson. Serving Blackwood, Tredegar, Risca, Newport & South Wales. Call 07700 900000 or use our contact form.",
+  keywords: ["book driving lesson Blackwood", "contact driving instructor", "driving lessons South Wales", "driving school contact"],
+  openGraph: {
+    title: "Contact Alyson's Driving Tuition | Book Driving Lessons",
+    description: "Contact us to book your first driving lesson in Blackwood, South Wales.",
+    type: "website",
+  },
 };
 
 export default function ContactLayout({ children }: { children: React.ReactNode }) {

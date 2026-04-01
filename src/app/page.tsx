@@ -197,17 +197,30 @@ function Hero() {
               </span>
             </motion.div>
 
-            <motion.h1
+            <h1 className="sr-only">Driving Lessons in Blackwood, South Wales - Alyson's Driving Tuition</h1>
+
+            <motion.div
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white leading-[0.9] mb-8"
+              className="mb-8"
             >
-              Drive with <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-red-400">
-                Confidence
+              <span className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white leading-[0.9]">
+                Drive with <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-red-400">
+                  Confidence
+                </span>
               </span>
-            </motion.h1>
+            </motion.div>
+
+            <motion.p
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1, delay: 0.35 }}
+              className="text-lg md:text-xl text-white/50 max-w-lg mb-12"
+            >
+              Professional driving lessons in Blackwood, Tredegar, Risca &amp; across South Wales
+            </motion.p>
 
             <motion.p
               initial={{ opacity: 0, y: 60 }}
@@ -241,6 +254,12 @@ function Hero() {
                 className="px-8 py-4 border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
               >
                 Book a Lesson
+              </Link>
+              <Link
+                href="/pricing"
+                className="px-8 py-4 border-2 border-white/20 text-white/70 font-medium rounded-full hover:bg-white/5 transition-colors flex items-center gap-2"
+              >
+                View Prices
               </Link>
             </motion.div>
           </div>

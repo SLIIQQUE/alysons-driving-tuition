@@ -86,27 +86,51 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "DrivingSchool",
+    "@id": `${baseUrl}/#drivingschool`,
     name: "Alyson's Driving Tuition",
     description:
       "Learn to drive with confidence in South Wales. Patient, friendly driving lessons from Alyson Baldwin - DVSA Approved Driving Instructor.",
     url: baseUrl,
-    telephone: "01234 567890",
+    telephone: "07700 900000",
     email: "hello@alysonsdriving.co.uk",
+    image: `${baseUrl}/og-image.jpg`,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Blackwood",
       addressRegion: "South Wales",
       addressCountry: "GB",
     },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: 51.6667,
+      longitude: -3.2017,
+    },
+    openingHoursSpecification: [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "opens": "08:00",
+        "closes": "20:00",
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Sunday",
+        "opens": "09:00",
+        "closes": "17:00",
+      },
+    ],
     areaServed: [
       { "@type": "Place", name: "Blackwood" },
       { "@type": "Place", name: "Tredegar" },
       { "@type": "Place", name: "Risca" },
       { "@type": "Place", name: "Newport" },
+      { "@type": "Place", name: "Bargoed" },
+      { "@type": "Place", name: "Ystrad Mynach" },
     ],
     priceRange: "££",
-    instructor: {
+    employee: {
       "@type": "Person",
+      "@id": `${baseUrl}/#alyson-baldwin`,
       name: "Alyson Baldwin",
       jobTitle: "DVSA Approved Driving Instructor (ADI)",
     },
@@ -124,6 +148,9 @@ export default function RootLayout({
 
   return (
     <html lang="en" data-scroll-behavior="smooth">
+      <head>
+        <link rel="alternate" hrefLang="en-GB" href={baseUrl} />
+      </head>
       <body className="min-h-full flex flex-col">
         <script
           type="application/ld+json"

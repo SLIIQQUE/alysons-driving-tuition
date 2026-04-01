@@ -7,14 +7,16 @@ const navigation = {
   services: [
     { name: "Standard Lessons", href: "/services" },
     { name: "Intensive Courses", href: "/services" },
-    { name: "Block Bookings", href: "/services" },
+    { name: "Block Bookings", href: "/pricing" },
     { name: "Pass Plus", href: "/services" },
-    { name: "Refresher Lessons", href: "/services" },
+    { name: "Pricing", href: "/pricing" },
   ],
   company: [
     { name: "About", href: "/about" },
+    { name: "Areas Covered", href: "/areas" },
     { name: "Testimonials", href: "/testimonials" },
     { name: "FAQ", href: "/faq" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ],
   legal: [
