@@ -4,12 +4,13 @@ import FAQPageContent from "./FAQPageContent";
 const baseUrl = "https://alysonsdrivingtuition.co.uk";
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions | Driving Lessons South Wales - Alyson's Driving Tuition",
-  description: "Frequently asked questions about driving lessons, intensive courses, pricing, test booking, and more. Find answers to common questions about learning to drive in South Wales.",
+  title: "FAQ | Driving Lessons South Wales | Alyson's Driving",
+  description: "Answers to common questions about driving lessons, intensive courses, pricing, test booking & more. Learn to drive in South Wales.",
   keywords: ["driving lessons FAQ", "learning to drive questions", "driving test FAQ", "intensive course questions", "driving lesson prices"],
+  alternates: { canonical: `${baseUrl}/faq` },
   openGraph: {
-    title: "Frequently Asked Questions | Alyson's Driving Tuition",
-    description: "Find answers to common questions about driving lessons in South Wales.",
+    title: "FAQ | Driving Lessons South Wales",
+    description: "Answers to common questions about driving lessons in South Wales.",
     type: "website",
   },
 };
@@ -80,6 +81,38 @@ const faqSchema = {
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "We cover Blackwood, Tredegar, Risca, Newport, and surrounding South Wales areas."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you teach nervous beginners?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolutely! We have extensive experience teaching nervous beginners. We pride ourselves on being patient and understanding. Everyone learns at their own pace, and we'll never rush you."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "At what age can I start learning to drive?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You can start learning to drive at 17. However, you can apply for your provisional driving licence from age 15 years and 9 months. Many pupils start taking lessons before they're 17 to be ready for their test as soon as they turn 17."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens if I need to cancel a lesson?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We ask for 48 hours notice for cancellations. Cancellations with less than 48 hours notice may be charged. Please contact us as soon as possible if you need to reschedule."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I have lessons in my own car?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For safety reasons, we recommend learning in our dual-controlled car initially. Once you reach a certain level and if your car is suitable and insured, we can discuss this. Safety is always our top priority."
       }
     },
   ],

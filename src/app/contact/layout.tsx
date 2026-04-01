@@ -1,12 +1,15 @@
 import { Metadata } from "next";
 
+const baseUrl = "https://alysonsdrivingtuition.co.uk";
+
 export const metadata: Metadata = {
-  title: "Contact Alyson's Driving Tuition | Book Driving Lessons in Blackwood",
-  description: "Contact Alyson's Driving Tuition to book your first driving lesson. Serving Blackwood, Tredegar, Risca, Newport & South Wales. Call 07791 489244 or use our contact form.",
+  title: "Contact | Book Driving Lessons Blackwood",
+  description: "Book your first driving lesson with Alyson's Driving Tuition. Call 07791 489244 or use our contact form. Serving Blackwood & South Wales.",
   keywords: ["book driving lesson Blackwood", "contact driving instructor", "driving lessons South Wales", "driving school contact"],
+  alternates: { canonical: `${baseUrl}/contact` },
   openGraph: {
-    title: "Contact Alyson's Driving Tuition | Book Driving Lessons",
-    description: "Contact us to book your first driving lesson in Blackwood, South Wales.",
+    title: "Contact | Book Driving Lessons Blackwood",
+    description: "Book your first driving lesson. Call 07791 489244 or use our contact form.",
     type: "website",
   },
 };

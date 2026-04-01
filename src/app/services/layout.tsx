@@ -1,12 +1,15 @@
 import { Metadata } from "next";
 
+const baseUrl = "https://alysonsdrivingtuition.co.uk";
+
 export const metadata: Metadata = {
-  title: "Driving Lessons & Intensive Courses in South Wales | Services",
-  description: "Professional driving lessons in South Wales. Standard lessons from £30/hr, intensive courses from £450, block bookings with up to 15% discount. Pass Plus, refresher lessons & more.",
+  title: "Driving Lessons & Intensive Courses | Blackwood",
+  description: "Professional driving lessons from £30/hr. Intensive courses, block bookings with 15% discount, Pass Plus & refresher lessons. Book today.",
   keywords: ["driving lessons South Wales", "intensive driving course Blackwood", "driving lesson prices", "Pass Plus South Wales", "block booking driving lessons", "refresher lessons"],
+  alternates: { canonical: `${baseUrl}/services` },
   openGraph: {
     title: "Driving Lessons & Courses | Alyson's Driving Tuition",
-    description: "Professional driving lessons in South Wales. Standard, intensive, and block booking options available.",
+    description: "Professional driving lessons from £30/hr. Intensive courses, block bookings & more.",
     type: "website",
   },
 };

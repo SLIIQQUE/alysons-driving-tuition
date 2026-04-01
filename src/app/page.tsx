@@ -200,21 +200,17 @@ function Hero() {
               </span>
             </motion.div>
 
-            <h1 className="sr-only">Driving Lessons in Blackwood, South Wales - Alyson's Driving Tuition</h1>
-
-            <motion.div
+            <motion.h1
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="mb-8"
+              className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white leading-[0.9] mb-8"
             >
-              <span className="text-6xl md:text-8xl lg:text-9xl font-display font-bold text-white leading-[0.9]">
-                Drive with <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-red-400">
-                  Confidence
-                </span>
+              Driving Lessons in <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-orange-400 to-red-400">
+                Blackwood
               </span>
-            </motion.div>
+            </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 60 }}

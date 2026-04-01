@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "motion/react";
 import { ArrowRight, Clock, Calendar, MessageCircle } from "lucide-react";
 
@@ -108,10 +109,12 @@ function BlogGrid() {
               className="glass-card overflow-hidden border-glow group"
             >
               <div className="relative h-56 overflow-hidden">
-                <img
+                <Image
                   src={post.image}
                   alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
                 <div className="absolute top-4 left-4 px-3 py-1 bg-amber-500/90 rounded-full text-xs font-semibold text-black">
