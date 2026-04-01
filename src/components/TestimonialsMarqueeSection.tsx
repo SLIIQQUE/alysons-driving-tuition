@@ -5,34 +5,70 @@ import { Star } from "lucide-react";
 
 const testimonials = [
   {
+    name: "Katie Rottan",
+    text: "Incredible driving instructor. Was patient with good communication throughout every lesson. 100% recommend!",
+    location: "Facebook Review",
+    stars: 5,
+  },
+  {
+    name: "Liza Lewis",
+    text: "Fab instructor really patient, definitely recommend.",
+    location: "Facebook Review",
+    stars: 4.5,
+  },
+  {
+    name: "David Dunstone",
+    text: "Very professional and patience in abundance. You're always at ease. I would recommend to anyone who wants to learn.",
+    location: "Facebook Review",
+    stars: 4,
+  },
+  {
+    name: "Zac Yearsley",
+    text: "Great instructor who's very patient and brought my confidence on loads. Would highly recommend.",
+    location: "Facebook Review",
+    stars: 5,
+  },
+  {
+    name: "Becci Masters",
+    text: "Definitely recommend this amazing lady. I've hated cars and been very anxious on the road. Alyson has been so supportive and stuck by me. Thank you so much!",
+    location: "Facebook Review",
+    stars: 4.5,
+  },
+  {
     name: "Marllah Rose Hoskin",
-    text: "Couldn't recommend Alyson enough, Thankyou for everything!",
-    location: "South Wales",
+    text: "Couldn't recommend Alyson enough, thankyou for everything!",
+    location: "Facebook Review",
+    stars: 5,
   },
   {
     name: "Nicole Adams",
     text: "Thank you so much for your support and helping me pass first time!",
-    location: "South Wales",
+    location: "Facebook Review",
+    stars: 4.5,
   },
   {
     name: "Blake Liam Carter",
     text: "Passed first time and couldn't be happier. Can't thank Alyson enough!",
-    location: "South Wales",
+    location: "Facebook Review",
+    stars: 5,
   },
   {
     name: "Jennie Powell",
     text: "Alyson was absolutely amazing, great at explaining all the manoeuvres!",
-    location: "South Wales",
+    location: "Facebook Review",
+    stars: 4,
   },
   {
     name: "Sally-Ann Morgan",
     text: "Very patient and provides so much knowledge and support. 100% recommended!",
-    location: "South Wales",
+    location: "Facebook Review",
+    stars: 5,
   },
   {
     name: "Ben Ellaway",
     text: "Professional, patient and thorough instruction. Highly recommend!",
-    location: "South Wales",
+    location: "Facebook Review",
+    stars: 4.5,
   },
 ];
 
@@ -77,8 +113,8 @@ export default function TestimonialsMarqueeSection() {
             className="flex-shrink-0 w-[400px] bg-gradient-to-br from-white/10 to-white/5 border border-white/10 rounded-3xl p-8"
           >
             <div className="flex items-center gap-4 mb-6">
-              <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${avatarColors[i % avatarColors.length]} flex items-center justify-center flex-shrink-0`}>
-                <span className="text-black font-bold text-lg">{getInitials(t.name)}</span>
+              <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${avatarColors[i % avatarColors.length]} flex items-center justify-center flex-shrink-0`}>
+                <span className="text-black font-bold text-sm">{getInitials(t.name)}</span>
               </div>
               <div>
                 <div className="font-bold text-white">{t.name}</div>
@@ -89,7 +125,7 @@ export default function TestimonialsMarqueeSection() {
               {[...Array(5)].map((_, j) => (
                 <Star
                   key={j}
-                  className="w-4 h-4 fill-amber-500 text-amber-500"
+                  className={`w-4 h-4 ${j < Math.floor(t.stars) ? 'fill-amber-500 text-amber-500' : j < t.stars ? 'fill-amber-500/50 text-amber-500' : 'text-white/20'}`}
                 />
               ))}
             </div>

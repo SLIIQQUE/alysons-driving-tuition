@@ -6,52 +6,70 @@ import { Star, ArrowRight, MessageCircle } from "lucide-react";
 
 const testimonials = [
   {
-    name: "Sarah J.",
-    location: "Blackwood",
-    text: "Alyson was so patient and friendly. I was really nervous about learning to drive but she made me feel at ease from the first lesson. Passed first time with only 2 minors!",
+    name: "Katie Rottan",
+    location: "South Wales",
+    text: "Incredible driving instructor. Was patient with good communication throughout every lesson. 100% recommend!",
     stars: 5,
   },
   {
-    name: "James T.",
-    location: "Tredegar",
-    text: "Excellent instructor! Very professional and knowledgeable. Helped me pass my test with only 3 minors. Would highly recommend to anyone looking for driving lessons.",
+    name: "Liza Lewis",
+    location: "South Wales",
+    text: "Fab instructor really patient, definitely recommend.",
     stars: 5,
   },
   {
-    name: "Emma L.",
-    location: "Newport",
-    text: "After failing twice with another instructor, Alyson helped me pass first time. Her patience is amazing and she explains everything clearly. Highly recommend!",
+    name: "David Dunstone",
+    location: "South Wales",
+    text: "Very professional and patience in abundance. You're always at ease. I would recommend to anyone who wants to learn.",
+    stars: 4.5,
+  },
+  {
+    name: "Zac Yearsley",
+    location: "South Wales",
+    text: "Great instructor who's very patient and brought my confidence on loads. Would highly recommend.",
     stars: 5,
   },
   {
-    name: "Michael R.",
-    location: "Risca",
-    text: "Best driving instructor in the area! Very calm and patient, never made me feel rushed. Passed first time thanks to Alyson's excellent teaching.",
+    name: "Becci Masters",
+    location: "South Wales",
+    text: "Definitely recommend this amazing lady. For me I've hated cars and been very anxious on the road. It's taken me a long time to get comfortable behind the wheel. Alyson has been so supportive and stuck by me and nudged me not to give up! Thank you so much I will truly miss you and our conversations.",
     stars: 5,
   },
   {
-    name: "Sophie K.",
-    location: "Blackwood",
-    text: "I was so nervous about learning to drive but Alyson made the whole experience enjoyable. She helped me build confidence and I passed with just 1 minor!",
+    name: "Marllah Rose Hoskin",
+    location: "South Wales",
+    text: "Couldn't recommend Alyson enough, thankyou for everything!",
+    stars: 4.5,
+  },
+  {
+    name: "Nicole Adams",
+    location: "South Wales",
+    text: "Thank you so much for your support and helping me pass first time!",
     stars: 5,
   },
   {
-    name: "David H.",
-    location: "Tredegar",
-    text: "Great instructor! Very thorough and always prepared for each lesson. Helped me pass my test after I'd been off the road for a few years. Highly recommend!",
+    name: "Blake Liam Carter",
+    location: "South Wales",
+    text: "Passed first time and couldn't be happier. Can't thank Alyson enough!",
     stars: 5,
   },
   {
-    name: "Olivia M.",
-    location: "Newport",
-    text: "Alyson is brilliant with nervous beginners. She never made me feel silly for making mistakes and always encouraged me. Passed first time!",
+    name: "Jennie Powell",
+    location: "South Wales",
+    text: "Alyson was absolutely amazing, great at explaining all the manoeuvres!",
+    stars: 4,
+  },
+  {
+    name: "Sally-Ann Morgan",
+    location: "South Wales",
+    text: "Very patient and provides so much knowledge and support. 100% recommended!",
     stars: 5,
   },
   {
-    name: "Tom W.",
-    location: "Blackwood",
-    text: "Fantastic instructor! Made learning to drive enjoyable and stress-free. Passed first time with 0 minors - couldn't recommend more highly!",
-    stars: 5,
+    name: "Ben Ellaway",
+    location: "South Wales",
+    text: "Professional, patient and thorough instruction. Highly recommend!",
+    stars: 4.5,
   },
 ];
 
@@ -134,10 +152,10 @@ function TestimonialsGrid() {
               className="glass-card p-8 border-glow"
             >
               <div className="flex gap-1 mb-4">
-                {[...Array(testimonial.stars)].map((_, j) => (
+                {[...Array(5)].map((_, j) => (
                   <Star
                     key={j}
-                    className="w-4 h-4 fill-amber-500 text-amber-500"
+                    className={`w-4 h-4 ${j < Math.floor(testimonial.stars) ? 'fill-amber-500 text-amber-500' : j < testimonial.stars ? 'fill-amber-500/50 text-amber-500' : 'text-white/20'}`}
                   />
                 ))}
               </div>
