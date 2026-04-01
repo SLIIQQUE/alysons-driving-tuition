@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# firecrawl scraped content
+.firecrawl/
+
+# agent skills and lock files
+.agents/
+skills-lock.json
+
+# test files
+test-*.js
+test-*.ts

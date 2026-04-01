@@ -1,1 +1,0 @@
-If you're having trouble accessing Google Search, please [click here](https://www.google.com/search?q=site:facebook.com+AlysonsDrivingTuition+reviews&sca_esv=3468db4eb512e84b&emsg=SG_REL&sei=tG7MaaLdB-qXxc8Pksa5qAQ), or send [feedback](https://support.google.com/websearch).
