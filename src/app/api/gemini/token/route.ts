@@ -3,28 +3,20 @@ import { GoogleGenAI } from "@google/genai";
 
 export async function POST() {
   try {
-    const apiKey = process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+    const apiKey =
+      process.env.GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
     if (!apiKey) {
       return NextResponse.json({ error: "Missing API key" }, { status: 500 });
     }
-    
-    // Server-side initialization
-    const client = new GoogleGenAI({ apiKey });
-    const expireTime = new Date(Date.now() + 30 * 60 * 1000).toISOString();
-    
-    // Create an ephemeral token
-    const token = await client.authTokens.create({
-      config: {
-        uses: 1, 
-        expireTime: expireTime,
-        newSessionExpireTime: new Date(Date.now() + 1 * 60 * 1000).toISOString(),
-        httpOptions: { apiVersion: "v1alpha" },
-      }
-    });
-    
-    return NextResponse.json({ token: token.name });
+
+    // For now, return the API key directly as the token
+    // In production, you might want to implement proper token-based auth
+    return NextResponse.json({ token: apiKey });
   } catch (error) {
-    console.error("Error creating ephemeral token:", error);
-    return NextResponse.json({ error: "Failed to create token" }, { status: 500 });
+    console.error("Error creating token:", error);
+    return NextResponse.json(
+      { error: "Failed to create token" },
+      { status: 500 },
+    );
   }
 }

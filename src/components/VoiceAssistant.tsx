@@ -290,15 +290,21 @@ export default function VoiceAssistant() {
         }
       };
 
+      const sessionHolder = { current: null as any };
+
       const session = await ai.live.connect({
-        model: "gemini-2.0-flash-exp",
+        model: "gemini-2.5-flash-live-preview",
         config: {
-          responseModalities: [Modality.AUDIO],
+          responseModalities: [Modality.AUDIO, Modality.TEXT],
           systemInstruction: { parts: [{ text: SYSTEM_INSTRUCTION }] },
+          inputAudioTranscription: {},
+          outputAudioTranscription: {},
         },
         callbacks: {
           onopen: () => {
             console.log("Gemini Live session opened");
+            sessionRef.current = sessionHolder.current;
+            isSessionActiveRef.current = true;
             setConnectionStatus("Connected");
             setVoiceState("listening");
             startAudioCapture();
@@ -350,15 +356,23 @@ export default function VoiceAssistant() {
             }
           },
           onerror: (error: any) => {
-            console.error("Gemini API Error Event:", error);
-            if (error instanceof Error)
-              console.error("Message:", error.message);
+            console.error("Gemini API Error Event:", JSON.stringify(error, null, 2));
+            if (error && error.message) {
+              console.error("Error message:", error.message);
+            }
+            if (error && error.code) {
+              console.error("Error code:", error.code);
+            }
             isSessionActiveRef.current = false;
             setConnectionStatus("Connection error");
             setVoiceState("idle");
           },
-          onclose: () => {
-            console.log("Gemini Live session closed");
+          onclose: (event: any) => {
+            console.log("Gemini Live session closed", {
+              code: event?.code,
+              reason: event?.reason,
+              wasClean: event?.wasClean
+            });
             isSessionActiveRef.current = false;
             cleanup();
             setConnectionStatus("");
@@ -366,8 +380,7 @@ export default function VoiceAssistant() {
         },
       });
 
-      sessionRef.current = session;
-      isSessionActiveRef.current = true;
+      sessionHolder.current = session;
     } catch (error: unknown) {
       setConnectionStatus(
         `Error: ${error instanceof Error ? error.message : "Unknown"}`,
@@ -469,10 +482,10 @@ export default function VoiceAssistant() {
 
   const switchToVoice = () => {
     if (mode === "chat") {
+      stopVoiceSession();
       setMode("voice");
       hasStartedRef.current = false;
       setIsOpen(true);
-      setTimeout(() => startVoiceSession(), 800);
     }
   };
 

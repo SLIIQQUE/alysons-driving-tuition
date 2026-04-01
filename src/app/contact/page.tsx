@@ -268,7 +268,7 @@ function ContactContent() {
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-red-500 rounded-xl flex items-center justify-center shrink-0">
                     <MessageCircle className="w-6 h-6 text-black" />
                   </div>
                   <div>
