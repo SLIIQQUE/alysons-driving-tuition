@@ -91,19 +91,21 @@ export default function RootLayout({
     description:
       "Learn to drive with confidence in South Wales. Patient, friendly driving lessons from Alyson Baldwin - DVSA Approved Driving Instructor.",
     url: baseUrl,
-    telephone: "07700 900000",
-    email: "hello@alysonsdriving.co.uk",
+    telephone: "07791 489244",
+    email: "alysonbaldwin1@mail.co.uk",
     image: `${baseUrl}/og-image.jpg`,
     address: {
       "@type": "PostalAddress",
+      streetAddress: "Elim Way, Pontllanfraith",
       addressLocality: "Blackwood",
       addressRegion: "South Wales",
+      postalCode: "NP12 2AA",
       addressCountry: "GB",
     },
     geo: {
       "@type": "GeoCoordinates",
-      latitude: 51.6667,
-      longitude: -3.2017,
+      latitude: 51.6333,
+      longitude: -3.2167,
     },
     openingHoursSpecification: [
       {

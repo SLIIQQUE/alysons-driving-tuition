@@ -7,7 +7,7 @@ export async function sendBookingConfirmation(booking: Booking) {
   const serviceLabel = SERVICE_LABELS[booking.serviceType];
 
   return resend.emails.send({
-    from: "Alyson's Driving Tuition <hello@alysonsdrivingtuition.co.uk>",
+    from: "Alyson's Driving Tuition <alysonbaldwin1@mail.co.uk>",
     to: [booking.email],
     subject: `Lesson Confirmed - ${serviceLabel} - Alyson's Driving Tuition`,
     html: `
@@ -52,15 +52,15 @@ export async function sendBookingConfirmation(booking: Booking) {
             
             <p>Alyson will call you the day before your lesson to confirm everything.</p>
             
-            <p>If you need to reschedule or have any questions, just reply to this email or call 01234 567890.</p>
+            <p>If you need to reschedule or have any questions, just reply to this email or call 07791 489244.</p>
             
             <p>See you soon!</p>
             
             <p>— Alyson Baldwin<br>Alyson's Driving Tuition</p>
           </div>
           <div class="footer">
-            <p>Blackwood, South Wales<br>
-            <a href="tel:01234567890">01234 567890</a> | <a href="mailto:hello@alysonsdrivingtuition.co.uk">hello@alysonsdrivingtuition.co.uk</a></p>
+            <p>Elim Way, Pontllanfraith, Blackwood NP12 2AA, United Kingdom<br>
+            <a href="tel:+447791489244">07791 489244</a> | <a href="mailto:alysonbaldwin1@mail.co.uk">alysonbaldwin1@mail.co.uk</a></p>
           </div>
         </body>
       </html>

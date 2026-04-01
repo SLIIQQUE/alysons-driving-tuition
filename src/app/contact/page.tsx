@@ -278,15 +278,31 @@ function ContactContent() {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-amber-500" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">Mobile</h3>
+                    <a
+                      href="tel:+447791489244"
+                      className="text-amber-500 hover:underline"
+                    >
+                      07791 489244
+                    </a>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
                     <Mail className="w-6 h-6 text-amber-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">Email</h3>
                     <a
-                      href="mailto:hello@alysonsdriving.co.uk"
+                      href="mailto:alysonbaldwin1@mail.co.uk"
                       className="text-amber-500 hover:underline"
                     >
-                      hello@alysonsdriving.co.uk
+                      alysonbaldwin1@mail.co.uk
                     </a>
                   </div>
                 </div>
@@ -296,11 +312,10 @@ function ContactContent() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">
-                      Areas Covered
+                      Address
                     </h3>
                     <p className="text-white/60">
-                      Blackwood, Tredegar, Risca, Newport and surrounding South
-                      Wales areas
+                      Elim Way, Pontllanfraith, Blackwood NP12 2AA, United Kingdom
                     </p>
                   </div>
                 </div>
@@ -345,14 +360,14 @@ function ContactContent() {
             {/* Google Map Embed */}
             <div className="glass-card overflow-hidden rounded-2xl">
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19896.47848!2d-3.2017!3d51.6667!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486e1e8b0e0e0e0f%3A0x0!2sBlackwood%2C%20Wales!5e0!3m2!1sen!2suk!4v1"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2484.5!2d-3.2167!3d51.6333!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486e1e8b0e0e0e0f%3A0x0!2sElim+Way%2C+Pontllanfraith%2C+Blackwood+NP12+2AA!5e0!3m2!1sen!2suk!4v1"
                 width="100%"
                 height="250"
                 style={{ border: 0 }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Alyson's Driving Tuition - Blackwood, South Wales"
+                title="Alyson's Driving Tuition - Elim Way, Pontllanfraith, Blackwood NP12 2AA"
                 className="w-full"
               />
             </div>

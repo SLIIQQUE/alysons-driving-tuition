@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact Alyson's Driving Tuition | Book Driving Lessons in Blackwood",
-  description: "Contact Alyson's Driving Tuition to book your first driving lesson. Serving Blackwood, Tredegar, Risca, Newport & South Wales. Call 07700 900000 or use our contact form.",
+  description: "Contact Alyson's Driving Tuition to book your first driving lesson. Serving Blackwood, Tredegar, Risca, Newport & South Wales. Call 07791 489244 or use our contact form.",
   keywords: ["book driving lesson Blackwood", "contact driving instructor", "driving lessons South Wales", "driving school contact"],
   openGraph: {
     title: "Contact Alyson's Driving Tuition | Book Driving Lessons",

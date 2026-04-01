@@ -10,7 +10,7 @@ const blogPosts: Record<string, {
   readTime: string;
   category: string;
   image: string;
-  content: { heading: string; paragraphs: string[] }[];
+  content: { heading: string; paragraphs: string[]; list?: string[] }[];
 }> = {
   "how-to-prepare-for-driving-test": {
     title: "How to Prepare for Your Driving Test: A Complete Guide",
@@ -20,31 +20,68 @@ const blogPosts: Record<string, {
     image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=1200&h=600&fit=crop",
     content: [
       {
-        heading: "Understanding the Driving Test",
+        heading: "Understanding the UK Driving Test",
         paragraphs: [
-          "The UK driving test consists of several parts: an eyesight check, 'show me, tell me' vehicle safety questions, general driving ability, reversing manoeuvre, and independent driving. Understanding what to expect is the first step to feeling prepared.",
-          "The test lasts around 40 minutes and covers a variety of road types including residential streets, dual carriageways, and sometimes country roads. Your examiner will be assessing your overall safety and ability to drive independently.",
+          "The UK practical driving test is designed to assess whether you can drive safely and independently on real roads. Understanding exactly what's involved is the first step to feeling confident and prepared on test day.",
+          "The test lasts approximately 40 minutes and is divided into several key sections. Your examiner will assess your overall ability to drive safely, follow road signs, and make independent decisions behind the wheel.",
+        ],
+        list: [
+          "Eyesight check — read a number plate from 20 metres",
+          "'Show me, tell me' vehicle safety questions (2 questions)",
+          "General driving ability on various road types",
+          "One reversing manoeuvre (parallel park, bay park, or pull up on the right)",
+          "Independent driving for about 20 minutes following signs or a sat nav",
         ],
       },
       {
         heading: "What to Bring on Test Day",
         paragraphs: [
-          "Make sure you bring your provisional driving licence — both the photocard and the paper counterpart if you have one. Without it, your test will be cancelled and you'll lose your fee.",
-          "If you're using your own car for the test, ensure it meets all requirements: L plates on the front and rear, a valid MOT, road tax, insurance that covers the test, no warning lights showing, and enough fuel for the test duration.",
+          "Being unprepared on test day is the easiest way to fail before you even start. Make sure you have everything you need the night before.",
+        ],
+        list: [
+          "Your provisional driving licence (photocard required)",
+          "Theory test pass certificate (if you have one)",
+          "Appointment confirmation (printed or on your phone)",
+          "Glasses or contact lenses if you need them for driving",
+          "Comfortable shoes — you'll be using the pedals for 40 minutes",
         ],
       },
       {
-        heading: "Common Mistakes to Avoid",
+        heading: "Common Mistakes That Cause Test Failure",
         paragraphs: [
-          "Observation at junctions is the most common reason for test failure. Always make exaggerated head movements so the examiner can see you're checking properly. Don't just glance in the mirror — look.",
-          "Other common faults include poor use of mirrors, incorrect positioning, and not responding correctly to traffic signs and signals. Practice these regularly with your instructor.",
+          "Knowing what examiners look for — and what causes failures — is one of the best ways to prepare. Here are the most common reasons learners fail their test:",
+        ],
+        list: [
+          "Poor observation at junctions — the number one cause of failure",
+          "Not checking mirrors before signalling or changing speed",
+          "Incorrect positioning when turning or at roundabouts",
+          "Not responding correctly to traffic lights and signs",
+          "Stalling the engine (occasional stalls are minor, but repeated stalls are serious)",
+          "Moving off unsafely without checking blind spots",
+          "Lack of control when reversing or parking",
+        ],
+      },
+      {
+        heading: "How to Practise Effectively Before Your Test",
+        paragraphs: [
+          "Practice doesn't make perfect — perfect practice makes perfect. Focus on quality over quantity. Work with your instructor to identify your weak areas and target them specifically.",
+          "Try to practise on the same roads you'll be tested on. At Alyson's Driving Tuition, we always include test route practice in the lessons leading up to your test so you're familiar with every junction, roundabout, and tricky section.",
+          "Mock tests are incredibly valuable. Ask your instructor to conduct a full mock test under real exam conditions. This will help you get used to the format and identify any last-minute areas for improvement.",
         ],
       },
       {
         heading: "Staying Calm on Test Day",
         paragraphs: [
-          "It's completely normal to feel nervous. In fact, a little adrenaline can help you stay sharp. The key is to manage your nerves so they don't affect your driving.",
-          "Arrive early, take deep breaths, and remember that your examiner wants you to pass. They're not trying to catch you out — they just want to see that you can drive safely on your own.",
+          "Nerves are completely normal — even experienced drivers feel them before a test. The key is managing them so they don't affect your performance.",
+          "Arrive at the test centre 10 minutes early. Take slow, deep breaths while you wait. Remember that your examiner is not trying to catch you out — they simply want to see that you can drive safely on your own.",
+          "If you make a mistake during the test, don't panic. One minor fault won't fail you. Keep driving safely and focus on the rest of the test. Many pupils who make small errors still pass.",
+        ],
+      },
+      {
+        heading: "After the Test",
+        paragraphs: [
+          "Whether you pass or not, your examiner will give you feedback. If you pass, congratulations — you're now a qualified driver! If not, don't be discouraged. Use the feedback to improve and book your next test.",
+          "At Alyson's Driving Tuition, we support every pupil through this process. If you don't pass first time, we'll work together on the areas that need improvement and get you ready for your next attempt.",
         ],
       },
     ],
@@ -57,25 +94,52 @@ const blogPosts: Record<string, {
     image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=1200&h=600&fit=crop",
     content: [
       {
-        heading: "The Official Numbers",
+        heading: "The Official DVSA Numbers",
         paragraphs: [
-          "According to the DVSA, the average learner driver needs around 45 hours of professional instruction plus 20 hours of private practice to reach test standard. That's roughly 65 hours of total driving experience.",
-          "However, these are averages — not rules. Some pupils pass with as few as 20 hours, while others may need 60 or more. It all depends on your individual ability, how quickly you learn, and how much you practice between lessons.",
+          "According to the Driver and Vehicle Standards Agency (DVSA), the average learner needs around 45 hours of professional instruction plus 20 hours of private practice to reach test standard. That's roughly 65 hours of total driving experience.",
+          "However, these are averages — not rules. Every learner is different, and the number of hours you need depends on many factors including your natural ability, how often you practise, and your confidence level.",
         ],
       },
       {
-        heading: "Factors That Affect How Many Lessons You Need",
+        heading: "Factors That Affect Your Learning Speed",
         paragraphs: [
-          "Your age can make a difference — younger learners often pick things up more quickly, but older learners tend to be more cautious and make fewer errors. Both approaches have their advantages.",
-          "How often you have lessons matters too. Weekly lessons are better than fortnightly ones because you retain more between sessions. Intensive courses can work well for some learners who want to learn quickly.",
-          "Private practice is invaluable. If you have access to a suitable car and a qualified supervisor (over 21 with 3+ years of experience), practising between lessons will significantly speed up your progress.",
+          "Several key factors influence how quickly you'll progress from your first lesson to passing your test:",
+        ],
+        list: [
+          "Lesson frequency — weekly lessons are far better than fortnightly ones because you retain more between sessions",
+          "Private practice — learners who practise between lessons with a qualified supervisor progress significantly faster",
+          "Age — younger learners often pick things up quickly, but older learners tend to be more cautious and make fewer errors",
+          "Nervousness — anxious learners may need more time to build confidence, but this doesn't mean they can't become excellent drivers",
+          "Learning style — some people learn best through repetition, others through understanding the 'why' behind each action",
+          "Intensive vs. spread-out — intensive courses compress learning into a short period, which works well for some but not all",
+        ],
+      },
+      {
+        heading: "Typical Lesson Breakdown",
+        paragraphs: [
+          "While every learner's journey is different, here's a rough guide to how your lessons might be structured:",
+        ],
+        list: [
+          "Hours 1-10: Basic controls, moving off and stopping, junctions, left and right turns",
+          "Hours 10-20: Roundabouts, meeting traffic, emerging, more complex junctions",
+          "Hours 20-30: Dual carriageways, independent driving, manoeuvres",
+          "Hours 30-40: Test route practice, mock tests, refining skills",
+          "Hours 40+: Final preparation and test readiness",
         ],
       },
       {
         heading: "How to Know When You're Ready",
         paragraphs: [
           "Your instructor is the best person to advise you on test readiness. They'll assess your ability against the DVSA standards and let you know when you're at the right level.",
-          "A good indicator is when you can drive independently without your instructor needing to intervene. If you're consistently making only minor errors and can handle all road types confidently, you're probably close to being ready.",
+          "Good signs you're approaching test standard include: consistently driving without instructor intervention, handling all road types confidently, making safe independent decisions, and only making minor errors occasionally.",
+          "Don't rush to book your test before you're ready. It's better to have a few extra lessons and pass first time than to rush and fail — which costs more in the long run.",
+        ],
+      },
+      {
+        heading: "How Block Bookings Can Help",
+        paragraphs: [
+          "Booking lessons in blocks can save you money and help you maintain consistent progress. At Alyson's Driving Tuition, we offer 5% off for 5+ lessons, 10% off for 10+ lessons, and 15% off for 20+ lessons.",
+          "Block bookings also help you establish a regular routine, which is one of the best ways to learn efficiently. Your instructor can plan a structured programme that builds your skills progressively towards test readiness.",
         ],
       },
     ],
@@ -88,32 +152,48 @@ const blogPosts: Record<string, {
     image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1200&h=600&fit=crop",
     content: [
       {
-        heading: "Why Driving Nerves Are Normal",
+        heading: "Why Driving Nerves Are Completely Normal",
         paragraphs: [
-          "Learning to drive is one of the most nerve-wracking things many people do. You're controlling a heavy machine at speed, navigating complex traffic situations, and being assessed — all at the same time.",
-          "Research shows that around 80% of learner drivers experience some form of driving anxiety. You're definitely not alone, and there are proven strategies to help you overcome these feelings.",
+          "Learning to drive is one of the most nerve-wracking experiences many people go through. You're controlling a heavy machine at speed, navigating complex traffic situations, and being assessed — all at the same time.",
+          "Research shows that around 80% of learner drivers experience some form of driving anxiety. Whether you're nervous about stalling, making mistakes, or simply being in control of a car, these feelings are entirely normal and shared by the vast majority of learners.",
         ],
       },
       {
-        heading: "Choosing the Right Instructor",
+        heading: "Choosing the Right Instructor Makes All the Difference",
         paragraphs: [
-          "The most important factor in overcoming driving nerves is finding an instructor who makes you feel comfortable. Look for someone who is patient, understanding, and adapts their teaching style to your needs.",
-          "Don't be afraid to have a trial lesson with an instructor before committing. If you don't feel at ease after the first lesson, it's perfectly okay to try someone else. The right instructor will make all the difference.",
+          "The single most important factor in overcoming driving nerves is finding an instructor who makes you feel safe and comfortable. Look for someone who is patient, understanding, and adapts their teaching style to your needs.",
+          "Don't be afraid to have a trial lesson before committing to a block of lessons. If you don't feel at ease after the first session, it's perfectly okay to try someone else. The right instructor will make you feel supported from day one.",
+          "At Alyson's Driving Tuition, we specialise in working with nervous learners. With over 20 years of experience, Alyson has helped hundreds of anxious beginners become confident, safe drivers.",
         ],
       },
       {
-        heading: "Practical Tips for Managing Anxiety",
+        heading: "Practical Tips for Managing Driving Anxiety",
         paragraphs: [
-          "Start with quiet roads and gradually build up to busier situations. There's no rush — your instructor will progress at a pace that feels comfortable for you.",
-          "Practice deep breathing techniques before and during lessons. Focus on what you're doing well rather than what you're struggling with. Progress isn't always linear, and that's okay.",
-          "Consider having shorter lessons at first — 1 hour instead of 2 — until you feel more confident. You can always increase the duration as your comfort level grows.",
+          "Here are proven strategies that work for nervous learners:",
+        ],
+        list: [
+          "Start on quiet roads — there's no rule that says you need to tackle busy streets on day one",
+          "Practice deep breathing — take slow, deep breaths before and during lessons to calm your nervous system",
+          "Focus on progress, not perfection — celebrate small wins like a smooth gear change or a successful junction",
+          "Have shorter lessons at first — 1-hour sessions are less overwhelming than 2-hour ones when you're starting out",
+          "Talk to your instructor — let them know you're nervous so they can adjust their teaching approach",
+          "Avoid comparing yourself to others — everyone learns at their own pace",
+          "Visualise success — imagine yourself driving confidently before each lesson",
+        ],
+      },
+      {
+        heading: "Understanding the Learning Curve",
+        paragraphs: [
+          "Learning to drive isn't linear. You'll have great lessons where everything clicks, and others where you feel like you've gone backwards. This is completely normal and happens to every learner.",
+          "The key is to trust the process. Your instructor has a plan and knows where you need to get to. Even on difficult days, you're still learning — sometimes the lessons that feel hardest are the ones where you learn the most.",
         ],
       },
       {
         heading: "Building Confidence Over Time",
         paragraphs: [
-          "Confidence comes with experience. The more time you spend behind the wheel, the more natural driving will feel. Celebrate small victories — your first successful junction, your first roundabout, your first dual carriageway.",
-          "Remember that every confident driver on the road was once a nervous beginner. With the right support and patience, you'll get there too.",
+          "Confidence comes from experience. The more time you spend behind the wheel, the more natural driving becomes. What feels overwhelming in lesson one will feel routine by lesson ten.",
+          "Set small, achievable goals for each lesson. Maybe today you want to master a particular junction, or maybe you want to work on your mirror checks. Achieving these mini-goals builds momentum and confidence.",
+          "Remember that every confident driver on the road was once a nervous beginner. With patience, the right instructor, and a willingness to learn, you will get there.",
         ],
       },
     ],
@@ -128,29 +208,46 @@ const blogPosts: Record<string, {
       {
         heading: "What Are Intensive Driving Courses?",
         paragraphs: [
-          "Intensive driving courses (sometimes called 'crash courses') pack your learning into a short period — typically 1-4 weeks. Instead of one lesson per week, you might have 2-4 hours of tuition every day.",
-          "These courses are ideal for people who need their licence quickly — perhaps for a new job, university, or relocation. They can also work well for people who learn best through immersion.",
+          "Intensive driving courses — sometimes called 'crash courses' — pack your entire learning programme into a short, concentrated period. Instead of one lesson per week spread over months, you might have 2-4 hours of tuition every day for 1-4 weeks.",
+          "These courses are designed for people who need their licence quickly, whether for a new job, university, or relocation. They can also work brilliantly for people who learn best through immersion and repetition.",
         ],
       },
       {
         heading: "What Are Regular Lessons?",
         paragraphs: [
-          "Regular lessons are the traditional approach — typically one or two lessons per week spread over several months. This gives you time to absorb what you've learned and practice between sessions.",
-          "This approach works well for most learners, especially those who benefit from time to reflect and consolidate their skills. It's also more flexible around work, school, and other commitments.",
+          "Regular lessons are the traditional approach to learning to drive. Typically, you'll have one or two lessons per week spread over several months. This gives you time to absorb what you've learned, reflect on your progress, and practise between sessions.",
+          "This approach works well for most learners, especially those who benefit from time to consolidate their skills. It's also more flexible around work, school, family, and other commitments.",
         ],
       },
       {
-        heading: "Pros and Cons",
-        paragraphs: [
-          "Intensive courses offer faster results and momentum — you're driving every day, so skills build quickly. However, they can be intense and overwhelming, and you need to be able to commit full days to learning.",
-          "Regular lessons are less pressure and more affordable upfront. You can spread the cost over time and fit lessons around your schedule. The downside is that progress can feel slower, and gaps between lessons can mean some skills need refreshing.",
+        heading: "Intensive Courses: Pros and Cons",
+        paragraphs: [],
+        list: [
+          "Faster results — you can go from zero to test-ready in just 1-4 weeks",
+          "Momentum — daily practice means skills build quickly and you don't forget between lessons",
+          "Cost-effective overall — fewer total hours may be needed due to concentrated learning",
+          "Can be intense and overwhelming, especially for nervous learners",
+          "Requires full-day availability for the course duration",
+          "Less time to process and reflect between sessions",
         ],
       },
       {
-        heading: "Which Should You Choose?",
+        heading: "Regular Lessons: Pros and Cons",
+        paragraphs: [],
+        list: [
+          "Less pressure — you learn at a comfortable, manageable pace",
+          "Flexible scheduling — fit lessons around work, school, and other commitments",
+          "More affordable upfront — pay per lesson rather than a large upfront sum",
+          "Time to practise between sessions with a qualified supervisor",
+          "Progress can feel slower, especially with gaps between lessons",
+          "Skills may need refreshing if too much time passes between lessons",
+        ],
+      },
+      {
+        heading: "Which Approach Is Right for You?",
         paragraphs: [
-          "Consider your learning style, availability, and urgency. If you learn well under pressure and need your licence fast, an intensive course could be perfect. If you prefer a steadier pace and have other commitments, regular lessons are likely the better choice.",
-          "At Alyson's Driving Tuition, we offer both options and can help you decide which approach suits you best. Get in touch for a free consultation.",
+          "Consider your learning style, availability, and urgency. If you learn well under pressure, have the time to commit, and need your licence fast, an intensive course could be perfect. If you prefer a steadier pace, have other commitments, or feel nervous about driving, regular lessons are likely the better choice.",
+          "At Alyson's Driving Tuition, we offer both options and can help you decide which approach suits you best. Get in touch for a free consultation and we'll create a learning plan tailored to your needs.",
         ],
       },
     ],
@@ -250,6 +347,16 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                   {paragraph}
                 </p>
               ))}
+              {section.list && (
+                <ul className="space-y-3 mt-4 mb-6">
+                  {section.list.map((item, k) => (
+                    <li key={k} className="flex items-start gap-3 text-white/60">
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0" />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </motion.div>
           ))}
 

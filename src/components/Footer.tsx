@@ -76,19 +76,19 @@ export default function Footer() {
             </p>
             <div className="flex flex-col gap-4">
               <a
-                href="mailto:hello@alysonsdriving.co.uk"
+                href="mailto:alysonbaldwin1@mail.co.uk"
                 className="flex items-center gap-3 text-white/70 hover:text-amber-500 transition-colors group"
               >
                 <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center group-hover:bg-amber-500/20 transition-colors">
                   <Mail className="w-5 h-5" />
                 </div>
-                hello@alysonsdriving.co.uk
+                alysonbaldwin1@mail.co.uk
               </a>
               <div className="flex items-center gap-3 text-white/70">
                 <div className="w-10 h-10 bg-white/5 rounded-lg flex items-center justify-center">
                   <MapPin className="w-5 h-5" />
                 </div>
-                Blackwood, South Wales
+                Elim Way, Pontllanfraith, Blackwood NP12 2AA
               </div>
             </div>
           </div>

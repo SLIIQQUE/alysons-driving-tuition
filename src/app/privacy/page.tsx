@@ -84,7 +84,7 @@ function PrivacyContent() {
     {
       title: "7. Your Rights",
       content:
-        "Under UK data protection law (UK GDPR), you have the right to: access your personal information, rectify inaccurate data, request erasure of your data, object to processing, request data portability, and withdraw consent. To exercise these rights, contact us at hello@alysonsdriving.co.uk.",
+        "Under UK data protection law (UK GDPR), you have the right to: access your personal information, rectify inaccurate data, request erasure of your data, object to processing, request data portability, and withdraw consent. To exercise these rights, contact us at alysonbaldwin1@mail.co.uk.",
     },
     {
       title: "8. Cookies",
@@ -99,7 +99,7 @@ function PrivacyContent() {
     {
       title: "10. Contact Us",
       content:
-        "If you have any questions about this Privacy Policy or how we handle your data, please contact us at hello@alysonsdriving.co.uk, call 07700 900000, or write to us at Blackwood, South Wales.",
+        "If you have any questions about this Privacy Policy or how we handle your data, please contact us at alysonbaldwin1@mail.co.uk, call 07791 489244, or write to us at Elim Way, Pontllanfraith, Blackwood NP12 2AA.",
     },
   ];
 
