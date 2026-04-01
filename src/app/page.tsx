@@ -244,12 +244,6 @@ function Hero() {
               >
                 Book a Lesson
               </Link>
-              <Link
-                href="/pricing"
-                className="px-8 py-4 border-2 border-white/20 text-white/70 font-medium rounded-full hover:bg-white/5 transition-colors flex items-center gap-2"
-              >
-                View Prices
-              </Link>
             </motion.div>
           </div>
         </div>
@@ -693,33 +687,38 @@ function BlogPreview() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
-              className="glass-card overflow-hidden border-glow group cursor-pointer"
+              className="glass-card overflow-hidden border-glow group"
             >
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-                <div className="absolute top-3 left-3 px-3 py-1 bg-amber-500/90 rounded-full text-xs font-semibold text-black">
-                  {post.category}
+              <Link href={`/blog/${post.slug}`} className="block">
+                <div className="relative h-48 overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110  cursor-pointer"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent" />
+                  <div className="absolute top-3 left-3 px-3 py-1 bg-amber-500/90 rounded-full text-xs font-semibold text-black">
+                    {post.category}
+                  </div>
                 </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-3 text-white/30 text-xs mb-3">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
-                    {post.date}
+                <div className="p-6">
+                  <div className="flex items-center gap-3 text-white/30 text-xs mb-3">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {post.date}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-white mb-2 group-hover:text-amber-500 transition-colors leading-tight">
+                    {post.title}
+                  </h3>
+                  <p className="text-white/40 text-sm leading-relaxed mb-4">
+                    {post.excerpt}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all">
+                    Read more <ArrowRight className="w-4 h-4" />
                   </span>
                 </div>
-                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-amber-500 transition-colors leading-tight">
-                  {post.title}
-                </h3>
-                <p className="text-white/40 text-sm leading-relaxed">
-                  {post.excerpt}
-                </p>
-              </div>
+              </Link>
             </motion.article>
           ))}
         </div>

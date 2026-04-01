@@ -9,38 +9,46 @@ const posts = [
   {
     slug: "how-to-prepare-for-driving-test",
     title: "How to Prepare for Your Driving Test: A Complete Guide",
-    excerpt: "Everything you need to know before your driving test. From what to bring to common mistakes and how to stay calm on test day.",
+    excerpt:
+      "Everything you need to know before your driving test. From what to bring to common mistakes and how to stay calm on test day.",
     date: "March 2026",
     readTime: "8 min read",
     category: "Test Preparation",
-    image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=500&fit=crop",
   },
   {
     slug: "how-many-driving-lessons-do-you-need",
     title: "How Many Driving Lessons Do You Actually Need?",
-    excerpt: "The average learner needs 45 hours of professional instruction. But everyone is different. Here's how to figure out what's right for you.",
+    excerpt:
+      "The average learner needs 45 hours of professional instruction. But everyone is different. Here's how to figure out what's right for you.",
     date: "March 2026",
     readTime: "6 min read",
     category: "Learning Guide",
-    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&h=500&fit=crop",
   },
   {
     slug: "nervous-about-learning-to-drive",
     title: "Nervous About Learning to Drive? You're Not Alone",
-    excerpt: "Feeling anxious about getting behind the wheel is completely normal. Here are practical tips to overcome driving anxiety and build confidence.",
+    excerpt:
+      "Feeling anxious about getting behind the wheel is completely normal. Here are practical tips to overcome driving anxiety and build confidence.",
     date: "February 2026",
     readTime: "7 min read",
     category: "Confidence Building",
-    image: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=500&fit=crop",
   },
   {
     slug: "intensive-vs-regular-driving-lessons",
     title: "Intensive vs Regular Driving Lessons: Which Is Right for You?",
-    excerpt: "Should you cram your lessons or spread them out? We compare intensive courses with regular lessons to help you decide.",
+    excerpt:
+      "Should you cram your lessons or spread them out? We compare intensive courses with regular lessons to help you decide.",
     date: "February 2026",
     readTime: "5 min read",
     category: "Course Comparison",
-    image: "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&h=500&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1502877338535-766e1452684a?w=800&h=500&fit=crop",
   },
 ];
 
@@ -49,8 +57,8 @@ function BlogHero() {
     <section className="relative min-h-[70vh] flex items-center overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920&h=1080&fit=crop')] bg-cover bg-center" />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/70" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
+        <div className="absolute inset-0 bg-linear-to-r from-[#0a0a0a] via-[#0a0a0a]/90 to-[#0a0a0a]/70" />
+        <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-[#0a0a0a]" />
 
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
@@ -87,7 +95,8 @@ function BlogHero() {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="text-xl text-white/60 max-w-2xl mx-auto"
         >
-          Expert advice from a DVSA Approved Driving Instructor to help you learn, prepare, and pass.
+          Expert advice from a DVSA Approved Driving Instructor to help you
+          learn, prepare, and pass.
         </motion.p>
       </motion.div>
     </section>
@@ -108,45 +117,42 @@ function BlogGrid() {
               viewport={{ once: true }}
               className="glass-card overflow-hidden border-glow group"
             >
-              <div className="relative h-56 overflow-hidden">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent" />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-amber-500/90 rounded-full text-xs font-semibold text-black">
-                  {post.category}
+              <Link href={`/blog/${post.slug}`} className="block">
+                <div className="relative h-56 overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent" />
+                  <div className="absolute top-4 left-4 px-3 py-1 bg-amber-500/90 rounded-full text-xs font-semibold text-black">
+                    {post.category}
+                  </div>
                 </div>
-              </div>
-              <div className="p-8">
-                <div className="flex items-center gap-4 text-white/40 text-sm mb-4">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />
-                    {post.date}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Clock className="w-3 h-3" />
-                    {post.readTime}
-                  </span>
-                </div>
-                <Link href={`/blog/${post.slug}`}>
+                <div className="p-8">
+                  <div className="flex items-center gap-4 text-white/40 text-sm mb-4">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />
+                      {post.date}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-3 h-3" />
+                      {post.readTime}
+                    </span>
+                  </div>
                   <h2 className="text-xl font-display font-bold text-white mb-3 group-hover:text-amber-500 transition-colors">
                     {post.title}
                   </h2>
-                </Link>
-                <p className="text-white/50 text-sm mb-6 leading-relaxed">
-                  {post.excerpt}
-                </p>
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all"
-                >
-                  Read more <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+                  <p className="text-white/50 text-sm mb-6 leading-relaxed">
+                    {post.excerpt}
+                  </p>
+                  <span className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all">
+                    Read more <ArrowRight className="w-4 h-4" />
+                  </span>
+                </div>
+              </Link>
             </motion.article>
           ))}
         </div>
@@ -159,7 +165,7 @@ function CTASection() {
   return (
     <section className="relative py-32 bg-[#0a0a0a] overflow-hidden">
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/10 via-transparent to-red-500/10" />
+        <div className="absolute inset-0 bg-linear-to-br from-amber-500/10 via-transparent to-red-500/10" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/10 rounded-full blur-[150px]" />
       </div>
 
@@ -171,10 +177,12 @@ function CTASection() {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-6">
-            Ready to Put These Tips <span className="text-gradient">Into Practice?</span>
+            Ready to Put These Tips{" "}
+            <span className="text-gradient">Into Practice?</span>
           </h2>
           <p className="text-lg text-white/50 mb-10 max-w-xl mx-auto">
-            Book your first lesson with Alyson and start your journey to passing your driving test.
+            Book your first lesson with Alyson and start your journey to passing
+            your driving test.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
             <Link href="/contact" className="btn btn-primary group">

@@ -56,10 +56,10 @@ export default function Footer() {
           <div className="xl:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-6">
               <div className="relative">
-                <div className="w-14 h-14 bg-gradient-to-br from-amber-500 to-red-500 rounded-xl flex items-center justify-center">
+                <div className="w-14 h-14 bg-linear-to-br from-amber-500 to-red-500 rounded-xl flex items-center justify-center">
                   <span className="text-black font-bold text-2xl">A</span>
                 </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-amber-500 to-red-500 rounded-xl blur-xl opacity-50" />
+                <div className="absolute inset-0 bg-linear-to-br from-amber-500 to-red-500 rounded-xl blur-xl opacity-50" />
               </div>
               <div>
                 <span className="font-display font-bold text-2xl text-white tracking-tight">
@@ -94,7 +94,7 @@ export default function Footer() {
           </div>
 
           {/* Links */}
-          <div className="mt-16 xl:mt-0 xl:col-span-2 grid grid-cols-3 gap-8">
+          <div className="mt-16 xl:mt-0 xl:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-8">
             <div>
               <h3 className="text-sm font-semibold text-white tracking-wider uppercase mb-4">
                 Services
