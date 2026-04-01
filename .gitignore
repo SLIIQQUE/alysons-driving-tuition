@@ -50,3 +50,13 @@ skills-lock.json
 # test files
 test-*.js
 test-*.ts
+
+# planning and agent files
+wireframes.md
+website-plan.md
+task_plan.md
+findings.md
+progress.md
+AGENTS.md
+CLAUDE.md
+.agents/
