@@ -10,7 +10,8 @@ export function generateStaticParams() {
   ];
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
   const postMeta: Record<string, { title: string; description: string }> = {
     "how-to-prepare-for-driving-test": {
       title: "How to Prepare for Your Driving Test: A Complete Guide | Alyson's Driving Tuition",
@@ -30,7 +31,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     },
   };
 
-  const meta = postMeta[params.slug] || {
+  const meta = postMeta[slug] || {
     title: "Driving Tips & Advice | Alyson's Driving Tuition",
     description: "Expert driving tips and advice from a DVSA Approved Driving Instructor in South Wales.",
   };
@@ -46,6 +47,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  return <BlogPostClient slug={params.slug} />;
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  return <BlogPostClient slug={slug} />;
 }

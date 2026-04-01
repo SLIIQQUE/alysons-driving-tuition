@@ -129,9 +129,11 @@ function BlogGrid() {
                     {post.readTime}
                   </span>
                 </div>
-                <h2 className="text-xl font-display font-bold text-white mb-3 group-hover:text-amber-500 transition-colors">
-                  {post.title}
-                </h2>
+                <Link href={`/blog/${post.slug}`}>
+                  <h2 className="text-xl font-display font-bold text-white mb-3 group-hover:text-amber-500 transition-colors">
+                    {post.title}
+                  </h2>
+                </Link>
                 <p className="text-white/50 text-sm mb-6 leading-relaxed">
                   {post.excerpt}
                 </p>
