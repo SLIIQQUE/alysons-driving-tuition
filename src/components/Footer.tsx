@@ -27,18 +27,18 @@ const navigation = {
 
 export default function Footer() {
   return (
-    <footer className="relative bg-[#0a0a0a] text-white overflow-visible pt-16 lg:pt-24 pb-8">
+    <footer className="relative bg-[#0a0a0a] text-white overflow-hidden pt-16 lg:pt-24 pb-8">
       {/* Text Underlay */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute inset-0 flex items-center justify-center">
           <span
-            className="font-display text-[12vw] font-bold text-white opacity-[0.03] leading-none tracking-tighter whitespace-nowrap"
+            className="font-display text-[8vw] lg:text-[12vw] font-bold text-white opacity-[0.03] leading-none tracking-tighter lg:whitespace-nowrap"
             style={{
-              transform: "scale(1.5)",
+              transform: "scale(1.2)",
               WebkitTextStroke: "1px rgba(245, 158, 11, 0.1)",
             }}
           >
-            Alyson's Driving
+            Alyson&apos;s Driving
           </span>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function Footer() {
         <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,#0a0a0a_100%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto px-6 md:px-12 max-w-[1400px]">
+      <div className="container relative z-10">
         <div className="xl:grid xl:grid-cols-4 xl:gap-16">
           {/* Brand */}
           <div className="xl:col-span-2">

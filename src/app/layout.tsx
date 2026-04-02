@@ -28,12 +28,8 @@ export const metadata: Metadata = {
   creator: "Alyson's Driving Tuition",
   publisher: "Alyson's Driving Tuition",
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "any" },
-    ],
-    apple: [
-      { url: "/apple-icon.png", sizes: "180x180", type: "image/png" },
-    ],
+    icon: [{ url: "/favicon.ico", sizes: "any" }],
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   formatDetection: {
     telephone: true,
@@ -110,15 +106,22 @@ export default function RootLayout({
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-        "opens": "08:00",
-        "closes": "20:00",
+        dayOfWeek: [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+        ],
+        opens: "08:00",
+        closes: "20:00",
       },
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Sunday",
-        "opens": "09:00",
-        "closes": "17:00",
+        dayOfWeek: "Sunday",
+        opens: "09:00",
+        closes: "17:00",
       },
     ],
     areaServed: [
@@ -153,7 +156,7 @@ export default function RootLayout({
       <head>
         <link rel="alternate" hrefLang="en-GB" href={baseUrl} />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col overflow-x-hidden w-full">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -165,7 +168,7 @@ export default function RootLayout({
           Skip to main content
         </a>
         <Navigation />
-        <main id="main-content" className="flex-1">
+        <main id="main-content" className="flex-1 w-full overflow-x-hidden">
           {children}
         </main>
         <Footer />

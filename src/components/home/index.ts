@@ -1,0 +1,9 @@
+export { Hero } from "./Hero";
+export { FeatureStrip } from "./FeatureStrip";
+export { CoursesSection } from "./CoursesSection";
+export { AboutPreview } from "./AboutPreview";
+export { TestimonialsMarquee } from "./TestimonialsMarquee";
+export { PricingPreview } from "./PricingPreview";
+export { BlogPreview } from "./BlogPreview";
+export { CTASection } from "./CTASection";
+export { AIVoiceAssistantSection } from "./AIVoiceAssistantSection";

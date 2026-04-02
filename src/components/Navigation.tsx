@@ -39,7 +39,7 @@ export default function Navigation() {
             : "bg-transparent py-6"
         }`}
       >
-        <nav className="mx-auto container" aria-label="Global">
+        <nav className="container relative" aria-label="Global">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <div className="flex lg:flex-1">
