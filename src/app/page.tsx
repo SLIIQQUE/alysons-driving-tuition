@@ -23,7 +23,7 @@ export default function Home() {
       <PricingPreview />
       <BlogPreview />
       <CTASection />
-      <AIVoiceAssistantSection />
+      {/* <AIVoiceAssistantSection /> */}
     </>
   );
 }

@@ -143,7 +143,7 @@ export function useVoiceAssistant() {
 
   // ─── Handle User Message ─────────────────────────────────────────────────────
 
-  const handleUserMessage = useCallback(
+  const sendMessage = useCallback(
     async (text: string) => {
       if (!text.trim()) {
         return;
@@ -226,7 +226,16 @@ export function useVoiceAssistant() {
 
   // ─── Start Listening ─────────────────────────────────────────────────────────
 
-  const startListening = useCallback(() => {
+  const startListening = useCallback(async () => {
+    // Check if the context is secure (HTTPS or localhost)
+    if (typeof window !== "undefined" && !window.isSecureContext) {
+      setState((s) => ({
+        ...s,
+        error: "Microphone access requires a secure context (HTTPS or localhost). Your current connection is insecure, so the browser will not show a permission prompt.",
+      }));
+      return;
+    }
+
     const SpeechRecognitionAPI =
       typeof window !== "undefined"
         ? window.SpeechRecognition || window.webkitSpeechRecognition
@@ -235,7 +244,26 @@ export function useVoiceAssistant() {
     if (!SpeechRecognitionAPI) {
       setState((s) => ({
         ...s,
-        error: "Speech recognition not supported. Please use Chrome or Edge.",
+        error: "Speech recognition not supported. Please use Chrome, Edge, or Safari.",
+      }));
+      return;
+    }
+
+    // Attempt to get microphone access once to trigger the browser prompt explicitly
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach((track) => track.stop()); // Release the microphone immediately
+    } catch (err: any) {
+      if (err.name === "NotAllowedError" || err.name === "PermissionDeniedError") {
+        setState((s) => ({
+          ...s,
+          error: "Microphone access denied. Please click the Lock icon in your address bar and set Microphone to 'Allow'.",
+        }));
+        return;
+      }
+      setState((s) => ({
+        ...s,
+        error: "Could not access microphone. Please check your system settings.",
       }));
       return;
     }
@@ -262,7 +290,7 @@ export function useVoiceAssistant() {
       const isFinal = event.results[event.results.length - 1]?.isFinal;
 
       if (isFinal && transcript.trim()) {
-        await handleUserMessage(transcript);
+        await sendMessage(transcript);
       } else if (isFinal && !transcript.trim()) {
         setState((s) => ({
           ...s,
@@ -273,10 +301,20 @@ export function useVoiceAssistant() {
     };
 
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
+      let errorMessage = `Microphone error: ${event.error}`;
+      
+      if (event.error === "not-allowed") {
+        errorMessage = "Microphone access denied. Please ensure your site is running on localhost or HTTPS, and check your browser's microphone permissions.";
+      } else if (event.error === "no-speech") {
+        errorMessage = "No speech detected. Please try again.";
+      } else if (event.error === "network") {
+        errorMessage = "A network error occurred. Please check your connection.";
+      }
+
       setState((s) => ({
         ...s,
         isListening: false,
-        error: `Microphone error: ${event.error}`,
+        error: errorMessage,
       }));
     };
 
@@ -284,9 +322,14 @@ export function useVoiceAssistant() {
       setState((s) => ({ ...s, isListening: false }));
     };
 
-    recognition.start();
-    recognitionRef.current = recognition;
-  }, [handleUserMessage]);
+    try {
+      recognition.start();
+      recognitionRef.current = recognition;
+    } catch (err) {
+      // recognition already started or other error
+      console.error(err);
+    }
+  }, [sendMessage]);
 
   // ─── Toggle Listening ────────────────────────────────────────────────────────
 
@@ -309,6 +352,7 @@ export function useVoiceAssistant() {
     state,
     startListening,
     toggleListening,
+    sendMessage,
     speak,
     stopSpeaking,
     clearMessages,

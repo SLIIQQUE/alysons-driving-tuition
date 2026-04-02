@@ -62,12 +62,6 @@ export function CTASection() {
               <Mic className="w-5 h-5" />
               Try AI Assistant
             </button>
-            <button
-              onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
-              className="px-10 py-5 border-2 border-white/30 text-white font-bold rounded-full text-lg hover:bg-white/10 transition-colors"
-            >
-              Try AI Assistant
-            </button>
           </div>
           <p className="text-white/40 text-sm mt-6">
             Available 24/7 • No booking needed • Free to use

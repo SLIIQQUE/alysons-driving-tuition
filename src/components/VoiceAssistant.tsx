@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Mic, MicOff, Volume2, VolumeX, X, MessageCircle } from "lucide-react";
+import { Mic, MicOff, Volume2, VolumeX, X, MessageCircle, Bot } from "lucide-react";
 import { useVoiceAssistant } from "@/hooks/useVoiceAssistant";
 
 export interface VoiceAssistantRef {
@@ -11,11 +11,19 @@ export interface VoiceAssistantRef {
 
 export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssistant(_, ref) {
   const [isOpen, setIsOpen] = useState(false);
-  const { state, toggleListening, speak, stopSpeaking, clearMessages } = useVoiceAssistant();
+  const [message, setMessage] = useState("");
+  const { state, toggleListening, sendMessage, speak, stopSpeaking, clearMessages } = useVoiceAssistant();
 
   useImperativeHandle(ref, () => ({
     open: () => setIsOpen(true),
   }));
+
+  const handleSend = async () => {
+    if (!message.trim() || state.isLoading) return;
+    const currentMessage = message;
+    setMessage(""); // Clear after sending
+    await sendMessage(currentMessage);
+  };
 
   useEffect(() => {
     if (state.messages.length > 0) {
@@ -50,7 +58,7 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-20 right-2 md:bottom-24 md:right-6 z-50 w-[calc(100vw-1rem)] md:w-80 md:lg:w-96 bg-[#0a0a0a] border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden"
+            className="fixed bottom-20 right-2 md:bottom-24 md:right-6 z-100 w-[calc(100vw-1rem)] md:w-80 md:lg:w-96 bg-[#0a0a0a] border border-white/10 rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden"
           >
             <div className="bg-gradient-to-r from-amber-500/20 to-red-500/20 p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -71,8 +79,8 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
               {state.messages.length === 0 && (
                 <div className="text-center text-white/40 py-8">
                   <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                  <p className="text-sm">Tap the microphone to start talking!</p>
-                  <p className="text-xs mt-2">I can help you book lessons or answer questions.</p>
+                  <p className="text-sm">Hi! How can I help you today?</p>
+                  <p className="text-xs mt-2">I can help with lessons, pricing, or bookings.</p>
                 </div>
               )}
               
@@ -102,47 +110,74 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
               )}
 
               {state.error && (
-                <div className="text-red-400 text-sm text-center p-2 bg-red-500/10 rounded-lg">
+                <div className="text-red-400 text-xs text-center p-2 bg-red-500/10 rounded-lg">
                   {state.error}
                 </div>
               )}
             </div>
 
-            <div className="p-4 border-t border-white/10 flex items-center gap-3">
-              <button
-                onClick={toggleListening}
-                disabled={state.isLoading}
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
-                  state.isListening
-                    ? "bg-red-500 animate-pulse"
-                    : "bg-gradient-to-r from-amber-500 to-red-500"
-                } disabled:opacity-50`}
-              >
-                {state.isListening ? (
-                  <MicOff className="w-5 h-5 text-white" />
-                ) : (
-                  <Mic className="w-5 h-5 text-black" />
-                )}
-              </button>
+            <div className="p-4 border-t border-white/10 space-y-4">
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleSend()}
+                  placeholder="Ask me anything..."
+                  className="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white placeholder-white/20 focus:outline-none focus:border-amber-500/50"
+                  disabled={state.isLoading}
+                />
+                <button
+                  onClick={handleSend}
+                  disabled={!message.trim() || state.isLoading}
+                  className="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center disabled:opacity-30 transition-opacity"
+                >
+                  <Bot className="w-5 h-5 text-black" />
+                </button>
+              </div>
 
-              <button
-                onClick={() => state.isSpeaking ? stopSpeaking() : null}
-                disabled={!state.isSpeaking && state.messages.length === 0}
-                className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center disabled:opacity-30"
-              >
-                {state.isSpeaking ? (
-                  <VolumeX className="w-4 h-4 text-white" />
-                ) : (
-                  <Volume2 className="w-4 h-4 text-white/50" />
-                )}
-              </button>
+              <div className="flex items-center justify-between pt-2 border-t border-white/5">
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={toggleListening}
+                    disabled={state.isLoading}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
+                      state.isListening
+                        ? "bg-red-500 animate-pulse"
+                        : "bg-white/10"
+                    } hover:bg-white/20 disabled:opacity-50`}
+                    title="Speak"
+                  >
+                    {state.isListening ? (
+                      <MicOff className="w-4 h-4 text-white" />
+                    ) : (
+                      <Mic className="w-4 h-4 text-white/70" />
+                    )}
+                  </button>
 
-              <button
-                onClick={clearMessages}
-                className="text-xs text-white/50 hover:text-white"
-              >
-                Clear
-              </button>
+                  <button
+                    onClick={() => state.isSpeaking ? stopSpeaking() : null}
+                    disabled={!state.isSpeaking && state.messages.length === 0}
+                    className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center disabled:opacity-30 hover:bg-white/20"
+                    title="Sound"
+                  >
+                    {state.isSpeaking ? (
+                      <VolumeX className="w-4 h-4 text-white" />
+                    ) : (
+                      <Volume2 className="w-4 h-4 text-white/50" />
+                    )}
+                  </button>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={clearMessages}
+                    className="text-[10px] uppercase tracking-wider text-white/30 hover:text-white/70 transition-colors"
+                  >
+                    Clear Chat
+                  </button>
+                </div>
+              </div>
             </div>
           </motion.div>
         )}

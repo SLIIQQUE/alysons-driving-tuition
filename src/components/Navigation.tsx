@@ -42,7 +42,7 @@ export default function Navigation() {
         <nav className="container relative" aria-label="Global">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div className="flex lg:flex-1">
+            <div className="flex xl:flex-1">
               <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3 group">
                 <div className="relative">
                   <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-red-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -62,7 +62,7 @@ export default function Navigation() {
             </div>
 
             {/* Desktop navigation */}
-            <div className="hidden lg:flex lg:gap-x-10">
+            <div className="hidden xl:flex xl:gap-x-10">
               {navigation.map((item) => {
                 const isActive = pathname === item.href;
                 return (
@@ -83,7 +83,7 @@ export default function Navigation() {
             </div>
 
             {/* CTA Button */}
-            <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <div className="hidden xl:flex xl:flex-1 xl:justify-end">
               <button
                 onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
                 className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-semibold rounded-full hover:shadow-lg hover:shadow-amber-500/25 transition-all group"
@@ -94,7 +94,7 @@ export default function Navigation() {
             </div>
 
             {/* Mobile menu button */}
-            <div className="flex lg:hidden">
+            <div className="flex xl:hidden">
               <button
                 type="button"
                 className="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 text-white"
@@ -106,85 +106,92 @@ export default function Navigation() {
             </div>
           </div>
 
-          {/* Mobile menu */}
-          <AnimatePresence>
-            {mobileMenuOpen && (
-              <motion.div
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.2 }}
-                className="lg:hidden"
-                role="dialog"
-                aria-modal="true"
-              >
-                <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xl" />
-                <motion.div
-                  initial={{ x: "100%" }}
-                  animate={{ x: 0 }}
-                  exit={{ x: "100%" }}
-                  transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                  className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-[#0a0a0a] px-6 py-6 sm:max-w-sm border-l border-white/10"
-                >
-                  <div className="flex items-center justify-between">
-                    <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
-                      <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-red-500 rounded-lg flex items-center justify-center">
-                        <span className="text-black font-bold text-lg">A</span>
-                      </div>
-                      <span className="font-display font-bold text-lg text-white">
-                        Alyson&apos;s Driving
-                      </span>
-                    </Link>
-                    <button
-                      type="button"
-                      className="-m-2.5 rounded-xl p-2.5 text-white/70 hover:text-white"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <span className="sr-only">Close menu</span>
-                      <X className="h-6 w-6" aria-hidden="true" />
-                    </button>
-                  </div>
-                  <div className="mt-8 flow-root">
-                    <div className="-my-6 divide-y divide-white/10">
-                      <div className="space-y-2 py-6">
-                        {navigation.map((item) => {
-                          const isActive = pathname === item.href;
-                          return (
-                            <Link
-                              key={item.name}
-                              href={item.href}
-                              onClick={() => setMobileMenuOpen(false)}
-                              className={`-mx-3 block rounded-xl px-3 py-3 text-base font-semibold leading-7 ${
-                                isActive 
-                                  ? "text-amber-500 bg-amber-500/10" 
-                                  : "text-white hover:bg-white/5"
-                              }`}
-                            >
-                              {item.name}
-                            </Link>
-                          );
-                        })}
-                      </div>
-                      <div className="py-6">
-                        <button
-                          onClick={() => {
-                            setMobileMenuOpen(false);
-                            document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click();
-                          }}
-                          className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-xl"
-                        >
-                          <Bot className="w-5 h-5" />
-                          AI Assistant
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </nav>
       </header>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-100 xl:hidden"
+            role="dialog"
+            aria-modal="true"
+          >
+            {/* Backdrop */}
+            <div 
+              className="fixed inset-0 bg-black/80 backdrop-blur-xl" 
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            
+            {/* Sidebar drawer */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed inset-y-0 right-0 w-full overflow-y-auto bg-[#0a0a0a] px-6 py-6 sm:max-w-sm border-l border-white/10 shadow-2xl"
+            >
+              <div className="flex items-center justify-between">
+                <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-3" onClick={() => setMobileMenuOpen(false)}>
+                  <div className="w-10 h-10 bg-gradient-to-br from-amber-500 to-red-500 rounded-lg flex items-center justify-center">
+                    <span className="text-black font-bold text-lg">A</span>
+                  </div>
+                  <span className="font-display font-bold text-lg text-white">
+                    Alyson&apos;s Driving
+                  </span>
+                </Link>
+                <button
+                  type="button"
+                  className="-m-2.5 rounded-xl p-2.5 text-white/70 hover:text-white"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <span className="sr-only">Close menu</span>
+                  <X className="h-6 w-6" aria-hidden="true" />
+                </button>
+              </div>
+              <div className="mt-8 flow-root">
+                <div className="-my-6 divide-y divide-white/10">
+                  <div className="space-y-2 py-6">
+                    {navigation.map((item) => {
+                      const isActive = pathname === item.href;
+                      return (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className={`-mx-3 block rounded-xl px-3 py-3 text-base font-semibold leading-7 ${
+                            isActive 
+                              ? "text-amber-500 bg-amber-500/10" 
+                              : "text-white hover:bg-white/5"
+                          }`}
+                        >
+                          {item.name}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                  <div className="py-6">
+                    <button
+                      onClick={() => {
+                        setMobileMenuOpen(false);
+                        document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click();
+                      }}
+                      className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-xl"
+                    >
+                      <Bot className="w-5 h-5" />
+                      AI Assistant
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    
       <div className="noise-overlay" />
     </>
   );
