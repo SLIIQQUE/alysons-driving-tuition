@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import VoiceAssistant from "@/components/VoiceAssistant";
+import { VoiceAssistant } from "@/components/VoiceAssistant";
 
 const baseUrl = "https://alysonsdrivingtuition.co.uk";
 
