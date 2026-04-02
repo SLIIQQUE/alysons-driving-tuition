@@ -12,7 +12,6 @@ import {
   RefreshCw,
   ArrowRight,
   Check,
-  MessageCircle,
 } from "lucide-react";
 
 const services = [
@@ -313,15 +312,6 @@ function CTASection() {
               <span>Get in Touch</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button
-              onClick={() =>
-                window.dispatchEvent(new CustomEvent("openVoiceAssistant"))
-              }
-              className="btn btn-secondary group"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span>Chat with AI</span>
-            </button>
           </div>
         </motion.div>
       </div>

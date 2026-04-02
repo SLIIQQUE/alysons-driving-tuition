@@ -12,7 +12,6 @@ import {
   Target,
   Users,
   ArrowRight,
-  MessageCircle,
 } from "lucide-react";
 
 const qualifications = [
@@ -338,10 +337,6 @@ function CTASection() {
             <Link href="/contact" className="btn btn-primary group">
               <span>Book a Lesson</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link href="/contact" className="btn btn-secondary group">
-              <MessageCircle className="w-5 h-5" />
-              <span>Chat with AI</span>
             </Link>
           </div>
         </motion.div>

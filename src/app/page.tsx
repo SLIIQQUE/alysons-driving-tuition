@@ -12,7 +12,6 @@ import {
   Users,
   Heart,
   ChevronDown,
-  MessageCircle,
   Clock,
   Bookmark,
   Calendar,
@@ -227,17 +226,14 @@ function Hero() {
               transition={{ duration: 1, delay: 0.5 }}
               className="flex flex-wrap gap-4"
             >
-              <button
-                onClick={() =>
-                  window.dispatchEvent(new CustomEvent("openVoiceAssistant"))
-                }
+              <Link
+                href="/contact"
                 className="group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  <MessageCircle className="w-5 h-5" />
-                  Chat with AI Assistant
+                  Book a Lesson
                 </span>
-              </button>
+              </Link>
               <Link
                 href="/contact"
                 className="px-8 py-4 border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
@@ -793,15 +789,12 @@ function CTASection() {
             most trusted driving school
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-            <button
-              onClick={() =>
-                window.dispatchEvent(new CustomEvent("openVoiceAssistant"))
-              }
+            <Link
+              href="/contact"
               className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full text-lg hover:scale-105 transition-transform flex items-center gap-3"
             >
-              <MessageCircle className="w-5 h-5" />
-              Chat with AI Assistant
-            </button>
+              Book Your First Lesson
+            </Link>
             <Link
               href="/contact"
               className="px-10 py-5 border-2 border-white/30 text-white font-bold rounded-full text-lg hover:bg-white/10 transition-colors"

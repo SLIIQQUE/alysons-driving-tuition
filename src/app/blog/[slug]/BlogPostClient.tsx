@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "motion/react";
-import { ArrowLeft, ArrowRight, Clock, Calendar, MessageCircle } from "lucide-react";
+import { ArrowLeft, ArrowRight, Clock, Calendar } from "lucide-react";
 
 const blogPosts: Record<string, {
   title: string;
@@ -409,15 +409,6 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                 <span>Book Your First Lesson</span>
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
-              <button
-                onClick={() =>
-                  window.dispatchEvent(new CustomEvent("openVoiceAssistant"))
-                }
-                className="btn btn-secondary group"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>Chat with AI</span>
-              </button>
             </div>
           </motion.div>
         </div>

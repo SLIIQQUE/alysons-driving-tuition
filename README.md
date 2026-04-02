@@ -8,7 +8,6 @@ A professional, SEO-optimized website for a DVSA Approved Driving Instructor bas
 
 ## Features
 
-- **AI Voice Assistant** — Gemini-powered chatbot with voice recognition for instant booking enquiries
 - **SEO Optimized** — Local SEO for Blackwood, Tredegar, Risca & South Wales with JSON-LD schema, OG tags, and sitemap
 - **Real Reviews** — Authentic testimonials from Facebook page
 - **Dark Theme** — Premium glass-card design with amber/red accent palette
@@ -25,7 +24,6 @@ A professional, SEO-optimized website for a DVSA Approved Driving Instructor bas
 | Language | TypeScript 5 |
 | Styling | Tailwind CSS 4 |
 | Animations | Motion (Framer Motion) |
-| AI | Google Gemini API (`@google/genai`) |
 | Icons | Lucide React |
 | Email | Resend |
 | Fonts | Outfit + Space Mono (Google Fonts) |
@@ -53,14 +51,10 @@ A professional, SEO-optimized website for a DVSA Approved Driving Instructor bas
 │   │   ├── sitemap.ts            # XML sitemap
 │   │   ├── robots.ts             # robots.txt
 │   │   └── api/
-│   │       ├── book/             # Contact form handler
-│   │       ├── gemini/
-│   │       │   ├── chat/         # Chat API
-│   │       │   └── token/        # Token API
+│   │       └── book/             # Contact form handler
 │   └── components/
 │       ├── Navigation.tsx
-│       ├── Footer.tsx
-│       └── VoiceAssistant.tsx
+│       └── Footer.tsx
 ├── next.config.ts                # Security headers + image domains
 ├── public/
 │   └── (static assets)
@@ -97,9 +91,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the site.
 Create a `.env.local` file in the root directory:
 
 ```env
-# Gemini API (required for AI Voice Assistant)
-GEMINI_API_KEY=your_gemini_api_key
-
 # Email (required for contact form)
 RESEND_API_KEY=your_resend_api_key
 CONTACT_EMAIL=alysonbaldwin1@mail.co.uk
@@ -149,7 +140,6 @@ vercel
 ```
 
 Set environment variables in the Vercel dashboard:
-- `GEMINI_API_KEY`
 - `RESEND_API_KEY`
 - `CONTACT_EMAIL`
 

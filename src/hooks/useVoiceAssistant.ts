@@ -132,14 +132,10 @@ export function useVoiceAssistant() {
         });
 
         if (!response.ok) {
-          const error = await response.text();
-          console.error("[voice] Booking API error:", error);
           throw new Error("Booking failed");
         }
-
-        console.log("[voice] Booking successful");
-      } catch (error) {
-        console.error("[voice] handleBooking error:", error);
+      } catch {
+        // Booking failed silently - user will be notified verbally
       }
     },
     [],
@@ -150,11 +146,8 @@ export function useVoiceAssistant() {
   const handleUserMessage = useCallback(
     async (text: string) => {
       if (!text.trim()) {
-        console.warn("[voice] Empty transcript received, skipping");
         return;
       }
-
-      console.log("[voice] Sending to API:", text);
 
       const userMessage: VoiceMessage = {
         id: Date.now().toString(),
@@ -184,16 +177,11 @@ export function useVoiceAssistant() {
           body: JSON.stringify({ messages: payload }),
         });
 
-        console.log("[voice] /api/voice response status:", response.status);
-
         if (!response.ok) {
-          const errorText = await response.text();
-          console.error("[voice] API error:", response.status, errorText);
           throw new Error(`API request failed: ${response.status}`);
         }
 
         const data = await response.json();
-        console.log("[voice] API response:", data);
 
         if (Array.isArray(data.toolCalls) && data.toolCalls.length > 0) {
           for (const toolCall of data.toolCalls) {
@@ -201,11 +189,8 @@ export function useVoiceAssistant() {
               try {
                 const args = JSON.parse(toolCall.function.arguments);
                 await handleBooking(args);
-              } catch (parseError) {
-                console.error(
-                  "[voice] Failed to parse tool call args:",
-                  parseError,
-                );
+              } catch {
+                // Silently ignore parse errors
               }
             }
           }
@@ -228,8 +213,7 @@ export function useVoiceAssistant() {
         if (data.content) {
           speak(data.content);
         }
-      } catch (error) {
-        console.error("[voice] handleUserMessage error:", error);
+      } catch {
         setState((s) => ({
           ...s,
           isLoading: false,
@@ -249,7 +233,6 @@ export function useVoiceAssistant() {
         : null;
 
     if (!SpeechRecognitionAPI) {
-      console.error("[speech] SpeechRecognition not available");
       setState((s) => ({
         ...s,
         error: "Speech recognition not supported. Please use Chrome or Edge.",
@@ -268,31 +251,28 @@ export function useVoiceAssistant() {
     recognition.lang = "en-GB";
 
     recognition.onstart = () => {
-      console.log("[speech] Started listening");
       setState((s) => ({ ...s, isListening: true, error: null }));
     };
 
     recognition.onresult = async (event: SpeechRecognitionEvent) => {
-      // ✅ CORRECT: event.results[i][0].transcript — NOT event.results[i].transcript
-      // event.results[i] is a SpeechRecognitionResult (array of alternatives)
-      // [0] selects the highest-confidence alternative
       const transcript = Array.from({ length: event.results.length })
         .map((_, i) => event.results[i][0].transcript)
         .join("");
 
       const isFinal = event.results[event.results.length - 1]?.isFinal;
 
-      console.log("[speech] transcript:", transcript);
-      console.log("[speech] isFinal:", isFinal);
-
-      if (isFinal) {
-        console.log("[speech] Final transcript — sending to API");
+      if (isFinal && transcript.trim()) {
         await handleUserMessage(transcript);
+      } else if (isFinal && !transcript.trim()) {
+        setState((s) => ({
+          ...s,
+          isListening: false,
+          error: "No speech detected. Please try again.",
+        }));
       }
     };
 
     recognition.onerror = (event: SpeechRecognitionErrorEvent) => {
-      console.error("[speech] Error:", event.error);
       setState((s) => ({
         ...s,
         isListening: false,
@@ -301,7 +281,6 @@ export function useVoiceAssistant() {
     };
 
     recognition.onend = () => {
-      console.log("[speech] Recognition ended");
       setState((s) => ({ ...s, isListening: false }));
     };
 

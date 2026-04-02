@@ -63,7 +63,3 @@ interface SpeechRecognition extends EventTarget {
   start: () => void;
   stop: () => void;
 }
-
-interface SpeechRecognitionConstructor {
-  new (): SpeechRecognition;
-}

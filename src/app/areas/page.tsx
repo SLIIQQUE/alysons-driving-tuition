@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "motion/react";
-import { MapPin, ArrowRight, MessageCircle, Car, Users, Clock } from "lucide-react";
+import { MapPin, ArrowRight, Car, Users, Clock } from "lucide-react";
 
 const areas = [
   {
@@ -240,15 +240,6 @@ function CTASection() {
               <span>Contact Us</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <button
-              onClick={() =>
-                window.dispatchEvent(new CustomEvent("openVoiceAssistant"))
-              }
-              className="btn btn-secondary group"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span>Chat with AI</span>
-            </button>
           </div>
         </motion.div>
       </div>

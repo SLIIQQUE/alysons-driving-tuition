@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
-import { MessageCircle, ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 import Link from "next/link";
 
 const faqs = [
@@ -119,7 +119,7 @@ function FAQHero() {
   );
 }
 
-function FAQItem({ question, answer, index }: { question: string; answer: string; index: number }) {
+function FAQItem({ question, answer }: { question: string; answer: string }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -174,7 +174,6 @@ function FAQContent() {
                 key={index}
                 question={faq.question}
                 answer={faq.answer}
-                index={index}
               />
             ))}
           </div>
@@ -207,15 +206,6 @@ function CTASection() {
             we&apos;ll be happy to help.
           </p>
           <div className="flex flex-col sm:flex-row gap-5 justify-center">
-            <button
-              onClick={() =>
-                window.dispatchEvent(new CustomEvent("openVoiceAssistant"))
-              }
-              className="btn btn-secondary group"
-            >
-              <MessageCircle className="w-5 h-5" />
-              <span>Chat with AI</span>
-            </button>
             <Link href="/contact" className="btn btn-primary group">
               <span>Contact Us</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

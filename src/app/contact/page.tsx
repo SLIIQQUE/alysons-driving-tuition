@@ -7,9 +7,8 @@ import {
   MapPin,
   Clock,
   Send,
-  ArrowRight,
-  MessageCircle,
   CheckCircle,
+  Phone,
 } from "lucide-react";
 
 function ContactHero() {
@@ -269,22 +268,18 @@ function ContactContent() {
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-red-500 rounded-xl flex items-center justify-center shrink-0">
-                    <MessageCircle className="w-6 h-6 text-black" />
+                    <Phone className="w-6 h-6 text-black" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-white mb-1">
-                      AI Assistant
+                      Call Us
                     </h3>
-                    <button
-                      onClick={() =>
-                        window.dispatchEvent(
-                          new CustomEvent("openVoiceAssistant"),
-                        )
-                      }
+                    <a
+                      href="tel:07791489244"
                       className="text-amber-500 hover:underline"
                     >
-                      Chat now for instant answers
-                    </button>
+                      07791 489244
+                    </a>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
@@ -359,22 +354,27 @@ function ContactContent() {
 
             <div className="glass-card p-8 md:p-10 bg-gradient-to-br from-amber-500/20 to-red-500/10 border-amber-500/20">
               <h3 className="text-xl font-display font-bold text-white mb-4">
-                Try Our AI Assistant
+                Contact Us Directly
               </h3>
               <p className="text-white/60 mb-6">
-                Chat with our AI assistant to book lessons, get answers to
-                questions, or learn more about our services.
+                Prefer to speak directly? Call us or send us a message anytime.
               </p>
-              <button
-                onClick={() => {
-                  window.dispatchEvent(new CustomEvent("openVoiceAssistant"));
-                }}
-                className="btn btn-primary w-full group"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>Chat with AI</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              <div className="space-y-3">
+                <a
+                  href="tel:07791489244"
+                  className="btn btn-primary w-full group flex items-center justify-center gap-2"
+                >
+                  <Phone className="w-5 h-5" />
+                  <span>Call 07791 489244</span>
+                </a>
+                <a
+                  href="mailto:alysonbaldwin1@mail.co.uk"
+                  className="btn btn-secondary w-full group flex items-center justify-center gap-2"
+                >
+                  <Mail className="w-5 h-5" />
+                  <span>Send an Email</span>
+                </a>
+              </div>
             </div>
 
             {/* Google Map Embed */}
