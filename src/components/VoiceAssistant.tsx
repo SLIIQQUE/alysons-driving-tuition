@@ -1,13 +1,21 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useImperativeHandle, forwardRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Mic, MicOff, Volume2, VolumeX, X, MessageCircle } from "lucide-react";
 import { useVoiceAssistant } from "@/hooks/useVoiceAssistant";
 
-export function VoiceAssistant() {
+export interface VoiceAssistantRef {
+  open: () => void;
+}
+
+export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssistant(_, ref) {
   const [isOpen, setIsOpen] = useState(false);
   const { state, toggleListening, speak, stopSpeaking, clearMessages } = useVoiceAssistant();
+
+  useImperativeHandle(ref, () => ({
+    open: () => setIsOpen(true),
+  }));
 
   useEffect(() => {
     if (state.messages.length > 0) {
@@ -18,6 +26,10 @@ export function VoiceAssistant() {
     }
   }, [state.messages, isOpen, speak]);
 
+  const handleOpenAI = () => {
+    setIsOpen(true);
+  };
+
   return (
     <>
       <motion.button
@@ -25,7 +37,8 @@ export function VoiceAssistant() {
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(true)}
+        onClick={handleOpenAI}
+        data-voice-button
         className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-r from-amber-500 to-red-500 rounded-full shadow-lg flex items-center justify-center"
       >
         <MessageCircle className="w-7 h-7 text-black" />
@@ -45,7 +58,7 @@ export function VoiceAssistant() {
                   <MessageCircle className="w-5 h-5 text-black" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-white">Voice Assistant</h3>
+                  <h3 className="font-bold text-white">AI Assistant</h3>
                   <p className="text-xs text-white/50">Alyson&apos;s Driving</p>
                 </div>
               </div>
@@ -57,6 +70,7 @@ export function VoiceAssistant() {
             <div className="h-80 overflow-y-auto p-4 space-y-4">
               {state.messages.length === 0 && (
                 <div className="text-center text-white/40 py-8">
+                  <MessageCircle className="w-12 h-12 mx-auto mb-4 opacity-50" />
                   <p className="text-sm">Tap the microphone to start talking!</p>
                   <p className="text-xs mt-2">I can help you book lessons or answer questions.</p>
                 </div>
@@ -135,4 +149,4 @@ export function VoiceAssistant() {
       </AnimatePresence>
     </>
   );
-}
+});

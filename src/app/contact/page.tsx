@@ -9,6 +9,7 @@ import {
   Send,
   CheckCircle,
   Phone,
+  Bot,
 } from "lucide-react";
 
 function ContactHero() {
@@ -360,13 +361,13 @@ function ContactContent() {
                 Prefer to speak directly? Call us or send us a message anytime.
               </p>
               <div className="space-y-3">
-                <a
-                  href="tel:07791489244"
+                <button
+                  onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
                   className="btn btn-primary w-full group flex items-center justify-center gap-2"
                 >
-                  <Phone className="w-5 h-5" />
-                  <span>Call 07791 489244</span>
-                </a>
+                  <Bot className="w-5 h-5" />
+                  <span>Try AI Assistant</span>
+                </button>
                 <a
                   href="mailto:alysonbaldwin1@mail.co.uk"
                   className="btn btn-secondary w-full group flex items-center justify-center gap-2"

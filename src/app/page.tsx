@@ -875,31 +875,35 @@ function CTASection() {
           viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto"
         >
-          <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-8">
-            Start Your{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-400">
-              Journey
-            </span>{" "}
-            Today
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-amber-500/20 text-amber-400 text-sm font-medium rounded-full mb-6">
+            <Bot className="w-4 h-4" />
+            AI Powered
+          </span>
+          <h2 className="text-5xl md:text-7xl font-display font-bold text-white mb-6">
+            Talk to Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-400">AI Assistant</span>
           </h2>
-          <p className="text-xl text-white/60 mb-12">
-            Book your first lesson and discover why we&apos;re South Wales&apos;
-            most trusted driving school
+          <p className="text-xl text-white/60 mb-8 max-w-2xl mx-auto">
+            Get instant answers, check pricing, or book your first lesson — 
+            just click the button and start talking!
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-            <Link
-              href="/contact"
+            <button
+              onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
               className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full text-lg hover:scale-105 transition-transform flex items-center gap-3"
             >
-              Book Your First Lesson
-            </Link>
+              <Mic className="w-5 h-5" />
+              Try AI Assistant
+            </button>
             <Link
               href="/contact"
               className="px-10 py-5 border-2 border-white/30 text-white font-bold rounded-full text-lg hover:bg-white/10 transition-colors"
             >
-              Book Your First Lesson
+              Or Book Manually
             </Link>
           </div>
+          <p className="text-white/40 text-sm mt-6">
+            Available 24/7 • No booking needed • Free to use
+          </p>
         </motion.div>
       </div>
     </section>
@@ -911,13 +915,13 @@ export default function Home() {
     <>
       <Hero />
       <FeatureStrip />
-      <AIVoiceAssistantSection />
       <CoursesSection />
       <AboutPreview />
       <TestimonialsMarquee />
       <PricingPreview />
       <BlogPreview />
       <CTASection />
+      <AIVoiceAssistantSection />
     </>
   );
 }
