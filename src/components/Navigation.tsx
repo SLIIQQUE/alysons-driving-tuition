@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Bot } from "lucide-react";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -84,12 +84,13 @@ export default function Navigation() {
 
             {/* CTA Button */}
             <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-              <Link
-                href="/contact"
+              <button
+                onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
                 className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-semibold rounded-full hover:shadow-lg hover:shadow-amber-500/25 transition-all group"
               >
-                <span className="text-sm">Book Now</span>
-              </Link>
+                <Bot className="w-4 h-4" />
+                <span className="text-sm">AI Assistant</span>
+              </button>
             </div>
 
             {/* Mobile menu button */}
@@ -165,13 +166,16 @@ export default function Navigation() {
                         })}
                       </div>
                       <div className="py-6">
-                        <Link
-                          href="/contact"
-                          onClick={() => setMobileMenuOpen(false)}
+                        <button
+                          onClick={() => {
+                            setMobileMenuOpen(false);
+                            document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click();
+                          }}
                           className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-xl"
                         >
-                          Book Now
-                        </Link>
+                          <Bot className="w-5 h-5" />
+                          AI Assistant
+                        </button>
                       </div>
                     </div>
                   </div>

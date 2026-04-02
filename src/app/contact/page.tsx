@@ -8,7 +8,6 @@ import {
   Clock,
   Send,
   CheckCircle,
-  Phone,
   Bot,
 } from "lucide-react";
 
@@ -264,51 +263,12 @@ function ContactContent() {
           >
             <div className="glass-card p-8 md:p-10">
               <h2 className="text-2xl font-display font-bold text-white mb-6">
-                Contact Information
+                Get in Touch
               </h2>
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-red-500 rounded-xl flex items-center justify-center shrink-0">
-                    <Phone className="w-6 h-6 text-black" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-1">
-                      Call Us
-                    </h3>
-                    <a
-                      href="tel:07791489244"
-                      className="text-amber-500 hover:underline"
-                    >
-                      07791 489244
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <svg
-                      className="w-6 h-6 text-amber-500"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white mb-1">Mobile</h3>
-                    <a
-                      href="tel:+447791489244"
-                      className="text-amber-500 hover:underline"
-                    >
-                      07791 489244
-                    </a>
-                  </div>
-                </div>
+              <p className="text-white/60 mb-6">
+                Use our AI assistant to book lessons instantly, or send us a message.
+              </p>
+              <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="w-12 h-12 bg-amber-500/20 rounded-xl flex items-center justify-center flex-shrink-0">
                     <Mail className="w-6 h-6 text-amber-500" />

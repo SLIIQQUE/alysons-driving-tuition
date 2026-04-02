@@ -228,20 +228,22 @@ function Hero() {
               transition={{ duration: 1, delay: 0.5 }}
               className="flex flex-wrap gap-4"
             >
-              <Link
-                href="/contact"
+              <button
+                onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
                 className="group relative px-8 py-4 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full overflow-hidden"
               >
                 <span className="relative z-10 flex items-center gap-2">
-                  Book a Lesson
+                  <Bot className="w-5 h-5" />
+                  Try AI Assistant
                 </span>
-              </Link>
-              <Link
-                href="/contact"
+              </button>
+              <button
+                onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
                 className="px-8 py-4 border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
               >
-                Book a Lesson
-              </Link>
+                <Mic className="w-5 h-5" />
+                Talk to AI
+              </button>
             </motion.div>
           </div>
         </div>

@@ -91,7 +91,7 @@ export default function RootLayout({
     description:
       "Learn to drive with confidence in South Wales. Patient, friendly driving lessons from Alyson Baldwin - DVSA Approved Driving Instructor.",
     url: baseUrl,
-    telephone: "07791 489244",
+    telephone: "Contact via AI Assistant or email",
     email: "alysonbaldwin1@mail.co.uk",
     image: `${baseUrl}/og-image.jpg`,
     address: {
