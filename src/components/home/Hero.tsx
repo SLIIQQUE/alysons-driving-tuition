@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
 import { Bot, Mic } from "lucide-react";
+import Link from "next/link";
 
 export function Hero() {
   const ref = useRef(null);
@@ -104,17 +105,12 @@ export function Hero() {
                   Try AI Assistant
                 </span>
               </button>
-              <button
-                onClick={() =>
-                  document
-                    .querySelector<HTMLButtonElement>("[data-voice-button]")
-                    ?.click()
-                }
+              <Link
+                href="/contact"
                 className="px-8 py-4 border-2 border-white/30 text-white font-bold rounded-full hover:bg-white/10 transition-colors flex items-center gap-2"
               >
-                <Mic className="w-5 h-5" />
-                Talk to AI
-              </button>
+                Book a Lesson
+              </Link>
             </motion.div>
           </div>
         </div>
