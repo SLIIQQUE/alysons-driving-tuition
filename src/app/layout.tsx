@@ -1,8 +1,22 @@
 import type { Metadata } from "next";
+import { Outfit, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { VoiceAssistant } from "@/components/VoiceAssistant";
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-space-mono",
+  display: "swap",
+});
 
 const baseUrl = "https://alysonsdrivingtuition.co.uk";
 
@@ -156,7 +170,7 @@ export default function RootLayout({
       <head>
         <link rel="alternate" hrefLang="en-GB" href={baseUrl} />
       </head>
-      <body className="min-h-full flex flex-col overflow-x-hidden w-full">
+      <body className={`${outfit.variable} ${spaceMono.variable} min-h-full flex flex-col overflow-x-hidden w-full font-sans`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

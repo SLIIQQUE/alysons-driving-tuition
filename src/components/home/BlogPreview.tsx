@@ -69,11 +69,12 @@ export function BlogPreview() {
               viewport={{ once: true }}
               className="glass-card overflow-hidden border-glow group"
             >
-              <Link href={`/blog/${post.slug}`} className="block">
+              <Link href={`/blog/${post.slug}`} className="block" aria-label={`Read full article: ${post.title}`}>
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={post.image}
                     alt={post.title}
+                    loading="lazy"
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110  cursor-pointer"
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-transparent to-transparent" />
@@ -94,9 +95,9 @@ export function BlogPreview() {
                   <p className="text-white/40 text-sm leading-relaxed mb-4">
                     {post.excerpt}
                   </p>
-                  <span className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all">
+                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all" aria-label={`Read more about ${post.title}`}>
                     Read more <ArrowRight className="w-4 h-4" />
-                  </span>
+                  </Link>
                 </div>
               </Link>
             </motion.article>

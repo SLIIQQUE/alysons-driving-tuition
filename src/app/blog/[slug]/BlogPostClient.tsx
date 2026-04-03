@@ -371,11 +371,12 @@ export default function BlogPostClient({ slug }: { slug: string }) {
                 .filter((p) => p.slug !== slug)
                 .slice(0, 2)
                 .map((related, i) => (
-                  <Link
-                    key={i}
-                    href={`/blog/${related.slug}`}
-                    className="glass-card p-6 hover:border-amber-500/30 transition-colors group"
-                  >
+                    <Link
+                      key={i}
+                      href={`/blog/${related.slug}`}
+                      className="glass-card p-6 hover:border-amber-500/30 transition-colors group"
+                      aria-label={`Read more: ${related.title}`}
+                    >
                     <h4 className="text-white font-semibold group-hover:text-amber-500 transition-colors">
                       {related.title}
                     </h4>

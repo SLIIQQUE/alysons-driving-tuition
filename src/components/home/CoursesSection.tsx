@@ -65,6 +65,7 @@ export function CoursesSection() {
                   src={course.image}
                   alt={course.name}
                   fill
+                  loading="lazy"
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
@@ -82,6 +83,7 @@ export function CoursesSection() {
                   <Link
                     href="/services"
                     className="inline-flex items-center gap-2 text-amber-400 font-semibold hover:gap-3 transition-all"
+                    aria-label={`Learn more about ${course.name}`}
                   >
                     Learn more{" "}
                     <ChevronDown className="w-4 h-4 rotate-[-90deg]" />

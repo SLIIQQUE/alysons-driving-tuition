@@ -123,6 +123,7 @@ function BlogGrid() {
                     src={post.image}
                     alt={post.title}
                     fill
+                    loading="lazy"
                     className="object-cover transition-transform duration-700 group-hover:scale-110 cursor-pointer"
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
@@ -148,9 +149,9 @@ function BlogGrid() {
                   <p className="text-white/50 text-sm mb-6 leading-relaxed">
                     {post.excerpt}
                   </p>
-                  <span className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all">
+                  <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2 text-amber-500 font-semibold hover:gap-3 transition-all" aria-label={`Read full article: ${post.title}`}>
                     Read more <ArrowRight className="w-4 h-4" />
-                  </span>
+                  </Link>
                 </div>
               </Link>
             </motion.article>

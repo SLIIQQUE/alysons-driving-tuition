@@ -87,6 +87,7 @@ export default function Navigation() {
               <button
                 onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
                 className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-semibold rounded-full hover:shadow-lg hover:shadow-amber-500/25 transition-all group"
+                aria-label="Open AI Assistant"
               >
                 <Bot className="w-4 h-4" />
                 <span className="text-sm">AI Assistant</span>
@@ -99,6 +100,7 @@ export default function Navigation() {
                 type="button"
                 className="-m-2.5 inline-flex items-center justify-center rounded-xl p-2.5 text-white"
                 onClick={() => setMobileMenuOpen(true)}
+                aria-label="Open main menu"
               >
                 <span className="sr-only">Open main menu</span>
                 <Menu className="h-6 w-6" aria-hidden="true" />
@@ -147,6 +149,7 @@ export default function Navigation() {
                   type="button"
                   className="-m-2.5 rounded-xl p-2.5 text-white/70 hover:text-white"
                   onClick={() => setMobileMenuOpen(false)}
+                  aria-label="Close menu"
                 >
                   <span className="sr-only">Close menu</span>
                   <X className="h-6 w-6" aria-hidden="true" />
@@ -180,6 +183,7 @@ export default function Navigation() {
                         document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click();
                       }}
                       className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-xl"
+                      aria-label="Open AI Assistant"
                     >
                       <Bot className="w-5 h-5" />
                       AI Assistant

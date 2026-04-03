@@ -48,6 +48,7 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
         onClick={handleOpenAI}
         data-voice-button
         className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 w-14 h-14 md:w-16 md:h-16 bg-gradient-to-r from-amber-500 to-red-500 rounded-full shadow-lg flex items-center justify-center touch-manipulation"
+        aria-label="Open AI Assistant"
       >
         <MessageCircle className="w-7 h-7 text-black" />
       </motion.button>
@@ -70,7 +71,7 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
                   <p className="text-xs text-white/50">Alyson&apos;s Driving</p>
                 </div>
               </div>
-              <button onClick={() => setIsOpen(false)} className="text-white/50 hover:text-white">
+              <button onClick={() => setIsOpen(false)} className="text-white/50 hover:text-white" aria-label="Close chat">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -131,6 +132,7 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
                   onClick={handleSend}
                   disabled={!message.trim() || state.isLoading}
                   className="w-10 h-10 bg-amber-500 rounded-xl flex items-center justify-center disabled:opacity-30 transition-opacity"
+                  aria-label="Send message"
                 >
                   <Bot className="w-5 h-5 text-black" />
                 </button>
@@ -146,7 +148,7 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
                         ? "bg-red-500 animate-pulse"
                         : "bg-white/10"
                     } hover:bg-white/20 disabled:opacity-50`}
-                    title="Speak"
+                    aria-label={state.isListening ? "Stop listening" : "Start voice input"}
                   >
                     {state.isListening ? (
                       <MicOff className="w-4 h-4 text-white" />
@@ -159,7 +161,7 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
                     onClick={() => state.isSpeaking ? stopSpeaking() : null}
                     disabled={!state.isSpeaking && state.messages.length === 0}
                     className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center disabled:opacity-30 hover:bg-white/20"
-                    title="Sound"
+                    aria-label={state.isSpeaking ? "Stop speaking" : "Play audio"}
                   >
                     {state.isSpeaking ? (
                       <VolumeX className="w-4 h-4 text-white" />
@@ -173,6 +175,7 @@ export const VoiceAssistant = forwardRef<VoiceAssistantRef>(function VoiceAssist
                   <button
                     onClick={clearMessages}
                     className="text-[10px] uppercase tracking-wider text-white/30 hover:text-white/70 transition-colors"
+                    aria-label="Clear chat history"
                   >
                     Clear Chat
                   </button>

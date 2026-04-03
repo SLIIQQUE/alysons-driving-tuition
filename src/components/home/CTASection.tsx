@@ -58,6 +58,7 @@ export function CTASection() {
             <button
               onClick={() => document.querySelector<HTMLButtonElement>('[data-voice-button]')?.click()}
               className="group px-10 py-5 bg-gradient-to-r from-amber-500 to-red-500 text-black font-bold rounded-full text-lg hover:scale-105 transition-transform flex items-center gap-3"
+              aria-label="Try AI Assistant"
             >
               <Mic className="w-5 h-5" />
               Try AI Assistant
